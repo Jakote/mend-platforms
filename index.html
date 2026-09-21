@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<!-- © MEND GROUP (PTY) LTD · Reg No. 96070 · TIN 200176439-4 · Maseru, Lesotho.
+     Generated from the mend-platforms monorepo — edit there, not here. -->
+<html data-title-key="title.home" lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mafisa · Pitso · Matsema — MEND GROUP</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="Three platforms named for the three systems Moshoeshoe used to build a nation. Built and owned by MEND GROUP (Pty) Ltd, Lesotho.">
+<link rel="icon" href="brand/logo-icon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Only the weights the browser actually renders. Asked the page itself
+     via document.fonts rather than reading the CSS: Plus Jakarta 600 and
+     Inter 500 were requested and never used, and each unused weight is a
+     whole font file somebody pays for by the megabyte. -->
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Inter:wght@400;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --teal:#0d9488; --teal2:#0f766e; --gold:#e8c877;
+  --stone:#1c1917; --stone2:#292524; --ink2:#57534e; --ink3:#8b837c;
+  --paper:#fafaf9; --paper2:#f5f5f4; --line:#e7e5e4;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--paper);color:var(--stone);
+     -webkit-font-smoothing:antialiased;line-height:1.65}
+.w{max-width:1000px;margin:0 auto;padding:0 clamp(20px,5vw,32px)}
+h1,h2,h3{font-family:'Plus Jakarta Sans',sans-serif;letter-spacing:-.025em;line-height:1.12}
+a{color:var(--teal2)}
+.mono{font-family:'Space Grotesk',ui-monospace,monospace}
+
+header{background:var(--stone);color:#fff;padding:14px 0}
+header .w{display:flex;align-items:center;justify-content:space-between;gap:16px}
+header img{height:26px;display:block}
+header .who{font-size:11.5px;color:#a8a29e;letter-spacing:.04em;text-align:right}
+
+.hero{background:var(--stone);color:#fff;padding:clamp(48px,9vw,88px) 0 clamp(56px,10vw,96px);
+      border-bottom:1px solid #3a3532}
+.hero .kick{font-family:'Space Grotesk',monospace;font-size:12px;letter-spacing:.16em;
+            text-transform:uppercase;color:var(--gold);margin-bottom:20px}
+.hero h1{font-size:clamp(30px,6.2vw,54px);font-weight:800;max-width:20ch;margin-bottom:22px}
+.hero h1 em{font-style:normal;color:var(--gold)}
+.hero p{font-size:clamp(15.5px,2.1vw,18.5px);color:#d6d3d1;max-width:62ch}
+.hero p+p{margin-top:16px}
+
+section{padding:clamp(44px,7vw,76px) 0}
+section.alt{background:var(--paper2);border-block:1px solid var(--line)}
+h2{font-size:clamp(21px,3.4vw,29px);font-weight:800;margin-bottom:12px}
+.lede{color:var(--ink2);max-width:66ch;font-size:15.5px}
+
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px}
+.card{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;
+      display:flex;flex-direction:column;text-decoration:none;color:inherit;
+      transition:transform .14s ease,box-shadow .14s ease,border-color .14s ease}
+.card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(28,25,23,.11);border-color:#d6d3d1}
+.card .top{height:5px}
+.card .body{padding:22px 21px 24px;display:flex;flex-direction:column;flex:1}
+.card h3{font-size:20px;font-weight:800;margin-bottom:3px}
+.card .st{font-family:'Space Grotesk',monospace;font-size:11.5px;letter-spacing:.1em;
+          text-transform:uppercase;color:var(--ink3);margin-bottom:13px}
+.card .then{font-size:13.5px;color:var(--ink2);padding-bottom:12px;margin-bottom:12px;
+            border-bottom:1px dashed var(--line)}
+.card .now{font-size:14.5px;flex:1}
+.card .go{margin-top:16px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:13.5px}
+.c1 .top{background:#14532D} .c1 .go{color:#14532D}
+.c2 .top{background:#1E2749} .c2 .go{color:#1E2749}
+.c3 .top{background:#D97706} .c3 .go{color:#B45309}
+
+.spine{margin-top:30px;background:#fff;border:1px solid var(--line);border-radius:12px;overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:560px}
+th{text-align:left;font-family:'Space Grotesk',monospace;font-size:10.5px;letter-spacing:.1em;
+   text-transform:uppercase;color:var(--ink3);padding:13px 16px;border-bottom:1px solid var(--line);
+   background:var(--paper2)}
+td{padding:12px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td.same{color:var(--teal2);font-weight:600}
+td:first-child{font-weight:600;white-space:nowrap}
+
+.note{margin-top:26px;border-left:3px solid var(--teal);background:#fff;padding:18px 20px;
+      border-radius:0 8px 8px 0;font-size:14.5px;color:var(--ink2);max-width:74ch}
+.note b{color:var(--stone)}
+.warn{border-left-color:var(--gold)}
+
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-top:30px}
+.fact{background:#fff;border:1px solid var(--line);border-radius:10px;padding:17px 18px}
+.fact .n{font-family:'Space Grotesk',monospace;font-size:25px;font-weight:700;color:var(--teal2);
+         line-height:1.1;font-variant-numeric:tabular-nums}
+.fact .l{font-size:13px;color:var(--ink2);margin-top:5px}
+
+.demo{margin-top:30px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:22px}
+.demo h3{font-size:18px;font-weight:800;margin-bottom:6px}
+.demo .dl{color:var(--ink2);font-size:14.5px;max-width:70ch;margin-bottom:14px}
+.demo .dl.small{font-size:13px;margin:12px 0 0}
+.demo label{display:block;font-family:'Space Grotesk',monospace;font-size:10.5px;letter-spacing:.1em;
+            text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.demo input{width:100%;max-width:420px;padding:11px 13px;border:2px solid var(--line);border-radius:0;
+            font:inherit;font-size:16px;background:#fff;color:var(--stone)}
+.demo input:focus{outline:3px solid var(--teal);outline-offset:1px;border-color:var(--teal)}
+.qr{margin-top:14px;display:grid;gap:8px}
+.qr .row{border:1px solid var(--line);border-left:4px solid var(--line);padding:11px 13px;font-size:14px}
+.qr .row.person{border-left-color:var(--teal);background:#f0fdfa}
+.qr .row.pitso{border-left-color:#14532D}
+.qr .row.mafisa{border-left-color:#1E2749}
+.qr .row.matsema{border-left-color:#D97706}
+.qr .t{font-weight:600}
+.qr .s{color:var(--ink2);font-size:13px}
+.qr .on{display:inline-block;margin-left:8px;font-family:'Space Grotesk',monospace;font-size:11px;
+        letter-spacing:.06em;text-transform:uppercase;background:var(--teal);color:#fff;padding:2px 7px}
+.qr .none{color:var(--ink3);font-size:14px}
+footer{background:var(--stone);color:#a8a29e;padding:34px 0;font-size:13px}
+footer .w{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center}
+footer b{color:#fff;font-weight:600}
+footer a{color:var(--gold)}
+
+@media(max-width:760px){ .three{grid-template-columns:1fr} header .who{display:none} }
+</style>
+<style>/* Injected into every app at build time. A printed page must be the RECORD,
+   not a photograph of an app: no navigation, no buttons, no banners, no
+   coloured blocks that come out as grey smears on a mono printer. */
+@media print {
+  #mend-strip, nav, .noprint, [data-noprint] { display: none !important; }
+  html, body { background: #fff !important; color: #000 !important;
+               padding-bottom: 0 !important; margin: 0 !important; }
+  body { font-size: 11.5pt; }
+  a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 9pt; word-break: break-all; }
+  a { text-decoration: none; color: #000 !important; }
+  /* Progress bars and status pills are colour on screen and meaningless in
+     grey, so print gives them an outline and lets the number carry the meaning. */
+  [class*="bar"], [class*="pill"], [class*="badge"], [class*="stamp"] {
+    box-shadow: none !important; border: 1px solid #000 !important;
+    background: #fff !important; color: #000 !important;
+  }
+  button, input[type="button"], input[type="submit"], select { display: none !important; }
+  input, textarea { border: none !important; padding: 0 !important; font: inherit !important; }
+  table { page-break-inside: auto; } tr { page-break-inside: avoid; }
+  h1, h2, h3 { page-break-after: avoid; }
+  /* When one element is being printed on purpose, print only that.
+     CSS cannot select an ancestor, so printRecord() marks the chain from the
+     target up to <body> with data-print-path. Without that, a target nested
+     anywhere below body had its own parent hidden and printed a blank page. */
+  body[data-printing] *:not([data-print-path]):not([data-print-target]):not([data-print-target] *) {
+    display: none !important;
+  }
+  body[data-printing] [data-print-path] {
+    display: block !important;
+    margin: 0 !important; padding: 0 !important; border: none !important;
+    background: none !important; box-shadow: none !important; max-width: none !important;
+  }
+  body[data-printing] [data-print-target],
+  body[data-printing] [data-print-target] * { display: revert !important; }
+  body[data-printing] [data-print-target] { display: block !important; }
+  @page { margin: 16mm; }
+}
+</style>
+<style>:root{--mend-bar-bg:#1c1917;--mend-bar-fg:#fafaf9;--mend-bar-accent:#0d9488;--mend-bar-line:rgba(255,255,255,.18);}</style>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#1c1917">
+<link rel="apple-touch-icon" href="icons/home-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="MEND">
+<script>/* Injected into every app at build time so all five behave identically and no
+   app has to remember to do this. Registration failing is never fatal: the app
+   works online exactly as before. */
+(function () {
+  if (!('serviceWorker' in navigator)) return;
+  addEventListener('load', function () {
+    navigator.serviceWorker.register('./sw.js').catch(function () {});
+  });
+  // Tell the page when it is offline, so it can stop pretending otherwise.
+  function paintOnline() { document.documentElement.setAttribute('data-online', navigator.onLine ? 'yes' : 'no'); }
+  addEventListener('online', paintOnline); addEventListener('offline', paintOnline); paintOnline();
+})();
+</script>
+</head>
+<body>
+
+<header><div class="w">
+  <img src="brand/logo-horizontal-dark.svg" alt="MEND GROUP">
+  <div class="who">Reg No. 96070 · TIN 200176439-4 · Maseru, Lesotho</div>
+</div></header>
+
+<div class="hero"><div class="w">
+  <div class="kick">Mafisa · Pitso · Matsema</div>
+  <h1>Moshoeshoe built a nation with three systems. <em>These are those three systems, in software.</em></h1>
+  <p>He lent cattle to families who had none so they could live off the milk while he kept ownership. He held an assembly where any man could stand and contradict him. He organised work parties for fields nobody could finish alone.</p>
+  <p>None of that was charity and none of it was hierarchy. It was infrastructure for people who had almost nothing except each other — and it is a better description of Lesotho's economy today than most of what gets written about it.</p>
+</div></div>
+
+<section><div class="w">
+  <h2>Three platforms</h2>
+  <p class="lede">They look nothing alike, because they are for different people on different days. Underneath, they are one system.</p>
+
+  <div class="three">
+    <a class="card c1" href="pitso/"><div class="top"></div><div class="body">
+      <h3>Pitso</h3>
+      <div class="st">The assembly</div>
+      <div class="then"><b>Then:</b> an open national meeting where anyone could speak, criticise the chief, or offer advice — and be judged on what they said.</div>
+      <div class="now"><b>Now:</b> find a plumber, an electrician, a bookkeeper or an HR specialist near you, engage them for one job, and rate them afterwards. A certificate is checked by MEND before it is shown as verified, and what each person has verified is on their profile.</div>
+      <div class="go">Open Pitso →</div>
+    </div></a>
+
+    <a class="card c2" href="mafisa/"><div class="top"></div><div class="body">
+      <h3>Mafisa</h3>
+      <div class="st">The loan of assets</div>
+      <div class="then"><b>Then:</b> cattle placed with families who had none, so they could live off the milk and the labour while ownership stayed with the lender.</div>
+      <div class="now"><b>Now:</b> register something you are not using — a bakkie, a tractor, a mixer, an overlocker — prove it is yours, set a rate, and lend it for a period. Both sides keep the record.</div>
+      <div class="go">Open Mafisa →</div>
+    </div></a>
+
+    <a class="card c3" href="matsema/"><div class="top"></div><div class="body">
+      <h3>Matsema</h3>
+      <div class="st">The work party</div>
+      <div class="then"><b>Then:</b> a field one family could not hoe in a season, twenty families finished in a day — and next week it was someone else's field.</div>
+      <div class="now"><b>Now:</b> a farmer with 1.4 hectares cannot supply a supermarket that wants twelve tonnes a month. Twenty farmers pooling a commitment can. Same for a mohair clip, a cold room, or buying inputs in bulk.</div>
+      <div class="go">Open Matsema →</div>
+    </div></a>
+  </div>
+</div></section>
+
+<section class="alt"><div class="w">
+  <h2>Why one system and not three</h2>
+  <p class="lede">Moshoeshoe's three institutions shared one thing: a known person's standing among people who knew them. Mafisa only worked because the lender knew who was receiving the cattle. Strip the metaphor and the software is the same shape.</p>
+
+  <div class="spine"><table>
+    <thead><tr><th></th><th>Mafisa</th><th>Pitso</th><th>Matsema</th></tr></thead>
+    <tbody>
+      <tr><td>Who are you</td><td class="same">verified person or entity</td><td class="same">verified person or entity</td><td class="same">verified person or entity</td></tr>
+      <tr><td>What do you have</td><td>an asset</td><td>a skill and a certificate</td><td>a share of a commitment</td></tr>
+      <tr><td>Proof</td><td class="same">a document, verified</td><td class="same">a document, verified</td><td class="same">a document, verified</td></tr>
+      <tr><td>What happens</td><td class="same">an agreement, for a period</td><td class="same">an agreement, for a period</td><td class="same">an agreement, for a period</td></tr>
+      <tr><td>What is left behind</td><td class="same">a rating and a record</td><td class="same">a rating and a record</td><td class="same">a rating and a record</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="demo" id="demo">
+    <h3>See it</h3>
+    <p class="dl">Type a name or a trade. This runs against sample data, in this page, with no server —
+       and it is the whole argument in one box: <b>one person, found once, standing on more than one platform.</b></p>
+    <label for="q">Search</label>
+    <input id="q" type="search" placeholder="thabang · ramotlakase · leribe · hilux" autocomplete="off">
+    <div id="qr" class="qr" role="status" aria-live="polite"></div>
+    <p class="dl small">Try <b>ramotlakase</b> — Sesotho for electrician. And <b>rantso</b>, spelled without
+       the apostrophe nobody types on a phone.</p>
+  </div>
+
+  <div class="note"><b>Four of the five rows are identical.</b> So the electrician verified on Pitso is the same person whose bakkie is rentable on Mafisa and who is counted in a pool on Matsema — and his standing follows him. That matters for one reason: a marketplace's hardest problem is that nobody joins until somebody else already has. Solving that once, for three platforms, is the difference between this working and this being three empty websites.</div>
+</div></section>
+
+<section><div class="w">
+  <h2>What is underneath</h2>
+  <p class="lede">A shared spine — identity, document verification, portable reputation, and an append-only record — verified by what it refuses to do.</p>
+
+  <div class="facts">
+    <div class="fact"><div class="n">20</div><div class="l">refusals enforced in the database, not in a screen — tested against PostgreSQL 16</div></div>
+    <div class="fact"><div class="n">0</div><div class="l">rands of infrastructure cost. Free tier throughout</div></div>
+    <div class="fact"><div class="n">1</div><div class="l">reputation, earned on any of the three, carried across all of them</div></div>
+    <div class="fact"><div class="n">R0</div><div class="l">of anyone's money held, moved or touched. See below</div></div>
+  </div>
+
+  <div class="note"><b>No money moves through these platforms.</b> They record that M450 was agreed and that both parties marked it settled; the M450 itself passes between the two people. This is deliberate. No card-acquiring rail is available to a Lesotho merchant, and holding pooled member funds is a licensed activity. Recording an agreement is not.</div>
+
+  <div class="note"><b>Not a blockchain, on purpose.</b> The useful part of a chain here was a record nobody can quietly edit, and that is a hash-chained append-only table in PostgreSQL — free, auditable, and readable by any authority that ever asks. The rest of a chain buys trustlessness, and the thing missing in Lesotho is not a registry that cannot be trusted. It is that for most assets there is no registry at all.</div>
+
+  <div class="note warn"><b>What these are today.</b> Working previews. Real forms, real validation, real persistence — but each app stores data in the browser you open it in until a server is connected, and each one says so on its own face. Nothing here is live, and no real person, business or buyer appears in the sample data.</div>
+</div></section>
+
+<footer><div class="w">
+  <div>Built and owned by <b>MEND GROUP (PTY) LTD</b> · Reg No. 96070 · TIN 200176439-4 · Maseru, Lesotho</div>
+  <div><a href="https://mendgroup.co.za">mendgroup.co.za</a></div>
+</div></footer>
+
+<script src="core/config.js"></script>
+<script src="core/i18n.js"></script>
+<script src="core/seed.js"></script>
+<script src="core/mend.js"></script>
+<!-- The shared strip: language toggle, Terms and Privacy. Every app has had
+     this since the beginning and the front door did not, so the first page
+     anyone opens was the only one with no way into Sesotho. -->
+<script src="core/ui.js"></script>
+<script>
+/* The demonstration is the argument. A page that only asserts portable standing
+   is asking to be believed; a box that finds one person on two platforms is
+   showing. Runs entirely in the page against the invented sample data — no
+   server, and none of the people are real. */
+(function () {
+  /* The three cards link to wherever the platforms actually are — subdomains
+     once DNS exists, GitHub Pages project paths until then. MEND.HOSTS works it
+     out from this page's own hostname, so the links are never dead. */
+  if (typeof MEND !== 'undefined' && MEND.HOSTS) {
+    document.querySelectorAll('a.card').forEach(function (a) {
+      var k = (a.className.match(/\bc([123])\b/) || [])[1];
+      var key = { '1': 'pitso', '2': 'mafisa', '3': 'matsema' }[k];
+      if (key && MEND.HOSTS[key]) a.href = MEND.HOSTS[key];
+    });
+  }
+
+  var q = document.getElementById('q'), out = document.getElementById('qr');
+  if (!q || typeof MEND === 'undefined') return;
+  var esc = function (x) {
+    return String(x == null ? '' : x).replace(/[&<>"]/g, function (c) {
+      return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;' }[c]; }); };
+
+  function run() {
+    var v = q.value.trim();
+    if (v.length < 2) { out.innerHTML = ''; return; }
+    var rows = MEND.searchAll(v, { limit: 8 });
+    if (!rows.length) {
+      out.innerHTML = '<div class="none">Nothing matched. Try <b>thabang</b>, <b>leribe</b> or <b>koloi</b>.</div>';
+      return;
+    }
+    out.innerHTML = rows.map(function (r) {
+      var cls = r.type === 'person' ? 'person' : (r.platform || '');
+      var on = (r.on && r.on.length > 1)
+        ? '<span class="on">on ' + r.on.join(' + ') + '</span>' : '';
+      var where = r.platform ? r.platform : 'person';
+      return '<div class="row ' + cls + '">' +
+               '<div class="t">' + esc(r.title) + on + '</div>' +
+               '<div class="s">' + esc(where) + (r.subtitle ? ' — ' + esc(r.subtitle) : '') + '</div>' +
+             '</div>';
+    }).join('');
+  }
+  q.addEventListener('input', run);
+  q.value = 'thabang'; run();
+})();
+</script>
+</body>
+</html>

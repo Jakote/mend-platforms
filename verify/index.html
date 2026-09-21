@@ -1,0 +1,497 @@
+<!doctype html>
+<!-- © MEND GROUP (PTY) LTD · Reg No. 96070 · TIN 200176439-4 · Maseru, Lesotho.
+     Generated from the mend-platforms monorepo — edit there, not here. -->
+<html data-title-key="title.verify" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Verification desk — MEND GROUP</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Weights trimmed to the ones this page actually uses. Plus Jakarta 600
+     and a bold Space Grotesk and Inter 500 were requested and never rendered;
+     each unused
+     weight is a whole font file somebody pays for. -->
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Inter:wght@400;600&family=Space+Grotesk:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+/* MEND's own identity, deliberately unlike all three platforms. This is the
+   operator's tool. Anyone looking at it should never mistake it for Pitso,
+   Mafisa or Matsema. */
+:root{--teal:#0d9488;--teal2:#0f766e;--gold:#e8c877;--stone:#1c1917;--stone2:#292524;
+      --ink2:#57534e;--ink3:#8b837c;--paper:#fafaf9;--paper2:#f5f5f4;--line:#e7e5e4;
+      --ok:#15803d;--bad:#b91c1c;--warn:#b45309;--mono:'Space Grotesk',ui-monospace,monospace}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--paper);color:var(--stone);
+     -webkit-font-smoothing:antialiased;line-height:1.6}
+h1,h2,h3{font-family:'Plus Jakarta Sans',sans-serif;letter-spacing:-.02em;line-height:1.2}
+.w{max-width:1000px;margin:0 auto;padding:0 clamp(16px,4vw,28px)}
+.mono,.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+header{background:var(--stone);color:#fff;padding:15px 0}
+header .w{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+header h1{font-size:18px;font-weight:800}
+header .sub{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+header .who{font-size:12.5px;color:#a8a29e}
+
+#mode{padding:11px 0;font-size:13px}
+#mode .w{display:flex;gap:11px;align-items:flex-start}
+#mode .tag{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+           padding:3px 9px;white-space:nowrap;flex:0 0 auto}
+.m-device{background:#eef2f4;border-bottom:1px solid var(--line)}
+.m-device .tag{background:var(--stone);color:#fff}
+.m-connecting{background:#fdf6e3;border-bottom:1px solid #e6d9a8}
+.m-connecting .tag{background:var(--warn);color:#fff}
+.m-connected{background:#ecfdf5;border-bottom:1px solid #a7d8c4}
+.m-connected .tag{background:var(--ok);color:#fff}
+.m-unreachable{background:#fef2f2;border-bottom:2px solid var(--bad)}
+.m-unreachable .tag{background:var(--bad);color:#fff}
+
+.tabs{border-bottom:1px solid var(--line);background:#fff}
+.tabs .w{display:flex;gap:2px}
+.tabs button{background:none;border:none;border-bottom:3px solid transparent;border-radius:0;
+             padding:13px 16px;min-height:48px;font-family:'Plus Jakarta Sans';font-weight:700;
+             font-size:14px;color:var(--ink2);cursor:pointer}
+.tabs button[aria-selected=true]{color:var(--stone);border-bottom-color:var(--teal)}
+.tabs button:hover{background:var(--paper2)}
+.tabs button:focus-visible{outline:3px solid var(--teal);outline-offset:-3px}
+.dsp{border:1px solid var(--line);border-radius:8px;padding:16px;margin-bottom:12px;background:#fff}
+.dsp.old{border-left:4px solid var(--warn)}
+.dsp .who{font-family:'Plus Jakarta Sans';font-weight:700;font-size:15.5px}
+.dsp .age{font-family:var(--mono);font-size:12px;color:var(--warn)}
+.acct{border-left:3px solid var(--line);padding:9px 0 9px 13px;margin:10px 0;font-size:14px}
+/* --ink3 measures 3.73:1 and fails at any reading size. It is fine as an
+   outline colour and wrong for text — which is the exact fault A11Y.md names in
+   the other three apps, and I made it here the same afternoon. */
+.acct .m{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;
+         color:var(--ink2);display:block;margin-bottom:3px}
+main{padding:26px 0 70px}
+.card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:20px;margin-bottom:14px}
+.card h2{font-size:19px;margin-bottom:4px}
+.card .lede{color:var(--ink2);font-size:14px;margin-bottom:16px}
+label{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--ink3);margin:0 0 5px}
+input,textarea,select{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:6px;
+      font-family:'Inter';font-size:14px;background:#fff;color:var(--stone);outline:none}
+input:focus,textarea:focus{border-color:var(--teal)}
+.btn{background:var(--teal);color:#fff;border:none;padding:10px 17px;border-radius:6px;
+     font-family:'Plus Jakarta Sans';font-weight:700;font-size:13.5px;cursor:pointer}
+.btn:hover{background:var(--teal2)}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.btn.ghost{background:#fff;border:1px solid var(--line);color:var(--ink2)}
+.btn.no{background:#fff;border:1px solid #e7b9b9;color:var(--bad)}
+.row{display:flex;gap:9px;flex-wrap:wrap;align-items:center}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+
+.doc{border:1px solid var(--line);border-radius:8px;padding:16px;margin-bottom:11px;background:#fff}
+.doc.old{border-left:4px solid var(--warn)}
+.doc .top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline}
+.doc .kind{font-family:'Plus Jakarta Sans';font-weight:700;font-size:16px}
+.doc .waited{font-family:var(--mono);font-size:12px;color:var(--warn)}
+.doc dl{display:grid;grid-template-columns:auto 1fr;gap:3px 14px;margin:11px 0;font-size:13.5px}
+.doc dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;
+        color:var(--ink3);padding-top:3px}
+.doc .unlocks{background:var(--paper2);border-radius:6px;padding:10px 12px;font-size:13px;
+              color:var(--ink2);margin:11px 0}
+.note{border-left:3px solid var(--teal);background:#fff;padding:14px 16px;font-size:14px;
+      color:var(--ink2);margin-bottom:14px}
+.note.warn{border-left-color:var(--warn);background:#fffbeb}
+.note.bad{border-left-color:var(--bad);background:#fef2f2}
+/* --ink3 fails contrast at body size (3.73:1). --ink2 clears 4.5:1. */
+.empty{text-align:center;padding:40px 20px;color:var(--ink2)}
+.empty b{display:block;font-family:'Plus Jakarta Sans';font-weight:700;font-size:17px;
+         color:var(--stone);margin-bottom:6px}
+#err{position:fixed;left:0;right:0;bottom:0;background:var(--bad);color:#fff;padding:12px 16px;
+     font-size:13.5px;display:none;z-index:99}
+#err b{display:block}
+@media(max-width:640px){.g2{grid-template-columns:1fr}}
+</style>
+<style>/* Injected into every app at build time. A printed page must be the RECORD,
+   not a photograph of an app: no navigation, no buttons, no banners, no
+   coloured blocks that come out as grey smears on a mono printer. */
+@media print {
+  #mend-strip, nav, .noprint, [data-noprint] { display: none !important; }
+  html, body { background: #fff !important; color: #000 !important;
+               padding-bottom: 0 !important; margin: 0 !important; }
+  body { font-size: 11.5pt; }
+  a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 9pt; word-break: break-all; }
+  a { text-decoration: none; color: #000 !important; }
+  /* Progress bars and status pills are colour on screen and meaningless in
+     grey, so print gives them an outline and lets the number carry the meaning. */
+  [class*="bar"], [class*="pill"], [class*="badge"], [class*="stamp"] {
+    box-shadow: none !important; border: 1px solid #000 !important;
+    background: #fff !important; color: #000 !important;
+  }
+  button, input[type="button"], input[type="submit"], select { display: none !important; }
+  input, textarea { border: none !important; padding: 0 !important; font: inherit !important; }
+  table { page-break-inside: auto; } tr { page-break-inside: avoid; }
+  h1, h2, h3 { page-break-after: avoid; }
+  /* When one element is being printed on purpose, print only that.
+     CSS cannot select an ancestor, so printRecord() marks the chain from the
+     target up to <body> with data-print-path. Without that, a target nested
+     anywhere below body had its own parent hidden and printed a blank page. */
+  body[data-printing] *:not([data-print-path]):not([data-print-target]):not([data-print-target] *) {
+    display: none !important;
+  }
+  body[data-printing] [data-print-path] {
+    display: block !important;
+    margin: 0 !important; padding: 0 !important; border: none !important;
+    background: none !important; box-shadow: none !important; max-width: none !important;
+  }
+  body[data-printing] [data-print-target],
+  body[data-printing] [data-print-target] * { display: revert !important; }
+  body[data-printing] [data-print-target] { display: block !important; }
+  @page { margin: 16mm; }
+}
+</style>
+<style>:root{--mend-bar-bg:#1c1917;--mend-bar-fg:#fafaf9;--mend-bar-accent:#0d9488;--mend-bar-line:rgba(255,255,255,.18);}</style>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#1c1917">
+<link rel="apple-touch-icon" href="icons/verify-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Desk">
+<script>/* Injected into every app at build time so all five behave identically and no
+   app has to remember to do this. Registration failing is never fatal: the app
+   works online exactly as before. */
+(function () {
+  if (!('serviceWorker' in navigator)) return;
+  addEventListener('load', function () {
+    navigator.serviceWorker.register('./sw.js').catch(function () {});
+  });
+  // Tell the page when it is offline, so it can stop pretending otherwise.
+  function paintOnline() { document.documentElement.setAttribute('data-online', navigator.onLine ? 'yes' : 'no'); }
+  addEventListener('online', paintOnline); addEventListener('offline', paintOnline); paintOnline();
+})();
+</script>
+</head>
+<body>
+
+<header><div class="w">
+  <div>
+    <div class="sub">MEND GROUP · Reg 96070</div>
+    <h1 id="deskTitle">Verification desk</h1>
+  </div>
+  <div class="who" id="who">—</div>
+</div></header>
+
+<div id="mode" class="m-device"><div class="w">
+  <span class="tag" id="modeTag">…</span><span id="modeText"></span>
+</div></div>
+
+<nav class="tabs" id="tabs" role="tablist"></nav>
+<main class="w" id="app" role="tabpanel" tabindex="0"></main>
+<div id="err"></div>
+
+<script src="core/config.js"></script>
+<script src="core/i18n.js"></script>
+<script src="core/seed.js"></script>
+<script src="core/mend.js"></script>
+<script src="core/ui.js"></script>
+<script>
+/* The desk is where a badge is earned. Every "verified" in Pitso, Mafisa and
+   Matsema comes from a decision made here by a named person on a named date.
+   Before this existed, the seed file simply asserted them. */
+
+var KIND_LABEL = {
+  national_id:'National ID', passport:'Passport', drivers_licence:"Driver's licence",
+  trade_certificate:'Trade certificate', professional_registration:'Professional registration',
+  company_registration:'Company registration', vehicle_registration:'Vehicle registration',
+  title_deed:'Title deed', lease:'Lease', proof_of_address:'Proof of address', membership:'Membership'
+};
+
+/* What a decision actually releases. A reviewer should know what they are
+   switching on before they switch it on. */
+var UNLOCKS = {
+  national_id:'Identity across all three platforms. Also the only thing that lets someone list a category nothing registers — a power tool, a generator — where ownership cannot be proved at all.',
+  passport:'Same as a national ID: identity across all three.',
+  /* It does NOT gate anything. Pitso accepts an offer from anyone — the
+     database checks only that the offer is yours — and a tester proved it by
+     having a mohair farmer with no certificate bid on an IT job. The desk was
+     the last place still claiming a gate that does not exist, which is worse
+     here than anywhere else: this screen is where MEND decides. */
+  trade_certificate:'Shows on their Pitso profile as a verified skill. It does not gate anything \u2014 anyone may make an offer, and the customer chooses. This is the one a customer is really relying on when they do.',
+  professional_registration:'Same as a trade certificate, for registered professions \u2014 shown, not enforced.',
+  company_registration:'Lets them act as a business on all three, and convene a pool on Matsema.',
+  vehicle_registration:'Lets them list that vehicle on Mafisa. Nothing else accepts it as proof.',
+  title_deed:'Lets them list farmland on Mafisa.',
+  lease:'Lets them list premises or storage on Mafisa.',
+  drivers_licence:'Identity support only. Does not by itself unlock a listing.',
+  proof_of_address:'Supporting only.',
+  membership:'Supporting, for a Matsema pool.'
+};
+
+function h(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){
+  return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+function daysSince(iso){ if(!iso) return null;
+  return Math.floor((Date.now()-new Date(iso).getTime())/86400000); }
+
+/* ---- the mode banner, all four states, updated when status changes -------- */
+function paintMode(){
+  var n = MEND.modeNotice();
+  var bar = document.getElementById('mode');
+  bar.className = 'm-' + n.mode;
+  document.getElementById('modeTag').textContent = n.label;
+  document.getElementById('modeText').textContent = n.detail;
+}
+MEND.onStatus(function(){ paintMode(); render(); });
+MEND.onLang(function(){
+  paintMode();    // the disclosure banner must follow the language button too
+  var d = document.getElementById('deskTitle');
+  if (d) d.textContent = MEND.t('desk.title');
+  paintMode(); render();
+});
+
+MEND.onWriteError(function(e){
+  var box = document.getElementById('err');
+  box.innerHTML = '<b>' + h(MEND.t('outbox.failed')) + '.</b>' + h(e.op + ' on ' + e.table + ' — ' + e.message) +
+                  ' The decision is showing on screen but did not reach the database. Reload before trusting it.';
+  box.style.display = 'block';
+});
+
+/* ---- sign in ------------------------------------------------------------- */
+var pendingEmail = null;
+
+function signInCard(){
+  if (!MEND.CONFIGURED) return '' +
+    '<div class="card"><h2>' + h(MEND.t('desk.no_server')) + '</h2>' +
+    '<p class="lede">' + h(MEND.t('desk.no_server_why')) + '</p>' +
+    '<div class="note">' + h(MEND.t('desk.fill_in', { file: 'core/config.js' })) + '</div></div>';
+
+  if (!pendingEmail) return '' +
+    '<div class="card"><h2>' + h(MEND.t('app.signin')) + '</h2>' +
+    '<p class="lede">' + h(MEND.t('auth.no_password')) + '</p>' +
+    '<div class="g2"><div><label>' + h(MEND.t('app.email')) + '</label><input id="em" type="email" placeholder="you@mendgroup.co.za"></div>' +
+    '<div style="align-self:end"><button class="btn" onclick="sendCode()">' + h(MEND.t('auth.send_code')) + '</button></div></div></div>';
+
+  return '' +
+    '<div class="card"><h2>' + h(MEND.t('auth.enter_code')) + '</h2>' +
+    '<p class="lede">' + h(MEND.t('auth.sent_to', { email: pendingEmail })) + '</p>' +
+    '<div class="g2"><div><label>' + h(MEND.t('auth.six_digit')) + '</label><input id="cd" inputmode="numeric" autocomplete="one-time-code"></div>' +
+    '<div style="align-self:end" class="row"><button class="btn" onclick="checkCode()">' + h(MEND.t('app.signin')) + '</button>' +
+    '<button class="btn ghost" onclick="pendingEmail=null;render()">Use another email</button></div></div></div>';
+}
+
+async function sendCode(){
+  var em = document.getElementById('em').value.trim();
+  if (!em) return;
+  try { await MEND.sendSignInCode(em); pendingEmail = em; render(); }
+  catch(e){ alert('Could not send the code: ' + e.message); }
+}
+async function checkCode(){
+  try { await MEND.verifySignInCode(pendingEmail, document.getElementById('cd').value.trim());
+        pendingEmail = null; render(); }
+  catch(e){ alert(e.message); }
+}
+
+/* ---- the queue ----------------------------------------------------------- */
+function queueCard(){
+  var q = MEND.verificationQueue();
+
+  if (!q.length) return '' +
+    '<div class="card"><div class="empty"><b>' + h(MEND.t('desk.nothing')) + '</b>' +
+    'Either every submitted document has been decided, or this account is not on the desk. ' +
+    'Row level security returns nothing to someone who is not staff, so an empty queue and ' +
+    'no permission look the same from here — by design.</div></div>';
+
+  return '<div class="card"><h2>' + h(MEND.t('desk.n_waiting', { n: q.length })) + '</h2>' +
+    '<p class="lede">' + h(MEND.t('desk.oldest_first')) + '</p>' +
+    q.map(docCard).join('') + '</div>';
+}
+
+function docCard(d){
+  var p = MEND.profile(d.profile_id) || {};
+  var waited = daysSince(d.submitted_at);
+  return '' +
+  '<div class="doc' + (waited >= 3 ? ' old' : '') + '">' +
+    '<div class="top"><span class="kind">' + h(KIND_LABEL[d.kind] || d.kind) + '</span>' +
+      (waited != null ? '<span class="waited">waiting ' + waited + ' day' + (waited===1?'':'s') + '</span>' : '') +
+    '</div>' +
+    '<dl>' +
+      '<dt>' + h(MEND.t('desk.person')) + '</dt><dd>' + h(p.display_name || d.profile_id) + (p.district ? ' · ' + h(p.district) : '') + '</dd>' +
+      (d.issued_by ? '<dt>' + h(MEND.t('doc.issued_by')) + '</dt><dd>' + h(d.issued_by) + '</dd>' : '') +
+      (d.issued_on ? '<dt>' + h(MEND.t('desk.issued')) + '</dt><dd>' + h(MEND.fmtDate(d.issued_on)) + '</dd>' : '') +
+      (d.expires_on ? '<dt>' + h(MEND.t('desk.expires')) + '</dt><dd>' + h(MEND.fmtDate(d.expires_on)) +
+        (d.expires_on < MEND.today() ? ' — <b style="color:var(--bad)">already expired, do not verify</b>' : '') + '</dd>' : '') +
+    '</dl>' +
+    '<div class="unlocks"><b>' + h(MEND.t('desk.releases')) + ':</b> ' + h(UNLOCKS[d.kind] || 'nothing on its own.') + '</div>' +
+    '<div class="row"><button class="btn ghost" onclick="openDoc(\'' + d.id + '\')">' + h(MEND.t('desk.open_doc')) + '</button></div>' +
+    '<div class="g2" style="margin-top:12px">' +
+      '<div><label>' + h(MEND.t('desk.reject_reason')) + '</label>' +
+        '<textarea id="n-' + d.id + '" rows="2" placeholder="' + h(MEND.t('desk.check_prompt')) + '"></textarea></div>' +
+      '<div style="align-self:end" class="row">' +
+        '<button class="btn" onclick="decide(\'' + d.id + '\',\'verified\')">' + h(MEND.t('desk.verify')) + '</button>' +
+        '<button class="btn no" onclick="decide(\'' + d.id + '\',\'rejected\')">' + h(MEND.t('desk.reject')) + '</button>' +
+      '</div>' +
+    '</div>' +
+  '</div>';
+}
+
+async function openDoc(id){
+  var d = MEND.all('documents').find(function(x){ return x.id === id; });
+  try {
+    var url = await MEND.documentLink(d, 300);
+    if (!url) return alert('No server connected, so there is no file to open.');
+    window.open(url, '_blank', 'noopener');
+  } catch(e){ alert('Could not open it: ' + e.message); }
+}
+
+function decide(id, decision){
+  var note = (document.getElementById('n-' + id) || {}).value || '';
+  try {
+    MEND.decideDocument(id, decision, note);
+    MEND.record('document.' + decision, { subject_table:'documents', subject_id:id });
+    render();
+  } catch(e){ alert(e.message); }
+}
+
+/* A takedown is the one destructive thing this desk can do, so it says why, in
+   the person's own record, under the name of whoever did it. db/020 refuses a
+   reason under ten characters and so does core; this just surfaces the refusal
+   in words rather than letting the button fail silently. */
+function doTakeDown(table, id){
+  var box = document.getElementById('rz-' + id);
+  try {
+    MEND.takeDown(table, id, box ? box.value : '');
+    MEND.record('moderation.hidden', { subject_table: table, subject_id: id });
+    render();
+  } catch(e){ alert(e.message); }
+}
+
+/* ---- disputes -----------------------------------------------------------
+   MEND can SEE what is happening on its own platform — row level security lets
+   staff read a dispute — and that is a duty of care, not a licence. THERE IS NO
+   DECIDE BUTTON HERE AND THERE MUST NOT BE. The platform does not adjudicate;
+   an outcome closes only when both people accept it, and a desk that could
+   close one for them would turn this into a court MEND is not.
+
+   What the desk can honestly do is notice, and offer to help if both want it.
+   -------------------------------------------------------------------------- */
+var tab = 'queue';
+
+function tabsBar(){
+  var t = document.getElementById('tabs');
+  /* Reports were being filed into a table no screen read. A complaint that
+     nobody can open is not moderation, it is a suggestion box with no lid. */
+  var nOpen = MEND.reportQueue().filter(function(g){ return g.open > 0; }).length;
+  var items = [['queue', MEND.t('doc.documents')],
+               ['disputes', MEND.t('dispute.plural')],
+               ['reports', MEND.t('desk.reports') + (nOpen ? ' (' + nOpen + ')' : '')]];
+  t.innerHTML = '<div class="w">' + items.map(function(i){
+    return '<button role="tab" aria-controls="app" aria-selected="' + (tab === i[0]) + '" data-t="' + i[0] + '">' +
+           h(i[1]) + '</button>';
+  }).join('') + '</div>';
+  [].forEach.call(t.querySelectorAll('button'), function(b){
+    b.addEventListener('click', function(){ tab = b.getAttribute('data-t'); render(); });
+  });
+}
+
+function reportsCard(){
+  var groups = MEND.reportQueue();
+  if (!groups.length) return '<div class="card"><div class="empty"><b>' +
+    h(MEND.t('ui.nothing_yet')) + '</b>' + h(MEND.t('desk.reports_none')) + '</div></div>';
+
+  return '<div class="card"><h2>' + h(MEND.t('desk.reports_n', { n: groups.length })) + '</h2>' +
+    '<p class="lede">' + h(MEND.t('desk.reports_note')) + '</p>' +
+    groups.map(reportGroupCard).join('') + '</div>';
+}
+
+function reportGroupCard(g){
+  var down = g.moderation && g.moderation.action === 'hidden';
+  var reasons = {};
+  g.reports.forEach(function(r){ reasons[r.reason] = (reasons[r.reason] || 0) + 1; });
+
+  /* The claim text is shown HERE and nowhere else. db/020 keeps it between the
+     reporter and the desk, and a stranger only ever sees a count. This screen is
+     the desk. */
+  var detail = g.reports.filter(function(r){ return r.detail; })
+    .map(function(r){ return '<blockquote class="q">' + h(r.detail) + '</blockquote>'; }).join('');
+
+  return '<div class="dsp' + (down ? '' : ' old') + '">' +
+    '<div class="top" style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap">' +
+      '<span class="who">' + h(g.subject_table.replace(/_/g, ' ')) + '</span>' +
+      '<span class="age">' + h(MEND.t('desk.reports_count', { n: g.reports.length })) +
+        (g.open ? ' · ' + h(MEND.t('desk.reports_open', { n: g.open })) : '') + '</span>' +
+    '</div>' +
+    '<div class="small mono" style="opacity:.7">' + h(g.subject_id) + '</div>' +
+    '<p class="small" style="margin:8px 0 0">' +
+      Object.keys(reasons).map(function(k){
+        return h(MEND.t('report.r.' + k)) + (reasons[k] > 1 ? ' ×' + reasons[k] : '');
+      }).join(' · ') + '</p>' +
+    detail +
+    (down
+      ? '<div class="note warn" style="margin-top:10px"><b>' + h(MEND.t('desk.taken_down')) + '</b> ' +
+        h(g.moderation.reason) + '</div>'
+      : '<div style="margin-top:10px">' +
+        '<label class="small" for="rz-' + h(g.subject_id) + '">' + h(MEND.t('desk.takedown_why')) + '</label>' +
+        '<textarea id="rz-' + h(g.subject_id) + '" rows="2" style="width:100%;margin-top:4px"></textarea>' +
+        '<div class="row" style="margin-top:8px"><button class="btn no" onclick="doTakeDown(\'' +
+          h(g.subject_table) + '\',\'' + h(g.subject_id) + '\')">' +
+          h(MEND.t('desk.take_down')) + '</button></div></div>') +
+    '</div>';
+}
+
+function disputesCard(){
+  var rows = MEND.all('disputes').filter(function(d){
+    return d.state === 'open' || d.state === 'answered'; });
+
+  if (!rows.length) return '<div class="card"><div class="empty"><b>' +
+    h(MEND.t('ui.nothing_yet')) + '</b>' +
+    'Either nothing is open, or this account is not on the desk. Row level security ' +
+    'returns nothing to someone who is not staff, so those look the same from here.</div></div>';
+
+  rows.sort(function(a,b){ return (a.created_at||'') < (b.created_at||'') ? -1 : 1; });
+  return '<div class="card"><h2>' + h(MEND.t('dispute.n_open', { n: rows.length })) + '</h2>' +
+    '<p class="lede">' + h(MEND.t('desk.dispute_note')) + '</p>' +
+    rows.map(disputeCard).join('') + '</div>';
+}
+
+function disputeCard(d){
+  var by = MEND.profile(d.raised_by) || {}, ag = MEND.profile(d.against) || {};
+  var age = daysSince(d.created_at);
+  var full = (MEND.disputeFor(d.engagement_id) || []).find(function(x){ return x.id === d.id; }) || d;
+  var stmts = (full.statements || []);
+  var answered = stmts.length > 1;
+  return '' +
+  '<div class="dsp' + (age >= 7 ? ' old' : '') + '">' +
+    '<div class="top" style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap">' +
+      '<span class="who">' + h(by.display_name || '—') + ' → ' + h(ag.display_name || '—') + '</span>' +
+      (age != null ? '<span class="age">' +
+        h(age === 0 ? MEND.t('dispute.opened_today')
+                    : age + ' ' + (age === 1 ? MEND.t('app.day') : MEND.t('app.days'))) +
+        '</span>' : '') +
+    '</div>' +
+    '<div class="mini" style="margin:4px 0 2px">' + h(MEND.t('dispute.k.' + d.kind)) +
+      (d.amount_cents ? ' · ' + h(MEND.M(d.amount_cents)) : '') + '</div>' +
+    stmts.map(function(s){
+      var a = MEND.profile(s.author_id) || {};
+      return '<div class="acct"><span class="m">' + h(a.display_name || '—') + ' · ' +
+             h(MEND.fmtDate((s.created_at || '').slice(0,10))) + '</span>' + h(s.body) + '</div>';
+    }).join('') +
+    (!answered
+      ? '<div class="note warn" style="margin:10px 0 0">Only one side has been heard. ' +
+        'Nothing can be concluded from that.</div>'
+      : '') +
+    '<div class="note" style="margin:10px 0 0">' + h(MEND.t('dispute.no_verdict')) + '</div>' +
+  '</div>';
+}
+
+/* ---- render -------------------------------------------------------------- */
+function render(){
+  var me = MEND.me();
+  document.getElementById('who').textContent = me ? me.display_name : 'not signed in';
+  tabsBar();
+  document.getElementById('tabs').hidden = !me;
+  var out = '';
+  if (!me) out += signInCard();
+  else out += (tab === 'disputes' ? disputesCard() : tab === 'reports' ? reportsCard() : queueCard());
+
+  out += '<div class="note warn">' + h(MEND.t('desk.rules_in_db')) + '</div>';
+  document.getElementById('app').innerHTML = out;
+}
+
+paintMode();
+render();
+</script>
+</body>
+</html>
