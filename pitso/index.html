@@ -1,0 +1,3461 @@
+<!doctype html>
+<!-- © MEND GROUP (PTY) LTD · Reg No. 96070 · TIN 200176439-4 · Maseru, Lesotho.
+     Generated from the mend-platforms monorepo — edit there, not here. -->
+<html data-title-key="title.pitso" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Pitso — skilled work, and what people say about it</title>
+<meta name="description" content="Pitso: find a verified tradesperson in Lesotho, post work, receive offers. MEND GROUP.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:wght@600;700&display=swap" rel="stylesheet">
+<style>
+/* ===========================================================================
+   PITSO — design system "Assembly"
+   A village noticeboard: civic, open, warm, plainspoken, generous with space.
+   Items separated by rules, not boxed into a grid of tiles.
+   =========================================================================== */
+:root{
+  --paper:#FBF7EF; --paper2:#F3EDE1;
+  --ink:#1C1917; --ink2:#57534E;
+  /* --ink3 was #8A8378, which measures 3.51:1 on the paper and 3.22:1 on
+     paper2 — under the 4.5:1 floor everywhere it was used as text (field
+     labels, the footer, 'not taking work now'). Darkened to 5.08 / 4.66.
+     It is still visibly the quietest of the three inks. */
+  --ink3:#6F6961;
+  --green:#14532D; --green2:#166534;
+  --clay:#B45309; --line:#DDD5C4;
+  --serif:'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --sans:'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  /* The shared strip (core/ui.js) is one component in a shadow root and can be
+     reached only through these four. Same values tools/deploy.py injects. */
+  --mend-bar-bg:#14532D; --mend-bar-fg:#FBF7EF;
+  --mend-bar-accent:#B45309; --mend-bar-line:rgba(251,247,239,.22);
+}
+*,*::before,*::after{box-sizing:border-box}
+/* A visible focus ring on EVERYTHING focusable. Nothing in this page drew
+   one, so the first Tab press left the reader with no idea where they were.
+   :focus rather than only :focus-visible — a ring a mouse user also sees is
+   a smaller cost than a keyboard user seeing none. */
+:focus{outline:3px solid var(--clay); outline-offset:2px}
+:focus-visible{outline:3px solid var(--clay); outline-offset:2px}
+@media (forced-colors:active){:focus,:focus-visible{outline:3px solid Highlight}}
+html,body{margin:0;padding:0;max-width:100%;overflow-x:hidden}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:var(--sans); font-size:16px; line-height:1.55;
+  -webkit-text-size-adjust:100%;
+}
+h1,h2,h3,h4{font-family:var(--serif); font-weight:600; line-height:1.22; margin:0; letter-spacing:-.005em}
+p{margin:0 0 .8rem}
+a{color:var(--green2)}
+img{max-width:100%}
+.wrap{width:100%; max-width:820px; margin:0 auto; padding:0 18px}
+.muted{color:var(--ink3)}
+.sec{color:var(--ink2)}
+.small{font-size:.8125rem}
+.tiny{font-size:.75rem}
+.break{overflow-wrap:anywhere; word-break:break-word}
+
+/* ---- masthead ---------------------------------------------------------- */
+header.mast{background:var(--green); color:#F6F2E8; padding:22px 0 18px}
+.mast h1{font-size:2rem; font-weight:700; color:#fff; letter-spacing:-.02em}
+.mast .said{font-family:var(--serif); font-size:1rem; color:#CFE3D5; margin-top:4px}
+.mast .who{
+  margin-top:16px; padding-top:14px; border-top:2px solid rgba(255,255,255,.18);
+  display:flex; flex-wrap:wrap; gap:8px 12px; align-items:center;
+}
+.mast .who label{font-size:.75rem; text-transform:none; color:#BBD4C3; letter-spacing:.02em}
+.mast select{
+  font-family:var(--sans); font-size:.9375rem; padding:9px 10px; min-height:44px;
+  background:#0F3F22; color:#fff; border:2px solid rgba(255,255,255,.25); border-radius:0;
+  max-width:100%;
+}
+/* ---- sign-in, in the masthead ------------------------------------------ */
+/* Email and a one-time code. There is no password field here and there is not
+   one anywhere else either. */
+.mast form.si{display:flex; flex-wrap:wrap; gap:8px 10px; align-items:center; width:100%}
+.mast input[type=email],.mast input[type=text].code{
+  flex:1 1 210px; min-width:0; font-family:var(--sans); font-size:1rem; padding:10px 12px;
+  min-height:44px; background:#0F3F22; color:#fff;
+  border:2px solid rgba(255,255,255,.25); border-radius:0;
+}
+.mast input::placeholder{color:#7FA88E}
+.mast input:focus{outline:2px solid #CFE3D5; outline-offset:0; border-color:#CFE3D5}
+.mast .btnw{
+  appearance:none; min-height:44px; padding:10px 16px; font-family:var(--sans);
+  font-size:.9375rem; font-weight:600; border-radius:0; cursor:pointer;
+  background:#F6F2E8; color:var(--green); border:2px solid #F6F2E8;
+}
+.mast .btnw.ghost{background:transparent; color:#CFE3D5; border-color:rgba(255,255,255,.35)}
+.mast .btnw[disabled]{opacity:.5; cursor:not-allowed}
+.mast .wholine{flex:1 1 100%; font-size:.9375rem; color:#DCE9E0}
+.mast .wholine b{color:#fff; font-weight:600}
+.mast .authnote{flex:1 1 100%; font-size:.75rem; color:#A9C6B5; max-width:60ch}
+.mast .autherr{flex:1 1 100%; font-size:.8125rem; font-weight:600; color:#FBD9A6}
+.mast .signedin{display:flex; flex-wrap:wrap; gap:10px; align-items:center; width:100%}
+
+/* ---- mode notice ------------------------------------------------------- */
+/* FOUR states, and they are not decorations. device and connecting are notes;
+   connected is a quiet confirmation; unreachable is a WARNING, because the page
+   is then showing whatever this browser last saved and a reader who misses that
+   will act on figures that are not current. */
+.mode{border-bottom:2px solid var(--line); background:var(--paper2); padding:12px 0}
+.mode .flag{
+  display:inline-block; font-size:.6875rem; font-weight:600; letter-spacing:.09em;
+  text-transform:uppercase; padding:3px 8px; margin-right:8px; color:#fff; background:var(--clay);
+}
+.mode.device .flag{background:var(--ink2)}
+.mode.connecting .flag{background:var(--ink3)}
+.mode.connected .flag{background:var(--green2)}
+.mode .detail{color:var(--ink2); font-size:.875rem}
+.mode.unreachable{
+  background:#FBF1E2; border-top:3px solid var(--clay); border-bottom:3px solid var(--clay);
+  padding:15px 0;
+}
+.mode.unreachable .flag{background:var(--clay)}
+.mode.unreachable .detail{color:#7C3A06}
+.mode.unreachable .stale{
+  display:block; margin-top:8px; margin-bottom:4px; color:#7C3A06;
+  font-family:var(--serif); font-size:1.125rem; font-weight:700; max-width:56ch;
+}
+
+/* ---- writes that did not save ------------------------------------------ */
+/* A row still on screen that never reached the database is the exact failure
+   this project keeps hitting. It gets a band of its own, not a toast. */
+#alerts:empty{display:none}
+.wfail{background:#FBF1E2; border-bottom:3px solid var(--clay); padding:14px 0}
+.wfail h4{font-size:1.0625rem; color:#7C3A06}
+.wfail p{font-size:.875rem; color:#7C3A06; margin:6px 0 0; max-width:60ch}
+.wfail ul{list-style:none; margin:10px 0 0; padding:0}
+.wfail li{padding:8px 0; border-top:1px solid #E4C9A2; font-size:.875rem; color:#7C3A06}
+.wfail li:first-child{border-top:0}
+.wfail .what{font-weight:600}
+.wfail .why{display:block; margin-top:3px; color:var(--ink2); overflow-wrap:anywhere}
+.wfail .btnrow{margin-top:12px}
+
+/* a row in flight, and a row that never landed */
+.sync{
+  display:inline-block; font-size:.6875rem; font-weight:600; letter-spacing:.04em;
+  padding:2px 7px; margin-left:8px; white-space:nowrap;
+  border:1px solid var(--line); background:var(--paper2); color:var(--ink3);
+}
+.sync.failed{border-color:var(--clay); background:#FBF1E2; color:#7C3A06}
+
+/* ---- nav --------------------------------------------------------------- */
+nav.tabs{border-bottom:2px solid var(--line); background:var(--paper); position:sticky; top:0; z-index:20}
+nav.tabs .scroller{display:flex; gap:0; overflow-x:auto; scrollbar-width:none; -webkit-overflow-scrolling:touch}
+nav.tabs .scroller::-webkit-scrollbar{display:none}
+nav.tabs button{
+  flex:0 0 auto; appearance:none; background:none; border:0; border-bottom:3px solid transparent;
+  font-family:var(--sans); font-size:.9375rem; font-weight:500; color:var(--ink2);
+  padding:14px 14px; min-height:48px; cursor:pointer; white-space:nowrap; border-radius:0;
+}
+nav.tabs button:first-child{padding-left:0}
+nav.tabs button[aria-selected="true"]{color:var(--green); font-weight:600; border-bottom-color:var(--clay)}
+
+/* ---- sections ---------------------------------------------------------- */
+main{padding:26px 0 72px}
+.viewhead h2{font-size:1.5rem}
+.viewhead p{color:var(--ink2); margin-top:6px; max-width:52ch}
+.rule{border:0; border-top:2px solid var(--line); margin:22px 0}
+.rule.thin{border-top-width:1px; margin:16px 0}
+
+/* ---- the noticeboard list ---------------------------------------------- */
+.board{list-style:none; margin:0; padding:0}
+.board > li{padding:22px 0; border-top:2px solid var(--line)}
+.board > li:first-child{border-top:0}
+
+/* ---- provider entry: NAME and STANDING first, price small and last ----- */
+.pname{font-family:var(--serif); font-size:1.3125rem; font-weight:700; color:var(--ink)}
+/* A person's name is the main thing anyone taps on this page, and it landed
+   at 31px against a 44px floor. The 2px rule under it moved from a
+   border-bottom (which padding pushes away from the text) to an underline
+   (which hugs it), so the target can be padded to 44px without the rule
+   drifting. The negative margin keeps the surrounding rhythm unchanged. */
+a.pname{
+  display:inline-block; min-height:44px; padding:10px 0; margin:-10px 0;
+  text-decoration:underline; text-decoration-color:var(--line);
+  text-decoration-thickness:2px; text-underline-offset:4px;
+}
+a.pname:hover{text-decoration-color:var(--clay)}
+.standing{display:flex; flex-wrap:wrap; align-items:baseline; gap:6px 10px; margin-top:6px}
+.stars{color:var(--clay); font-size:1.0625rem; letter-spacing:.06em}
+.score{font-weight:600}
+.counts{color:var(--ink2); font-size:.875rem}
+.trade{margin-top:8px; font-size:.9375rem; color:var(--ink2)}
+.trade b{color:var(--ink); font-weight:600}
+.headline{margin-top:8px; font-family:var(--serif); font-size:1.0625rem; color:var(--ink); max-width:56ch}
+.price{margin-top:12px; font-size:.8125rem; color:var(--ink3)}
+.price b{color:var(--ink2); font-weight:600}
+
+.badges{display:flex; flex-wrap:wrap; gap:6px; margin-top:10px}
+.badge{
+  font-size:.6875rem; font-weight:600; letter-spacing:.04em; padding:3px 8px;
+  border:1px solid var(--line); background:var(--paper2); color:var(--ink2);
+}
+.badge.ok{border-color:#B9CFC0; background:#EDF4EF; color:var(--green)}
+/* clay on this band measures 4.49:1 — a hair under the floor at 11px. */
+.badge.warn{border-color:#E4C9A2; background:#FBF1E2; color:#9A4708}
+.badge.off{color:var(--ink3)}
+
+/* ---- filters ----------------------------------------------------------- */
+.filters{background:var(--paper2); border-top:2px solid var(--line); border-bottom:2px solid var(--line); padding:16px 0 18px; margin-bottom:4px}
+.fgrid{display:grid; grid-template-columns:1fr; gap:12px}
+@media(min-width:560px){.fgrid{grid-template-columns:1fr 1fr}}
+label.fl{display:block; font-size:.75rem; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--ink3); margin-bottom:5px}
+select,input[type=text],input[type=date],input[type=number],textarea{
+  width:100%; max-width:100%; font-family:var(--sans); font-size:1rem; color:var(--ink);
+  background:#fff; border:2px solid var(--line); border-radius:0; padding:11px 12px; min-height:46px;
+}
+textarea{min-height:110px; resize:vertical; line-height:1.5}
+select:focus,input:focus,textarea:focus{outline:2px solid var(--green2); outline-offset:0; border-color:var(--green2)}
+.checkrow{display:flex; align-items:center; gap:12px; min-height:44px}
+/* A 20x20 checkbox is a 20px target. Drawn instead as a 44px ballot box —
+   which is both a thumb-sized target and, in a system made of 2px rules and
+   square corners, the shape this design was always reaching for. */
+.checkrow input[type=checkbox]{
+  appearance:none; -webkit-appearance:none; margin:0; flex:0 0 auto;
+  width:44px; height:44px; border:2px solid var(--line); background:#fff;
+  border-radius:0; cursor:pointer; display:grid; place-content:center;
+}
+.checkrow input[type=checkbox]::before{
+  content:'\2713'; font-size:1.5rem; line-height:1; font-weight:700;
+  color:var(--green); opacity:0;
+}
+.checkrow input[type=checkbox]:checked{border-color:var(--green); background:#EDF4EF}
+.checkrow input[type=checkbox]:checked::before{opacity:1}
+.checkrow label{cursor:pointer; min-height:44px; display:flex; align-items:center}
+.count{margin-top:14px; font-size:.875rem; color:var(--ink2)}
+
+/* ---- buttons ----------------------------------------------------------- */
+.btn{
+  appearance:none; display:inline-flex; align-items:center; justify-content:center;
+  font-family:var(--sans); font-size:.9375rem; font-weight:600; border-radius:0; cursor:pointer;
+  min-height:46px; padding:11px 18px; border:2px solid var(--green); background:var(--green); color:#fff;
+}
+.btn:hover{background:var(--green2); border-color:var(--green2)}
+.btn.ghost{background:transparent; color:var(--green); }
+.btn.ghost:hover{background:#EDF4EF}
+.btn.clay{background:var(--clay); border-color:var(--clay)}
+.btn.clay:hover{background:#9A4708; border-color:#9A4708}
+.btn.small{min-height:44px; padding:9px 14px; font-size:.875rem}
+.btn[disabled]{opacity:.45; cursor:not-allowed}
+.btnrow{display:flex; flex-wrap:wrap; gap:10px; margin-top:14px}
+/* Same problem, same fix: an inline text button was 22px high. */
+.link{
+  background:none; border:0; font:inherit; color:var(--green2); cursor:pointer;
+  text-decoration:underline; text-underline-offset:3px;
+  display:inline-block; min-height:44px; padding:11px 0; margin:-11px 0;
+}
+
+/* ---- cards (the ONLY 4px radius in the system) ------------------------- */
+.card{background:#fff; border:2px solid var(--line); border-radius:4px; padding:16px}
+.card + .card{margin-top:12px}
+.card.quiet{background:var(--paper2)}
+
+/* ---- forms ------------------------------------------------------------- */
+form .field{margin-bottom:18px}
+form .hint{font-size:.8125rem; color:var(--ink3); margin-top:5px}
+.err{font-size:.8125rem; color:#9A3412; font-weight:500; margin-top:5px}
+.field.bad input,.field.bad select,.field.bad textarea{border-color:#B45309}
+.note{border-left:4px solid var(--clay); padding:10px 0 10px 14px; background:var(--paper2); font-size:.875rem; color:var(--ink2)}
+.note.ok{border-left-color:var(--green2)}
+.flash{border:2px solid var(--green2); background:#EDF4EF; color:var(--green); padding:12px 14px; font-weight:500; margin-bottom:18px}
+
+/* ---- request entry ----------------------------------------------------- */
+.rtitle{font-family:var(--serif); font-size:1.1875rem; font-weight:600; max-width:46ch}
+.meta{display:flex; flex-wrap:wrap; gap:4px 12px; margin-top:8px; font-size:.875rem; color:var(--ink2)}
+.meta span{white-space:nowrap}
+.desc{margin-top:10px; color:var(--ink2); max-width:60ch}
+.offercount{margin-top:10px; font-size:.875rem; font-weight:600; color:var(--clay)}
+.offercount.none{color:var(--ink3); font-weight:400}
+
+/* ---- reviews ----------------------------------------------------------- */
+.review{padding:16px 0; border-top:1px solid var(--line)}
+.review:first-child{border-top:0}
+.review .body{font-family:var(--serif); font-size:1.0625rem; color:var(--ink); margin-top:6px; max-width:58ch}
+.review .by{font-size:.8125rem; color:var(--ink3); margin-top:8px}
+
+/* ---- standing panel ---------------------------------------------------- */
+.tally{display:flex; flex-wrap:wrap; gap:10px; margin-top:12px}
+.tally div{flex:1 1 128px; background:var(--paper2); border:2px solid var(--line); padding:12px 14px; min-width:0}
+.tally .n{font-family:var(--serif); font-size:1.5rem; font-weight:700; line-height:1}
+.tally .l{font-size:.75rem; color:var(--ink2); margin-top:4px}
+/* The cross-platform links are the proof that a standing is portable, and on a
+   phone they are a real tap, not decoration — so they get the 44px floor too.
+   Underline rather than border-bottom, and negative margins, so the padding
+   does not push the rule away from the word or grow the tally cell. */
+.tally .l a{
+  color:var(--green2); display:inline-block; min-height:44px; padding:14px 0; margin:-14px 0;
+  text-decoration:underline; text-decoration-color:var(--line); text-underline-offset:3px;
+}
+.tally .l a:hover{text-decoration-color:var(--clay)}
+
+/* ---- my documents ------------------------------------------------------ */
+.dlist{list-style:none; margin:0; padding:0}
+.dlist > li{padding:22px 0; border-top:2px solid var(--line)}
+.dlist > li:first-child{border-top:0}
+.dname{font-family:var(--serif); font-size:1.1875rem; font-weight:700}
+.dstate{margin-top:6px; font-size:.9375rem; font-weight:600}
+.dstate.ok{color:var(--green)}
+.dstate.wait{color:var(--ink2)}
+.dstate.no{color:var(--clay)}
+.dstate.draft{color:var(--ink2)}
+.dwhy{
+  margin-top:10px; border-left:4px solid var(--clay); padding:10px 0 10px 14px;
+  background:var(--paper2); font-size:.875rem; color:var(--ink); max-width:60ch;
+}
+.dmeta{margin-top:8px; font-size:.875rem; color:var(--ink2)}
+.dlink{margin-top:10px; font-size:.875rem}
+.kinds{list-style:none; margin:10px 0 0; padding:0; font-size:.8125rem; color:var(--ink3); max-width:60ch}
+.kinds li{padding:6px 0; border-top:1px solid var(--line)}
+.kinds b{color:var(--ink2); font-weight:600}
+input[type=file]{
+  width:100%; max-width:100%; font-family:var(--sans); font-size:.9375rem;
+  padding:11px 12px; min-height:46px; background:#fff;
+  border:2px dashed var(--line); border-radius:0; color:var(--ink2);
+}
+input[type=file]:focus{outline:2px solid var(--green2); border-color:var(--green2)}
+
+/* ---- doc verdicts ------------------------------------------------------ */
+.docs{list-style:none; margin:10px 0 0; padding:0}
+.docs li{padding:10px 0; border-top:1px solid var(--line); display:flex; gap:10px; align-items:flex-start; font-size:.9375rem}
+.docs li:first-child{border-top:0}
+.docs .mark{flex:0 0 auto; font-weight:700; width:1.2em; text-align:center}
+.docs .ok{color:var(--green2)}
+.docs .no{color:var(--clay)}
+.docs .wait{color:var(--ink3)}
+
+/* ---- rating input ------------------------------------------------------ */
+.ratepick{display:flex; gap:6px; flex-wrap:wrap}
+.ratepick button{
+  appearance:none; min-width:46px; min-height:46px; font-size:1.125rem; cursor:pointer;
+  border:2px solid var(--line); background:#fff; color:var(--ink3); border-radius:0; font-family:var(--sans);
+}
+.ratepick button[aria-pressed="true"]{background:var(--clay); border-color:var(--clay); color:#fff; font-weight:600}
+
+/* ---- scrollers for anything genuinely wide ----------------------------- */
+.xscroll{overflow-x:auto; -webkit-overflow-scrolling:touch; max-width:100%}
+
+/* ---- footer ------------------------------------------------------------ */
+footer{border-top:2px solid var(--line); background:var(--paper2); padding:26px 0 34px; margin-top:40px}
+footer p{font-size:.8125rem; color:var(--ink3); margin:0 0 6px}
+footer a{color:var(--green2)}
+/* ---- share: the text itself, always shown, never a dead button ---------- */
+/* MEND.share() falls all the way down — share sheet, clipboard, then the text
+   returned so it can be copied by hand. The manual case is the one that has to
+   work: a button that appears to do nothing is worse than no button. */
+.sharebox{border:2px solid var(--green); background:#fff; padding:14px; margin:0 0 18px}
+.sharebox h4{font-size:1.0625rem}
+.sharebox .lead{font-size:.875rem; color:var(--ink2); margin:6px 0 10px}
+.sharebox textarea{
+  width:100%; max-width:100%; min-height:190px; box-sizing:border-box;
+  font-family:var(--sans); font-size:.875rem; line-height:1.5;
+  padding:10px; border:1.5px solid var(--line); background:var(--paper2); color:var(--ink);
+  border-radius:0; resize:vertical; -webkit-text-size-adjust:100%;
+}
+.sharebox .btnrow{margin-top:10px}
+
+/* ---- settlement -------------------------------------------------------- */
+.settle{border-top:2px solid var(--line); margin-top:14px; padding-top:12px}
+.settle h4{font-size:1rem}
+.paid{border-left:4px solid var(--green); background:var(--paper2); padding:10px 12px; margin:10px 0 0}
+.paid .top{display:flex; flex-wrap:wrap; gap:4px 12px; align-items:baseline}
+.paid .amt{font-size:1.0625rem; font-weight:600}
+.paid .st{font-size:.75rem; text-transform:uppercase; letter-spacing:.06em; color:var(--ink2)}
+.paid.done{border-left-color:var(--green2); background:#EEF5EE}
+.paid .ref{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.8125rem; overflow-wrap:anywhere}
+.settleform .grid2{display:flex; flex-wrap:wrap; gap:0 14px}
+.settleform .grid2 > *{flex:1 1 150px; min-width:0}
+
+/* ---- saying something is wrong ----------------------------------------- */
+/* QUIET, on purpose. This is not an action to encourage: a prominent REPORT
+   button on every listing is an invitation, and the first people to accept an
+   invitation like that are rarely the ones with a real complaint. It is the
+   quietest ink in the system, it sits under everything else, and it still
+   carries the 44px floor because a small target is a different thing from a
+   quiet one. */
+.reportrow{margin-top:14px}
+.link.quiet{font-size:.8125rem; color:var(--ink3); text-decoration-color:var(--line)}
+.link.quiet:hover{color:var(--clay); text-decoration-color:var(--clay)}
+/* A count, and only from two people up — one report is one opinion. */
+.repsignal{margin-top:10px; font-size:.8125rem; color:var(--clay); font-weight:600}
+.repform .private{
+  border-left:4px solid var(--green); background:#EDF4EF; padding:10px 0 10px 14px;
+  margin-top:12px; font-size:.875rem; color:var(--ink2); max-width:60ch;
+}
+
+/* ---- taken down by MEND ------------------------------------------------ */
+/* Never silent. A listing that quietly stops appearing, with no word said, is
+   indistinguishable from a bug — to the person it happened to most of all. */
+.takedown{
+  border:2px solid var(--clay); background:#FBF0E6; padding:12px 14px; margin:12px 0;
+  max-width:62ch;
+}
+.takedown .hd{font-family:var(--serif); font-size:1.0625rem; font-weight:700; color:#8A3F07}
+.takedown .why{margin-top:8px; font-size:.875rem; color:var(--ink)}
+.takedown .why b{display:block; font-size:.75rem; font-weight:600; letter-spacing:.06em;
+  text-transform:uppercase; color:var(--ink2); margin-bottom:3px}
+.takedown .note{border:0; background:none; padding:0; margin-top:8px; font-size:.8125rem}
+
+/* ---- what the list is not showing -------------------------------------- */
+.bounded{
+  margin-top:12px; border-left:4px solid var(--clay); background:var(--paper2);
+  padding:10px 0 10px 14px; font-size:.875rem; color:var(--ink2); max-width:62ch;
+}
+.bounded b{color:var(--ink); font-weight:600}
+
+/* ---- searching --------------------------------------------------------- */
+.qrow{margin-bottom:12px}
+input[type=search]{
+  width:100%; max-width:100%; appearance:none; -webkit-appearance:none;
+  font-family:var(--sans); font-size:1rem; color:var(--ink);
+  background:#fff; border:2px solid var(--line); border-radius:0; padding:11px 12px; min-height:46px;
+}
+input[type=search]:focus{outline:2px solid var(--green2); outline-offset:0; border-color:var(--green2)}
+input[type=search]::-webkit-search-cancel-button{-webkit-appearance:none; appearance:none}
+.qnote{margin-top:10px; font-size:.8125rem; color:var(--ink2); max-width:62ch}
+.qnote .where{display:block; color:var(--ink3); margin-top:3px}
+.qres{list-style:none; margin:0; padding:0}
+.qres > li{padding:16px 0; border-top:2px solid var(--line)}
+.qres > li:first-child{border-top:0}
+.qres .kindtag{
+  display:inline-block; font-size:.6875rem; font-weight:600; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--ink2); border:1px solid var(--line);
+  background:var(--paper2); padding:3px 8px;
+}
+.qres .qt{font-family:var(--serif); font-size:1.1875rem; font-weight:600; margin-top:8px}
+.qres .qt a{color:var(--green2); text-decoration:underline; text-underline-offset:3px;
+  display:inline-block; min-height:44px; padding:11px 0; margin:-11px 0}
+.qres .qs{margin-top:6px; font-size:.875rem; color:var(--ink2); max-width:60ch}
+
+/* ---- your account ------------------------------------------------------ */
+.acct{border:2px solid var(--line); background:var(--paper2); padding:16px; margin-top:12px}
+.acct + .acct{margin-top:14px}
+.acct h4{font-size:1.0625rem}
+.acct .lead{margin-top:6px; font-size:.875rem; color:var(--ink2); max-width:62ch}
+.acct .lead.warn{color:var(--ink)}
+.acct textarea.raw{
+  width:100%; max-width:100%; min-height:150px; box-sizing:border-box; margin-top:10px;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.75rem; line-height:1.45;
+  padding:10px; border:1.5px solid var(--line); background:#fff; color:var(--ink);
+  border-radius:0; resize:vertical;
+}
+/* The preview, and it is rendered BEFORE any button that removes anything.
+   Two columns that mean two different things: gone, and staying. */
+.prev{display:grid; grid-template-columns:1fr; gap:12px; margin-top:14px}
+@media(min-width:560px){.prev{grid-template-columns:1fr 1fr}}
+.prev section{background:#fff; border:2px solid var(--line); padding:12px 14px}
+.prev h5{font-family:var(--serif); font-size:.9375rem; font-weight:700; margin:0 0 8px; color:var(--ink)}
+.prev section.gone{border-color:#E3C6A8}
+.prev section.stays{border-color:#B9CFC0}
+.prev dl{margin:0}
+.prev .pr{display:flex; justify-content:space-between; gap:12px; align-items:baseline;
+  padding:6px 0; border-top:1px solid var(--line)}
+.prev .pr:first-of-type{border-top:0}
+.prev dt{font-size:.8125rem; color:var(--ink2); min-width:0}
+.prev dd{margin:0; font-family:var(--serif); font-size:1.125rem; font-weight:700; color:var(--ink)}
+.keepwhy{
+  margin-top:12px; border-left:4px solid var(--green); background:#EDF4EF;
+  padding:10px 0 10px 14px; font-size:.875rem; color:var(--ink2); max-width:62ch;
+}
+.undone{margin-top:12px; font-weight:600; color:#8A3F07}
+
+/* ---- a disagreement, held as a record ---------------------------------- */
+/* The platform does not adjudicate, and this block must never look as though it
+   does. No verdict colour, no winner, no score: two accounts, dated, side by
+   side on a screen wide enough and stacked in order on one that is not. It is
+   built to read like a page from a book, which is what it is. */
+.dispute{border:2px solid var(--line); background:var(--paper2); margin-top:14px; padding:14px}
+.dispute h4{font-size:1.0625rem}
+.dispute .kind{margin-top:6px; font-family:var(--serif); font-size:1.125rem; color:var(--ink); max-width:52ch}
+.dispute .raisedby{margin-top:4px; font-size:.8125rem; color:var(--ink2)}
+.dispute .amt{margin-top:6px; font-size:.9375rem; color:var(--ink2)}
+.dstamp{
+  display:inline-block; font-size:.6875rem; font-weight:600; letter-spacing:.08em;
+  text-transform:uppercase; padding:3px 8px; border:1px solid var(--line);
+  background:#fff; color:var(--ink2);
+}
+.dstamp.done{border-color:#B9CFC0; background:#EDF4EF; color:var(--green)}
+.noverdict{
+  border-left:4px solid var(--green); background:#EDF4EF; padding:10px 0 10px 14px;
+  margin-top:12px; font-size:.875rem; color:var(--ink2); max-width:60ch;
+}
+.accounts{margin-top:16px}
+.acclabel{font-size:.75rem; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--ink2)}
+.acchead{display:none}
+ol.entries{list-style:none; margin:8px 0 0; padding:0}
+ol.entries > li{
+  background:#fff; border-top:2px solid var(--line); border-left:4px solid var(--green);
+  padding:12px 14px; margin-top:10px; min-width:0;
+}
+ol.entries > li[data-side="b"]{border-left-color:var(--clay)}
+.entries .top{display:flex; flex-wrap:wrap; gap:2px 10px; align-items:baseline}
+.entries .n{font-family:var(--serif); font-size:1.125rem; font-weight:700; color:var(--ink3)}
+.entries .nm{font-weight:600; color:var(--ink)}
+.entries .role{font-size:.75rem; color:var(--ink2)}
+.entries .dt{font-size:.8125rem; color:var(--ink2); flex:1 1 100%}
+.entries .say{font-family:var(--serif); font-size:1.0625rem; color:var(--ink); margin-top:8px; max-width:58ch}
+@media(min-width:620px){
+  /* Two columns, one per person, still in the order it was written: grid
+     auto-placement keeps source order when each item names its own column. */
+  .acchead{display:grid; grid-template-columns:1fr 1fr; gap:0 14px}
+  .acchead div{border-bottom:2px solid var(--line); padding-bottom:6px}
+  ol.entries{display:grid; grid-template-columns:1fr 1fr; gap:0 14px; align-items:start}
+  ol.entries > li[data-side="a"]{grid-column:1}
+  ol.entries > li[data-side="b"]{grid-column:2}
+}
+.outcome{border-top:2px solid var(--line); margin-top:16px; padding-top:14px}
+.outcome .agreed{
+  font-family:var(--serif); font-size:1.0625rem; color:var(--ink); background:#fff;
+  border-left:4px solid var(--green); padding:10px 14px; margin-top:8px; max-width:58ch;
+}
+.outcome .where{margin-top:10px; font-size:.9375rem; font-weight:600; color:var(--ink2)}
+
+/* ---- the printed record ------------------------------------------------ */
+/* Built as a DIRECT CHILD of <body> on purpose: tools/print.css isolates a
+   print target with `body[data-printing] > *:not([data-print-target])`, which
+   only reaches the top level. A nested target has its own parent hidden. */
+.printsheet{display:none}
+.printsheet h1{font-size:1.5rem; margin:0 0 2px}
+.printsheet .kicker{font-size:.6875rem; letter-spacing:.14em; text-transform:uppercase; color:#444}
+.printsheet .rule{border:0; border-top:1px solid #000; margin:12px 0}
+.printsheet dl{display:grid; grid-template-columns:auto 1fr; gap:4px 16px; margin:0}
+.printsheet dt{font-size:.75rem; text-transform:uppercase; letter-spacing:.06em; color:#333}
+.printsheet dd{margin:0; font-weight:600}
+.printsheet table{width:100%; border-collapse:collapse; margin-top:8px}
+.printsheet th,.printsheet td{border:1px solid #000; padding:5px 7px; text-align:left; font-size:10.5pt}
+.printsheet .foot{margin-top:16px; font-size:9pt; color:#333}
+
+@media print{
+  /* Repeated from tools/print.css, which is inlined only at build time. Serving
+     the monorepo directly has no build step, so without these the printed page
+     would be a photograph of the app rather than the record. */
+  #mend-strip, nav.tabs, header.mast,  #alerts,  .noprint, [data-noprint]{display:none !important}
+  html,body{background:#fff !important; color:#000 !important}
+  /* core/ui.js appends body{padding-bottom:88px!important} at runtime, after this
+     stylesheet, so it needs a more specific selector to be beaten. */
+  body,body[data-printing]{padding-bottom:0 !important; margin:0 !important}
+  button{display:none !important}
+  body[data-printing] > *:not([data-print-target]){display:none !important}
+  body[data-printing] [data-print-target]{display:block !important}
+  .printsheet{color:#000}
+  @page{margin:16mm}
+}
+.hidden{display:none !important}
+</style>
+<style>/* Injected into every app at build time. A printed page must be the RECORD,
+   not a photograph of an app: no navigation, no buttons, no banners, no
+   coloured blocks that come out as grey smears on a mono printer. */
+@media print {
+  #mend-strip, nav, .noprint, [data-noprint] { display: none !important; }
+  html, body { background: #fff !important; color: #000 !important;
+               padding-bottom: 0 !important; margin: 0 !important; }
+  body { font-size: 11.5pt; }
+  a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 9pt; word-break: break-all; }
+  a { text-decoration: none; color: #000 !important; }
+  /* Progress bars and status pills are colour on screen and meaningless in
+     grey, so print gives them an outline and lets the number carry the meaning. */
+  [class*="bar"], [class*="pill"], [class*="badge"], [class*="stamp"] {
+    box-shadow: none !important; border: 1px solid #000 !important;
+    background: #fff !important; color: #000 !important;
+  }
+  button, input[type="button"], input[type="submit"], select { display: none !important; }
+  input, textarea { border: none !important; padding: 0 !important; font: inherit !important; }
+  table { page-break-inside: auto; } tr { page-break-inside: avoid; }
+  h1, h2, h3 { page-break-after: avoid; }
+  /* When one element is being printed on purpose, print only that.
+     CSS cannot select an ancestor, so printRecord() marks the chain from the
+     target up to <body> with data-print-path. Without that, a target nested
+     anywhere below body had its own parent hidden and printed a blank page. */
+  body[data-printing] *:not([data-print-path]):not([data-print-target]):not([data-print-target] *) {
+    display: none !important;
+  }
+  body[data-printing] [data-print-path] {
+    display: block !important;
+    margin: 0 !important; padding: 0 !important; border: none !important;
+    background: none !important; box-shadow: none !important; max-width: none !important;
+  }
+  body[data-printing] [data-print-target],
+  body[data-printing] [data-print-target] * { display: revert !important; }
+  body[data-printing] [data-print-target] { display: block !important; }
+  @page { margin: 16mm; }
+}
+</style>
+<style>:root{--mend-bar-bg:#14532D;--mend-bar-fg:#FBF7EF;--mend-bar-accent:#B45309;--mend-bar-line:rgba(251,247,239,.22);}</style>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#14532D">
+<link rel="apple-touch-icon" href="icons/pitso-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Pitso">
+<script>/* Injected into every app at build time so all five behave identically and no
+   app has to remember to do this. Registration failing is never fatal: the app
+   works online exactly as before. */
+(function () {
+  if (!('serviceWorker' in navigator)) return;
+  addEventListener('load', function () {
+    navigator.serviceWorker.register('./sw.js').catch(function () {});
+  });
+  // Tell the page when it is offline, so it can stop pretending otherwise.
+  function paintOnline() { document.documentElement.setAttribute('data-online', navigator.onLine ? 'yes' : 'no'); }
+  addEventListener('online', paintOnline); addEventListener('offline', paintOnline); paintOnline();
+})();
+</script>
+</head>
+<body>
+
+<header class="mast">
+  <div class="wrap">
+    <h1>Pitso</h1>
+    <div class="said" id="said"></div>
+    <div class="who" id="who"></div>
+  </div>
+</header>
+
+<div class="mode" id="mode"><div class="wrap"></div></div>
+<div id="alerts"></div>
+
+<nav class="tabs" aria-label="Sections">
+  <div class="wrap">
+    <div class="scroller" role="tablist">
+      <button role="tab" data-view="find" aria-controls="view" aria-selected="true">Find someone</button>
+      <button role="tab" data-view="requests" aria-controls="view" aria-selected="false">Open requests</button>
+      <button role="tab" data-view="post" aria-controls="view" aria-selected="false">Post a request</button>
+      <button role="tab" data-view="mine" aria-controls="view" aria-selected="false">My work</button>
+      <button role="tab" data-view="docs" aria-controls="view" aria-selected="false">My documents</button>
+    </div>
+  </div>
+</nav>
+
+<main><div class="wrap" id="view" role="tabpanel" tabindex="0"></div></main>
+
+<footer>
+  <div class="wrap">
+    <!-- Painted from the string table at boot and again on a language change.
+         Each of these is ONE string with placeholders for the links, because a
+         sentence cut into pieces either side of an <a> cannot be translated:
+         Sesotho does not put the platform names where English does. -->
+    <p id="foot-three"></p>
+    <p id="foot-money"></p>
+    <p id="foot-by"></p>
+  </div>
+</footer>
+
+<script src="core/config.js"></script>
+<script src="core/i18n.js"></script>
+<script src="core/seed.js"></script>
+<script src="strings.js"></script>
+<script src="core/mend.js"></script>
+<script src="core/ui.js"></script>
+<script>
+(function(){
+'use strict';
+
+/* Reference data — mirrors db/004_reference.sql pitso_trades exactly. */
+var TRADES = [
+  ['plumber','Plumber','Rakhoele'],['electrician','Electrician','Ramotlakase'],
+  ['builder','Builder / bricklayer','Moaki'],['carpenter','Carpenter','Rakhabo'],
+  ['painter','Painter','Mopenti'],['welder','Welder','Mowelli'],
+  ['mechanic','Motor mechanic','Ramechanic'],['panelbeater','Panel beater',null],
+  ['tiler','Tiler',null],['roofer','Roofer',null],['borehole','Borehole & pumps',null],
+  ['solar','Solar & inverters',null],['aircon','Refrigeration & aircon',null],
+  ['itsupport','IT support & networks',null],['appliance','Appliance repair',null],
+  ['locksmith','Locksmith',null],['landscaper','Landscaping & paving',null],
+  ['cleaner','Cleaning services','Mohloekisi'],['mover','Removals & transport',null],
+  ['caterer','Catering','Moapehi'],['seamstress','Tailoring & dressmaking','Moroki'],
+  ['hairdresser','Hair & beauty',null],['photographer','Photography & video',null],
+  ['accountant','Bookkeeping & tax',null],['hr','HR on demand',null],
+  ['legal','Legal drafting',null],['surveyor','Land surveying',null],
+  ['vet','Veterinary & livestock',null]
+];
+var TRADE_NAME = {}; TRADES.forEach(function(t){ TRADE_NAME[t[0]] = t[1]; });
+function tradeName(c){ return TRADE_NAME[c] || c; }
+
+/* Seven of these eleven names already exist in core/i18n.js and are used from
+   there rather than written again. Only the four core does not carry are
+   Pitso's own. */
+var DOC_KEY = {
+  national_id:'doc.national_id', passport:'doc.passport',
+  drivers_licence:'pitso.doc.drivers_licence',
+  trade_certificate:'doc.trade_certificate',
+  professional_registration:'pitso.doc.professional_registration',
+  company_registration:'doc.company_registration',
+  vehicle_registration:'doc.vehicle_registration',
+  title_deed:'doc.title_deed', lease:'pitso.doc.lease',
+  proof_of_address:'doc.proof_of_address', membership:'pitso.doc.membership'
+};
+function docLabel(k){ return DOC_KEY[k] ? T(DOC_KEY[k]) : k; }
+
+/* The kinds Pitso asks a person to prove. The doc_type enum in db/001_spine.sql
+   carries eleven; a title deed or a vehicle registration is what Mafisa asks for
+   when you lend a bakkie, not what a tradesperson is asked for here. */
+var PITSO_DOC_KINDS = ['national_id','passport','trade_certificate',
+  'professional_registration','company_registration','proof_of_address'];
+
+function docWhy(k){ return T('pitso.docwhy.' + k); }
+
+/* The bucket in db/006_storage.sql: private, 10MB, these four types only.
+   Checked here as well so a person is told before the upload, not after. */
+var MAX_UPLOAD = 10485760;
+var ALLOWED_MIME = ['image/jpeg','image/png','image/heic','application/pdf'];
+var ALLOWED_EXT  = ['.jpg','.jpeg','.png','.heic','.pdf'];
+
+/* The other two platforms. Portable standing is the whole architectural claim,
+   so a reader must be able to follow it rather than take it on trust. */
+var CROSS = {
+  mafisa:  MEND.HOSTS.mafisa,
+  matsema: MEND.HOSTS.matsema
+};
+/* Where a shared notice points. Absolute on purpose: it is going into somebody
+   else's WhatsApp, where a relative path means nothing. */
+var CROSS_SELF = MEND.HOSTS.pitso;
+
+/* The nav is static markup so it renders before any script runs. Its labels
+   are painted from the string table at boot and again when the language
+   changes — otherwise the toggle would leave five English tabs on the page. */
+var TAB_KEY = { find:'pitso.find', requests:'pitso.requests', post:'pitso.post',
+                mine:'pitso.tab.mine', docs:'pitso.tab.docs' };
+
+/* ---- tiny helpers ------------------------------------------------------ */
+function esc(s){
+  return String(s == null ? '' : s)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+var $  = function(s,r){ return (r||document).querySelector(s); };
+var $$ = function(s,r){ return Array.prototype.slice.call((r||document).querySelectorAll(s)); };
+function dayOf(ts){ return ts ? String(ts).slice(0,10) : null; }
+function yearOf(d){ return d ? String(d).slice(0,4) : ''; }
+function name(id){ var p = MEND.profile(id); return p ? p.display_name : 'Unknown'; }
+
+/* ONE function converts a typed amount into cents, and ONE converts cents to
+   text. A figure shown on screen and the figure written to storage must never
+   be computed in two places. */
+function toCents(v){
+  if (v == null) return null;
+  var s = String(v).trim().replace(/[, ]/g,'');
+  if (s === '') return null;
+  var n = Number(s);
+  if (!isFinite(n) || n < 0) return NaN;
+  return Math.round(n * 100);
+}
+/* The amount of an offer, used for BOTH the displayed quote and the
+   agreed_cents written onto the engagement when it is accepted. */
+function offerAmount(offer){ return offer && offer.quote_cents != null ? offer.quote_cents : null; }
+function moneyOrPhrase(cents, phrase){ return cents == null ? phrase : MEND.M(cents); }
+
+function rateLine(pp){
+  if (pp.rate === 'hourly'  && pp.rate_cents != null) return T('pitso.rate.hourly', { amount: MEND.M(pp.rate_cents) });
+  if (pp.rate === 'daily'   && pp.rate_cents != null) return T('pitso.rate.daily',  { amount: MEND.M(pp.rate_cents) });
+  if (pp.rate === 'per_job') return T('pitso.rate.perjob');
+  return T('pitso.rate.quote');
+}
+
+/* A state that came out of the database — 'agreed', 'engaged', 'offered' — is
+   the schema talking, not the app. One place turns it into a word. */
+function stateWord(st){ return T('pitso.st.' + st); }
+
+/* A sentence that has a LINK inside it cannot be assembled from fragments: the
+   word order moves between languages. So the whole sentence is one string with
+   named holes, escaped as a template, and the holes filled with markup that is
+   already safe. */
+function tHtml(key, vars){
+  var out = esc(T(key));
+  Object.keys(vars || {}).forEach(function(k){
+    out = out.split('{' + k + '}').join(vars[k]);
+  });
+  return out;
+}
+function countWord(n, one, many){ return n === 1 ? T(one) : T(many, { n: n }); }
+
+/* This app found a race in MEND.record(): it read the previous hash and the next
+   sequence number, awaited the SHA-256 digest, and only then pushed — so two
+   actions in the same tick both wrote a row claiming seq 1 and the chain
+   verified as broken from its first entry. Found by clicking settle twice
+   quickly. THAT IS NOW FIXED IN core/mend.js, which serialises its own writes.
+   This wrapper stays for the second reason only: a ledger failure must never
+   eat a click. */
+var recTail = Promise.resolve();
+function rec(event_type, opts){
+  recTail = recTail.then(function(){ return MEND.record(event_type, opts); })
+                   .catch(function(){ /* a ledger failure must never eat a click */ });
+  return recTail;
+}
+
+/* ---- language ---------------------------------------------------------- */
+/* t() returns the KEY when a string is missing, so a gap shows up in testing
+   instead of appearing as a blank line on somebody's screen. */
+var T = function(k, v){ return MEND.t(k, v); };
+
+/* =========================================================================
+   SHARE — plain text that can leave the app
+   Plenty of the people who could do a job have no smartphone. A notice has to
+   be able to become text somebody pastes into a WhatsApp group, reads down a
+   phone, or prints and puts on a wall.
+
+   MEND.share() falls all the way down: the share sheet, then the clipboard,
+   then the text itself handed back. THE LAST CASE IS THE ONE THAT MATTERS —
+   it is shown in a box that can be selected, because a button that appears to
+   do nothing is worse than no button at all.
+   ========================================================================= */
+function doShare(spec){
+  MEND.share(spec).then(function(res){
+    if (res.via === 'cancelled') return;
+    state.shareBox = { title: spec.title, text: res.text, via: res.via };
+    render();
+    window.scrollTo(0, 0);
+  });
+}
+
+function shareBoxHtml(){
+  var b = state.shareBox;
+  if (!b) return '';
+  var lead = b.via === 'clipboard' ? T('pitso.share.copied')
+           : b.via === 'share-sheet' ? T('pitso.share.shared')
+           : T('pitso.share.manual');
+  return '<div class="sharebox" data-noprint>' +
+    '<h4>' + esc(T('pitso.share.notice')) + '</h4>' +
+    '<p class="lead">' + esc(lead) + '</p>' +
+    '<textarea id="sharetext" readonly rows="10" aria-label="' +
+      esc(T('pitso.share.notice')) + '">' + esc(b.text) + '</textarea>' +
+    '<div class="btnrow">' +
+      '<a class="btn small" href="' + esc(MEND.whatsappLink('', b.text)) + '" target="_blank" rel="noopener">' +
+        esc(T('pitso.share.whatsapp')) + '</a>' +
+      '<button class="btn ghost small" id="share-close">' + esc(T('app.close')) + '</button>' +
+    '</div>' +
+  '</div>';
+}
+
+/* =========================================================================
+   PRINT — the record, not a photograph of an app
+   The sheet is built as a DIRECT CHILD of <body>. tools/print.css isolates the
+   print target with `body[data-printing] > *:not([data-print-target])`, which
+   only reaches the top level: a target nested inside a wrapper has that
+   wrapper hidden out from under it and prints a blank page.
+   ========================================================================= */
+function printSheet(html, title){
+  var el = document.getElementById('printsheet');
+  if (!el){
+    el = document.createElement('div');
+    el.id = 'printsheet'; el.className = 'printsheet';
+    /* It is display:none except while printing. Without this its h1/h3 stay in
+       the heading order of the live page and a screen reader navigating by
+       heading walks into a document that is not on screen. */
+    el.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(el);
+  }
+  el.innerHTML = html;
+  MEND.printRecord(el, title);
+}
+function sheetFoot(){
+  return '<div class="foot">Pitso · MEND GROUP (PTY) LTD · Reg No. 96070 · TIN 200176439-4<br>' +
+    esc(T('pitso.sheet.printedon', { date: MEND.fmtDate(MEND.today()),
+        host: String(CROSS_SELF).replace(/^https?:\/\//, '').replace(/\/$/, '') })) +
+    (MEND.status === 'connected' ? '' :
+      '<br><strong>' + esc(T(MEND.CONFIGURED ? 'pitso.sheet.notserver' : 'pitso.sheet.invented')) +
+      '</strong>') +
+    '</div>';
+}
+
+/* ---- what a provider looks like as text and as paper -------------------- */
+function providerLines(pid){
+  var p = MEND.profile(pid) || {};
+  var pp = MEND.all('pitso_providers').filter(function(x){ return x.profile_id === pid; })[0];
+  var st = MEND.standing(pid);
+  var out = [];
+  if (pp) out.push(tradeName(pp.trade_code) + ' · ' + (pp.districts || []).join(', ') +
+                   ' · ' + pp.years_experience + ' ' + T('pitso.years'));
+  out.push(MEND.star(st.rating) + (st.rating != null ? ' ' + st.rating.toFixed(2) : '') +
+           ' · ' + st.review_count + ' ' + T('rep.reviews') +
+           ' · ' + st.jobs_completed + ' ' + T('rep.jobs'));
+  out.push(st.verified_docs + ' × ' + T('doc.verified'));
+  if (pp) out.push(rateLine(pp) + (pp.available ? '' : ' · ' + T('pitso.notakingwork')));
+  if (pp && pp.headline) out.push('"' + pp.headline + '"');
+  if (p.phone) out.push(T('app.phone') + ': ' + p.phone);
+  return out;
+}
+function shareProvider(pid){
+  var p = MEND.profile(pid) || {};
+  doShare({ title: 'PITSO · ' + p.display_name, lines: providerLines(pid),
+            url: CROSS_SELF, table: 'pitso_providers', id: pid });
+}
+function printProvider(pid){
+  var p = MEND.profile(pid) || {};
+  var pp = MEND.all('pitso_providers').filter(function(x){ return x.profile_id === pid; })[0];
+  var st = MEND.standing(pid);
+  var docs = MEND.all('documents').filter(function(d){ return d.profile_id === pid; });
+  var revs = MEND.all('reviews').filter(function(r){ return r.subject_id === pid; });
+  printSheet(
+    '<div class="kicker">' + esc(T('pitso.sheet.person')) + '</div>' +
+    '<h1>' + esc(p.display_name) + '</h1>' +
+    '<p>' + esc([p.village, p.district].filter(Boolean).join(', ')) + '</p>' +
+    '<hr class="rule">' +
+    '<dl>' +
+      (pp ? '<dt>' + esc(T('pitso.trade')) + '</dt><dd>' + esc(tradeName(pp.trade_code)) + ', ' +
+            pp.years_experience + ' ' + esc(T('pitso.years')) + '</dd>' : '') +
+      (pp ? '<dt>' + esc(T('pitso.sheet.worksin')) + '</dt><dd>' + esc((pp.districts||[]).join(', ')) + '</dd>' : '') +
+      (pp ? '<dt>' + esc(T('pitso.sheet.charges')) + '</dt><dd>' + esc(rateLine(pp)) + '</dd>' : '') +
+      '<dt>' + esc(T('rep.standing')) + '</dt><dd>' + esc(MEND.star(st.rating)) + ' (' +
+        esc(st.rating != null ? T('pitso.sheet.ratingfrom', { rating: st.rating.toFixed(2), n: st.review_count })
+                              : T('pitso.sheet.norating')) + ') · ' +
+        esc(countWord(st.jobs_completed, 'pitso.onejob', 'pitso.njobs')) + '</dd>' +
+      '<dt>' + esc(T('doc.verified')) + '</dt><dd>' +
+        esc(countWord(st.verified_docs, 'pitso.onedoc', 'pitso.ndocs')) + '</dd>' +
+      (p.phone ? '<dt>' + esc(T('app.phone')) + '</dt><dd>' + esc(p.phone) + '</dd>' : '') +
+    '</dl>' +
+    (pp && pp.headline ? '<hr class="rule"><p>' + esc(pp.headline) + '</p>' : '') +
+    '<hr class="rule"><h3>' + esc(T('pitso.prof.checked')) + '</h3>' +
+    (docs.length
+      ? '<table><thead><tr><th>' + esc(T('doc.document')) + '</th><th>' + esc(T('pitso.sheet.verdict')) +
+        '</th></tr></thead><tbody>' +
+        docs.map(function(d){
+          return '<tr><td>' + esc(docLabel(d.kind)) + '</td><td>' + esc(docVerdict(d).text) + '</td></tr>';
+        }).join('') + '</tbody></table>'
+      : '<p>' + esc(T('pitso.sheet.nodocs')) + '</p>') +
+    '<p style="font-size:9.5pt">' + esc(T('pitso.sheet.docsprivate')) + '</p>' +
+    '<hr class="rule"><h3>' + esc(T('pitso.prof.said')) + '</h3>' +
+    (revs.length
+      ? revs.map(function(r){
+          return '<p>' + esc(MEND.star(r.rating)) + ' — ' + esc(r.body || '') +
+                 '<br><em>' + esc(name(r.author_id)) + ', ' + esc(MEND.fmtDate(dayOf(r.created_at))) + '</em></p>';
+        }).join('')
+      : '<p>' + esc(T('pitso.sheet.norevs')) + '</p>') +
+    sheetFoot(),
+    'Pitso — ' + p.display_name);
+}
+
+/* ---- what an open request looks like as text and as paper --------------- */
+function requestLines(q){
+  var live = offersFor(q.id).filter(function(o){ return o.state === 'offered'; });
+  return [
+    tradeName(q.trade_code) + ' · ' + q.district,
+    T('pitso.neededby') + ' ' + MEND.fmtDate(q.needed_by),
+    T('pitso.budget') + ': ' + moneyOrPhrase(q.budget_cents, T('pitso.openbudget')),
+    q.description || '',
+    T('pitso.postedby') + ' ' + name(q.requester_id) + ' · ' + MEND.fmtDate(dayOf(q.created_at)),
+    live.length ? countWord(live.length, 'pitso.req.oneoffer', 'pitso.req.noffers') : T('pitso.nooffers'),
+    q.state === 'engaged' ? T('pitso.sheet.takenline') : T('pitso.sheet.anyoneoffer')
+  ];
+}
+function shareRequest(qid){
+  var q = MEND.all('pitso_requests').filter(function(x){ return x.id === qid; })[0];
+  if (!q) return;
+  doShare({ title: 'PITSO · ' + q.title, lines: requestLines(q),
+            url: CROSS_SELF, table: 'pitso_requests', id: q.id });
+}
+function printRequest(qid){
+  var q = MEND.all('pitso_requests').filter(function(x){ return x.id === qid; })[0];
+  if (!q) return;
+  var offers = offersFor(q.id);
+  printSheet(
+    '<div class="kicker">' + esc(T('pitso.sheet.wanted')) + '</div>' +
+    '<h1>' + esc(q.title) + '</h1>' +
+    '<hr class="rule">' +
+    '<dl>' +
+      '<dt>' + esc(T('pitso.trade')) + '</dt><dd>' + esc(tradeName(q.trade_code)) + '</dd>' +
+      '<dt>' + esc(T('app.district')) + '</dt><dd>' + esc(q.district) + '</dd>' +
+      '<dt>' + esc(T('pitso.neededby')) + '</dt><dd>' + esc(MEND.fmtDate(q.needed_by)) + '</dd>' +
+      '<dt>' + esc(T('pitso.budget')) + '</dt><dd>' + esc(moneyOrPhrase(q.budget_cents, T('pitso.openbudget'))) + '</dd>' +
+      '<dt>' + esc(T('pitso.postedby')) + '</dt><dd>' + esc(name(q.requester_id)) + ', ' +
+        esc(MEND.fmtDate(dayOf(q.created_at))) + '</dd>' +
+      '<dt>' + esc(T('pitso.sheet.state')) + '</dt><dd>' + esc(stateWord(q.state)) + '</dd>' +
+    '</dl>' +
+    (q.description ? '<hr class="rule"><p>' + esc(q.description) + '</p>' : '') +
+    '<hr class="rule"><h3>' + esc(T('pitso.sheet.offers')) + '</h3>' +
+    (offers.length
+      ? '<table><thead><tr><th>' + esc(T('pitso.sheet.from')) + '</th><th>' + esc(T('app.price')) +
+        '</th><th>' + esc(T('pitso.sheet.state')) + '</th></tr></thead><tbody>' +
+        offers.map(function(o){
+          return '<tr><td>' + esc(name(o.provider_id)) + '</td><td>' +
+            esc(moneyOrPhrase(offerAmount(o), T('pitso.mine.toquote'))) + '</td><td>' +
+            esc(stateWord(o.state)) + '</td></tr>';
+        }).join('') + '</tbody></table>'
+      : '<p>' + esc(T('pitso.sheet.nooffers')) + '</p>') +
+    sheetFoot(),
+    'Pitso — ' + q.title);
+}
+
+/* =========================================================================
+   SETTLEMENT — the platform RECORDS that money moved. It never moves it.
+   No card rail exists for a Lesotho merchant and holding other people's funds
+   is licensed activity, so the money goes M-Pesa, EcoCash, bank or hand to
+   hand, exactly as it already does. What Pitso can give the two of them is one
+   record they both agreed to, with the transaction code on it.
+
+   There is no Pay button on this screen and there is not going to be one.
+   ========================================================================= */
+var ELECTRONIC = ['mpesa','ecocash','bank_transfer'];
+function methodLabel(m){ return T('pitso.method.' + m); }
+
+/* MEND.canSettle is the ONLY place the rule lives. This puts its answer into
+   Sesotho and nothing more — if core changes its wording the match misses and
+   the English comes through, which is degraded but never wrong. */
+function settleReason(msg){
+  if (!msg) return msg;
+  var m = String(msg);
+  if (/^put in how much/.test(m))                       return T('pitso.settle.err.amount');
+  if (/only be between the two people/.test(m))         return T('pitso.settle.err.parties');
+  if (/same person on both sides/.test(m))              return T('pitso.settle.err.same');
+  var mm = m.match(/^an?\s+(.+?)\s+payment needs its transaction code/);
+  if (mm) return T('money.code_needed', { method: mm[1] });
+  if (/more than twice/.test(m))                        return T('pitso.settle.err.toomuch');
+  if (/only the two people in this payment/.test(m))    return T('pitso.settle.err.nobody');
+  return m;
+}
+
+function settleRow(s, meId){
+  var mineDone = (s.payer_id === meId && s.confirmed_by_payer) ||
+                 (s.payee_id === meId && s.confirmed_by_payee);
+  var iAmParty = s.payer_id === meId || s.payee_id === meId;
+  var them = s.payer_id === meId ? s.payee_id : s.payer_id;
+  var line = s.agreed_by_both ? T('money.settled')
+           : (s.confirmed_by_payer || s.confirmed_by_payee)
+             ? (mineDone ? T('pitso.settle.mine.done', { name: name(them) })
+                         : T('pitso.settle.theirs.done', { name: name(them) }))
+             : T('pitso.settle.state.new');
+  return '<div class="paid' + (s.agreed_by_both ? ' done' : '') + '">' +
+    '<div class="top">' +
+      '<span class="amt">' + esc(MEND.M(s.amount_cents)) + '</span>' +
+      '<span class="st">' + esc(methodLabel(s.method)) + '</span>' +
+      '<span class="st">' + esc(MEND.fmtDate(s.paid_on)) + '</span>' +
+    '</div>' +
+    '<div class="small sec">' + esc(T('pitso.settle.paidto',
+        { payer: name(s.payer_id), payee: name(s.payee_id) })) + '</div>' +
+    (s.reference ? '<div class="ref">' + esc(T('pitso.settle.ref')) + ': ' + esc(s.reference) + '</div>' : '') +
+    (s.note ? '<div class="small sec break">' + esc(s.note) + '</div>' : '') +
+    '<div class="small" style="margin-top:6px"><b>' + esc(line) + '</b></div>' +
+    (iAmParty && !mineDone
+      ? ifWritable('<div class="btnrow"><button class="btn small" data-confirmpay="' + esc(s.id) + '">' +
+                   esc(T('pitso.settle.confirm')) + '</button></div>')
+      : '') +
+  '</div>';
+}
+
+function settleForm(e, meId){
+  var other = e.provider_id === meId ? e.counterparty_id : e.provider_id;
+  var outstanding = Math.max(0, (e.agreed_cents || 0) - MEND.settledTotal(e.id));
+  var dirs = [
+    ['cp', e.counterparty_id, e.provider_id],     /* the customer paying the worker: the usual way round */
+    ['pv', e.provider_id, e.counterparty_id]      /* and the other way, for a refund or a deposit back */
+  ];
+  return '<form class="card quiet settleform" data-payform="' + esc(e.id) + '" style="margin-top:12px" novalidate>' +
+    '<h4>' + esc(T('pitso.settle.record')) + '</h4>' +
+    '<p class="tiny muted" style="margin-top:4px">' + esc(T('pitso.settle.nopay')) + '</p>' +
+    (state.settleErr ? '<div class="note" style="margin:10px 0 0"><b>' + esc(T('app.no')) + '</b> — ' +
+                       esc(state.settleErr) + '</div>' : '') +
+    '<div class="field"><label class="fl" for="s-dir">' + esc(T('pitso.settle.who')) + '</label>' +
+      '<select id="s-dir">' + dirs.map(function(d){
+        return '<option value="' + d[0] + '">' +
+          esc(T('pitso.settle.paidto', { payer: name(d[1]), payee: name(d[2]) })) + '</option>';
+      }).join('') + '</select></div>' +
+    '<div class="grid2">' +
+      '<div class="field"><label class="fl" for="s-method">' + esc(T('pitso.settle.method')) + '</label>' +
+        '<select id="s-method">' + MEND.SETTLE_METHODS.map(function(m){
+          return '<option value="' + esc(m) + '">' + esc(methodLabel(m)) + '</option>';
+        }).join('') + '</select></div>' +
+      '<div class="field"><label class="fl" for="s-amount">' + esc(T('pitso.settle.amount')) + '</label>' +
+        '<input type="number" id="s-amount" min="0" step="1" inputmode="decimal"' +
+          (outstanding > 0 ? ' value="' + (outstanding / 100) + '"' : '') + '></div>' +
+    '</div>' +
+    '<div class="grid2">' +
+      '<div class="field"><label class="fl" for="s-date">' + esc(T('pitso.settle.date')) + '</label>' +
+        '<input type="date" id="s-date" value="' + esc(MEND.today()) + '"></div>' +
+      '<div class="field"><label class="fl" for="s-ref">' + esc(T('pitso.settle.ref')) + '</label>' +
+        '<input type="text" id="s-ref" maxlength="40" placeholder="QXR4T8LM9P">' +
+        '<div class="hint" id="s-refhint">' + esc(T('pitso.settle.ref.need')) + '</div></div>' +
+    '</div>' +
+    '<div class="btnrow"><button type="submit" class="btn">' + esc(T('pitso.settle.save')) + '</button>' +
+      '<button type="button" class="btn ghost" data-cancel="1">' + esc(T('app.cancel')) + '</button></div>' +
+  '</form>';
+}
+
+function submitSettlement(form){
+  if (refuseWrite()) return;
+  var eid = form.getAttribute('data-payform');
+  var e = MEND.all('engagements').filter(function(x){ return x.id === eid; })[0];
+  var meP = MEND.me();
+  if (!e || !meP) return;
+
+  var dir = $('#s-dir', form).value;
+  var payer = dir === 'pv' ? e.provider_id : e.counterparty_id;
+  var payee = dir === 'pv' ? e.counterparty_id : e.provider_id;
+  var cents = toCents($('#s-amount', form).value);
+  var spec = {
+    payer_id: payer, payee_id: payee,
+    amount_cents: isNaN(cents) ? null : cents,
+    method: $('#s-method', form).value,
+    reference: $('#s-ref', form).value,
+    paid_on: $('#s-date', form).value || MEND.today()
+  };
+
+  /* Ask the gate BEFORE writing and show what it said, in words, rather than
+     greying a button out and leaving the person to guess. */
+  var why = MEND.canSettle(eid, spec);
+  if (why){ state.settleErr = settleReason(why); return render(); }
+
+  try {
+    MEND.recordSettlement(eid, spec);
+  } catch (err){
+    state.settleErr = settleReason(err.message); return render();
+  }
+  state.settleErr = null; state.openForm = null;
+  state.flash = T('pitso.settle.written');
+  render();
+}
+
+function settleBlock(e, meId){
+  if (e.state !== 'active' && e.state !== 'completed'){
+    return '<div class="small sec" style="margin-top:12px">' + esc(T('pitso.settle.heading')) + ': ' +
+      esc(T('pitso.settle.toosoon', { state: stateWord(e.state) })) + '</div>';
+  }
+  var list = MEND.settlementsFor(e.id);
+  var total = MEND.settledTotal(e.id);
+  var h = '<div class="settle"><h4>' + esc(T('pitso.settle.heading')) + '</h4>' +
+    '<p class="tiny muted" style="margin-top:4px">' + esc(T('money.records_only')) + '</p>';
+  h += list.length
+    ? list.map(function(s){ return settleRow(s, meId); }).join('')
+    : '<p class="small muted" style="margin-top:10px">' + esc(T('pitso.settle.none')) + '</p>';
+  if (list.length){
+    h += '<p class="small" style="margin-top:10px">' + esc(T('pitso.settle.total',
+      { total: MEND.M(total), agreed: moneyOrPhrase(e.agreed_cents, '—') })) + '</p>' +
+      '<p class="tiny muted">' + esc(T('pitso.settle.onlyown')) + '</p>';
+  }
+  h += (state.openForm === 'pay-' + e.id
+    ? settleForm(e, meId)
+    : ifWritable('<div class="btnrow"><button class="btn ghost small" data-pay="' + esc(e.id) + '">' +
+                 esc(T('pitso.settle.record')) + '</button></div>'));
+  return h + '</div>';
+}
+
+/* =========================================================================
+   SAYING SOMETHING IS WRONG
+
+   A report is a CLAIM, not a finding. Three things follow from that, and all
+   three are in the markup below rather than in a comment nobody reads:
+
+     1. It is PRIVATE. What is written goes to MEND and is never shown to the
+        person reported. The form says so, in the person's own language,
+        before they type — because that is what decides whether somebody
+        writes honestly or writes nothing.
+     2. It is QUIET. The way in is the smallest link on the page. A prominent
+        button here would be an invitation, and the people who take up an
+        invitation like that first are rarely the ones with a real complaint.
+     3. ONE report is ONE opinion. MEND.reportSignal() returns 0 below two on
+        purpose, so the count is shown only when it is non-zero. Nothing here
+        ever prints "1 person reported this".
+   ========================================================================= */
+var REPORT_WHAT = { pitso_providers:'pitso.rep.what.provider',
+                    pitso_requests: 'pitso.rep.what.request' };
+
+/* core/mend.js refuses in English. Same pattern as settleReason/disputeReason:
+   an unmatched refusal comes through in English, which is degraded and
+   visible, rather than swallowed. */
+function reportReason(msg){
+  if (!msg) return msg;
+  var m = String(msg);
+  if (/^sign in to report/.test(m))        return T('pitso.rep.err.signin');
+  if (/already reported this/.test(m))     return T('report.already');
+  if (/^choose a reason/.test(m))          return T('pitso.rep.err.reason');
+  return m;
+}
+
+function reportKey(table, id){ return table + ':' + id; }
+
+/* The count, and nothing else. Never the reason, never who said it, never the
+   words — putting a claim on a public page would make Pitso a place people are
+   damaged by rumour. */
+function reportSignalHtml(table, id){
+  var n = MEND.reportSignal(table, id);
+  if (!n) return '';
+  return '<div class="repsignal">' + esc(T('report.signal', { n: n })) + '</div>';
+}
+
+function reportForm(table, id){
+  var k = reportKey(table, id);
+  var what = T(REPORT_WHAT[table] || 'pitso.rep.what.provider');
+  return '<form class="card quiet repform" data-reportform="' + esc(k) + '" style="margin-top:12px" novalidate>' +
+    '<h4>' + esc(T('pitso.rep.head')) + '</h4>' +
+    '<p class="tiny sec" style="margin-top:4px">' + esc(T('pitso.rep.about', { what: what })) + '</p>' +
+    /* Said before a word is typed. It is true — db/020_abuse.sql scopes a
+       report to its reporter and the desk — and it is the fact that decides
+       whether somebody is willing to write honestly. */
+    '<div class="private">' + esc(T('report.private')) + '</div>' +
+    (state.reportErr ? '<div class="note" style="margin-top:10px"><b>' + esc(T('app.no')) + '</b> — ' +
+                       esc(state.reportErr) + '</div>' : '') +
+    '<div class="field" style="margin-top:14px"><label class="fl" for="rp-reason">' +
+      esc(T('report.why')) + '</label>' +
+      '<select id="rp-reason">' +
+        '<option value="">' + esc(T('pitso.rep.pick')) + '</option>' +
+        MEND.REPORT_REASONS.map(function(r){
+          return '<option value="' + esc(r) + '">' + esc(T('report.r.' + r)) + '</option>';
+        }).join('') +
+      '</select></div>' +
+    '<div class="field"><label class="fl" for="rp-detail">' + esc(T('report.detail')) + '</label>' +
+      '<textarea id="rp-detail" maxlength="2000" placeholder="' + esc(T('pitso.rep.detail_ph')) + '"></textarea></div>' +
+    '<div class="btnrow"><button type="submit" class="btn ghost small">' + esc(T('pitso.rep.send')) + '</button>' +
+      '<button type="button" class="btn ghost small" data-cancel="1">' + esc(T('app.cancel')) + '</button></div>' +
+  '</form>';
+}
+
+/* The signal, then either the form, the refusal in words, or the quiet way in.
+   Never a dead button: if MEND.canReport says no, the reason is printed. */
+function reportBlock(table, id){
+  var k = reportKey(table, id);
+  var h = reportSignalHtml(table, id);
+  if (state.openForm === 'rep-' + k) return h + reportForm(table, id);
+  var why = MEND.canReport(table, id);
+  if (why)
+    return h + '<div class="reportrow"><span class="small muted">' + esc(reportReason(why)) + '</span></div>';
+  return h + '<div class="reportrow" data-noprint>' +
+    '<button class="link quiet" data-report="' + esc(k) + '">' + esc(T('report.this')) + '</button></div>';
+}
+
+function submitReport(form){
+  if (refuseWrite()) return;
+  var parts = String(form.getAttribute('data-reportform') || '').split(':');
+  var table = parts.shift(), id = parts.join(':');
+  var reason = $('#rp-reason', form).value;
+  var detail = $('#rp-detail', form).value.trim();
+  if (!reason) { state.reportErr = T('pitso.rep.err.reason'); return render(); }
+  try {
+    MEND.report(table, id, reason, detail);
+  } catch (err) {
+    state.reportErr = reportReason(err.message);
+    return render();
+  }
+  state.openForm = null; state.reportErr = null;
+  state.flash = MEND.claimed(T('report.sent'));
+  render();
+}
+
+/* =========================================================================
+   WHEN MEND HAS TAKEN SOMETHING DOWN
+
+   db/020_abuse.sql makes moderation readable by everybody (`using (true)`) for
+   exactly this reason: a person whose listing was hidden is entitled to see
+   that it was, and why. A takedown also quietly flips the row itself —
+   pitso_providers.available to false, pitso_requests.state to 'withdrawn' — so
+   without this block the listing would read as "not taking work now" to its
+   owner and to everyone else, which is a different and untrue statement.
+   ========================================================================= */
+function isHidden(table, id){
+  var m = MEND.moderationOf(table, id);
+  return m && m.action === 'hidden' ? m : null;
+}
+
+function takedownBlock(table, id){
+  var m = isHidden(table, id);
+  if (!m) return '';
+  var day = dayOf(m.created_at);
+  return '<div class="takedown">' +
+    '<div class="hd">' + esc(T('mod.hidden')) +
+      (day ? ' ' + esc(T('pitso.mod.on', { date: MEND.fmtDate(day) })) : '') + '</div>' +
+    '<div class="why"><b>' + esc(T('mod.reason')) + '</b><span class="break">' + esc(m.reason) + '</span></div>' +
+    '<p class="note">' + esc(T('pitso.mod.note')) + '</p>' +
+  '</div>';
+}
+
+/* =========================================================================
+   WHAT THE LIST IS NOT SHOWING
+
+   Downloads are bounded — the first 200 providers, the first 200 open
+   requests. A bounded list that does not say it is bounded is lying by
+   omission, and the lie is worst for exactly the person who is missing.
+   ========================================================================= */
+/* Four thousand three hundred and twelve is read as 4,312, not 4312. A figure
+   that has to be counted digit by digit is a figure people skip. */
+function grouped(n){
+  try { return Number(n).toLocaleString(); } catch (e) { return String(n); }
+}
+
+function coverageBlock(table, opts){
+  var c = MEND.coverageOf(table);
+  if (!c || !(c.total > c.loaded)) return '';
+  opts = opts || {};
+  return '<div class="bounded">' +
+    '<b>' + esc(T('pitso.cov.showing',
+      { loaded: grouped(c.loaded), total: grouped(c.total) })) + '</b> ' +
+    esc(T('pitso.cov.why', { loaded: grouped(c.loaded) })) +
+    (opts.search ? ' ' + esc(T('pitso.cov.search')) : '') +
+  '</div>';
+}
+
+/* ---- state ------------------------------------------------------------- */
+var state = { view:'find', profileId:null, flash:null,
+              filters:{ trade:'', district:'', available:false },
+              openForm:null, rating:0,
+              /* sign-in: email + one-time code. No password is held here
+                 because none is ever asked for. */
+              auth:{ email:'', code:'', sent:false, busy:false, err:null, msg:null, user:null },
+              writeErrors:[],      /* rows the server refused, shown until dismissed */
+              failedIds:{},        /* and remembered per row, so a later no-op does not clear them */
+              docLinks:{},         /* short-lived signed links, per document id */
+              uploading:false, upErr:null,
+              shareBox:null,       /* the text of a share, held so it survives a repaint */
+              settleErr:null,      /* what MEND.canSettle refused, in the person's language */
+              disputeErr:null,     /* and the same for MEND.canDispute / addStatement */
+              reportErr:null,      /* and the same for MEND.report */
+              /* The find box. `via` is which search actually ran — the server
+                 or the local cache — and it is PRINTED, because "nothing
+                 matched" means two entirely different things in the two
+                 cases. `seq` drops an answer that arrives after a newer one. */
+              search:{ q:'', running:false, results:null, via:null, err:null, seq:0 },
+              /* Your account. Nothing here is fetched until asked for, and the
+                 deletion preview is fetched and RENDERED before any button
+                 that removes anything exists on the page. */
+              acct:{ open:false,
+                     exporting:false, exportAt:null, exportUrl:null, exportText:null, exportErr:null,
+                     previewing:false, preview:null, previewErr:null,
+                     deleting:false, progress:null, delErr:null } };
+
+/* ---- a write that did not land ----------------------------------------- */
+/* In connected mode insert()/update() return immediately and push in the
+   background. A row that failed carries _sync === 'failed' and _error. Both are
+   shown: a band at the top of the page, and a mark on the row itself. */
+function syncMark(row){
+  if (!row) return '';
+  /* Once a row has been refused, Pitso keeps saying so. It does not take a later
+     'success' as proof: a PATCH against a row that was never inserted matches
+     nothing, returns 200, and core clears its own marker — at which point a
+     document that exists in this browser alone would read as saved. */
+  var remembered = row.id && state.failedIds[row.id];
+  if (row._sync === 'failed' || remembered)
+    return '<span class="sync failed" title="' + esc(row._error || remembered || T('pitso.wfail.nomsg')) + '">' +
+           esc(T('pitso.wfail.notsaved')) + '</span>';
+  if (row._sync === 'saving')
+    return '<span class="sync" title="' + esc(T('pitso.wfail.sendingtip')) + '">' +
+           esc(T('pitso.wfail.saving')) + '</span>';
+  return '';
+}
+
+function renderAlerts(){
+  var box = $('#alerts');
+  if (!box) return;
+  if (!state.writeErrors.length) { box.innerHTML = ''; return; }
+  var n = state.writeErrors.length;
+  box.innerHTML = '<div class="wfail"><div class="wrap">' +
+    '<h4>' + esc(n === 1 ? T('pitso.wfail.one') : T('pitso.wfail.many', { n: n })) + '</h4>' +
+    '<p>' + esc(T('pitso.wfail.explain')) + '</p>' +
+    '<ul>' + state.writeErrors.map(function(e){
+      return '<li><span class="what">' + esc(describeWrite(e)) + '</span>' +
+             '<span class="why">' + esc(e.message) + '</span>' +
+             (/_sync/.test(e.message || '')
+               ? '<span class="why">' + esc(T('pitso.wfail.core')) + '</span>'
+               : '') +
+             '</li>';
+    }).join('') + '</ul>' +
+    '<div class="btnrow"><button class="btn ghost small" id="clear-errors">' +
+      esc(T('pitso.wfail.read')) + '</button></div>' +
+    '</div></div>';
+}
+
+/* Plain words for the table that refused, so a person reads what they did
+   rather than a table name. */
+var WRITE_WORDS = {
+  pitso_requests:'pitso.w.request', pitso_offers:'pitso.w.offer',
+  engagements:'pitso.w.engagement', reviews:'pitso.w.review',
+  documents:'pitso.w.document', profiles:'pitso.w.profile',
+  pitso_providers:'pitso.w.provider'
+};
+function describeWrite(e){
+  return (WRITE_WORDS[e.table] ? T(WRITE_WORDS[e.table]) : T('pitso.w.other', { table: e.table })) +
+         (e.op === 'update' ? T('pitso.w.change') : '');
+}
+
+/* ---- when a write would be a lie --------------------------------------- */
+/* Device preview has no server, and the banner says so, so a local write there
+   is honest. When a server IS configured and is not answering, a form that
+   accepts input would produce a row that lives in this browser and nowhere
+   else — which is the failure this whole band of the page exists to prevent. */
+function writeBlock(){
+  if (!MEND.CONFIGURED) return null;
+  if (MEND.status === 'connected') return null;
+  if (MEND.status === 'connecting') return T('pitso.err.connecting');
+  return T('pitso.err.noserver');
+}
+function ifWritable(html){
+  var r = writeBlock();
+  return r ? '<div class="note" style="margin-top:12px">' + esc(r) + '</div>' : html;
+}
+/* Guard at the moment of writing, not only at render. */
+function refuseWrite(){
+  var r = writeBlock();
+  if (r) { state.flash = r; render(); return true; }
+  return false;
+}
+
+/* ---- standing rendering ------------------------------------------------ */
+function standingLine(st){
+  var bits = [];
+  if (st.rating != null) {
+    bits.push('<span class="stars">' + esc(MEND.star(st.rating)) + '</span>' +
+              '<span class="score">' + st.rating.toFixed(2) + '</span>' +
+              '<span class="counts">' +
+                esc(countWord(st.review_count, 'pitso.onereview', 'pitso.nreviews')) + '</span>');
+  } else {
+    bits.push('<span class="counts sec">' + esc(T('rep.noreviews')) + '</span>');
+  }
+  bits.push('<span class="counts">' +
+            esc(countWord(st.jobs_completed, 'pitso.onejob', 'pitso.njobs')) + '</span>');
+  return '<div class="standing">' + bits.join('') + '</div>';
+}
+function verifiedBadges(pid){
+  var st = MEND.standing(pid);
+  var out = st.verified_docs > 0
+    ? '<span class="badge ok">' + esc(countWord(st.verified_docs, 'pitso.onedoc', 'pitso.ndocs')) + '</span>'
+    : '<span class="badge off">' + esc(T('doc.none_verified')) + '</span>';
+  var expired = MEND.all('documents').filter(function(d){
+    return d.profile_id === pid && MEND.effectiveStatus(d) === 'expired';
+  });
+  if (expired.length)
+    out += '<span class="badge warn">' + esc(T('pitso.nexpired', { n: expired.length })) + '</span>';
+  return '<div class="badges">' + out + '</div>';
+}
+
+/* =========================================================================
+   VIEW 1 — FIND SOMEONE
+   ========================================================================= */
+function providerEntry(pp){
+  var p = MEND.profile(pp.profile_id) || {};
+  var st = MEND.standing(pp.profile_id);
+  return '<li>' +
+    '<a class="pname" href="#" data-profile="' + esc(pp.profile_id) + '">' + esc(p.display_name) + '</a>' +
+    standingLine(st) +
+    verifiedBadges(pp.profile_id) +
+    /* A takedown sets available=false, so without this the row would read
+       "not taking work now" — which is a different statement and not the true
+       one. The reason itself is on the profile, one tap away; a takedown
+       reason printed on every row of a list is noise, and leaving the row
+       saying the wrong thing is a lie. */
+    '<div class="trade"><b>' + esc(tradeName(pp.trade_code)) + '</b> · ' +
+      esc((pp.districts || []).join(', ')) + ' · ' + pp.years_experience + ' ' + esc(T('pitso.years')) +
+      (isHidden('pitso_providers', pp.profile_id)
+        ? ' · <span class="sec"><b>' + esc(T('mod.hidden')) + '</b></span>'
+        : pp.available ? '' : ' · <span class="sec">' + esc(T('pitso.notakingwork')) + '</span>') + '</div>' +
+    (pp.headline ? '<div class="headline">' + esc(pp.headline) + '</div>' : '') +
+    '<div class="price"><b>' + esc(rateLine(pp)) + '</b></div>' +
+  '</li>';
+}
+
+/* =========================================================================
+   FINDING SOMEBODY WHO IS NOT IN THE FIRST 200
+
+   MEND.searchAll() reads the local cache, and the cache is now the first 200
+   providers and the first 200 open requests. The one welder in Mokhotlong is
+   not in it, and a search that answered "nothing matched" would be telling a
+   person their neighbour does not exist.
+
+   So: MEND.searchServer() when there is a server answering, MEND.searchAll()
+   when there is not — and the page SAYS WHICH ONE RAN, every time, because
+   "nothing matched" means two different things in the two cases.
+
+   Debounced, and deliberately not on every keystroke. Firing a query per
+   letter over somebody's prepaid data is a cost they did not agree to, and
+   eight round trips to spell "Mokhotlong" is seven of them wasted.
+   ========================================================================= */
+var SEARCH_MIN = 2;
+var SEARCH_WAIT = 400;
+var searchTimer = null;
+
+function searchBox(){
+  var s = state.search;
+  return '<div class="qrow">' +
+    '<label class="fl" for="q-find">' + esc(T('pitso.q.label')) + '</label>' +
+    '<input type="search" id="q-find" autocomplete="off" spellcheck="false" ' +
+      'value="' + esc(s.q) + '" placeholder="' + esc(T('pitso.q.ph')) + '">' +
+  '</div>';
+}
+
+/* Which of the two searches ran, said plainly. This is the honesty the whole
+   feature turns on, so it is never omitted — not when there are results, not
+   when there are none. */
+function searchNoteHtml(){
+  var s = state.search;
+  if (s.err)
+    return '<div class="qnote">' + esc(T('pitso.q.err', { why: s.err })) + '</div>';
+  if (s.running)
+    return '<div class="qnote">' + esc(T('pitso.q.running')) + '</div>';
+  if (s.q.trim().length && s.q.trim().length < SEARCH_MIN)
+    return '<div class="qnote">' + esc(T('pitso.q.min')) + '</div>';
+  if (!s.results) return '';
+  var n = s.results.length;
+  return '<div class="qnote">' +
+    esc(n === 0 ? T('pitso.q.none') : n === 1 ? T('pitso.q.one') : T('pitso.q.n', { n: n })) +
+    '<span class="where">' + esc(T(s.via === 'server' ? 'pitso.q.server' : 'pitso.q.local')) + '</span>' +
+  '</div>';
+}
+
+/* A person or a Pitso listing is opened in this app. Anything on Mafisa or
+   Matsema is a link OUT, which is the portable-standing claim being made good
+   rather than asserted — and it opens in its own tab so nothing typed here is
+   thrown away. */
+function searchResultHtml(r){
+  var label = T('pitso.q.t.' + r.type) === 'pitso.q.t.' + r.type ? r.type : T('pitso.q.t.' + r.type);
+  var inApp = (r.type === 'person' || r.type === 'provider') ||
+              (r.type === 'request' && r.platform === 'pitso');
+  var title;
+  if (inApp && (r.type === 'person' || r.type === 'provider')) {
+    title = '<a href="#" data-profile="' + esc(r.id) + '">' + esc(r.title) + '</a>';
+  } else if (r.url) {
+    title = '<a href="' + esc(r.url) + '" rel="noopener" target="_blank">' + esc(r.title) + '</a>';
+  } else {
+    title = esc(r.title);
+  }
+  var where = (r.platform && r.platform !== 'pitso') ? ' · ' + T('pitso.q.elsewhere') : '';
+  return '<li>' +
+    '<span class="kindtag">' + esc(label) + '</span>' +
+    '<div class="qt">' + title + '</div>' +
+    (r.subtitle || where
+      ? '<div class="qs break">' + esc((r.subtitle || '') + where) + '</div>' : '') +
+  '</li>';
+}
+
+function searchResultsHtml(){
+  var s = state.search;
+  if (!s.results || !s.results.length) return '';
+  return '<ul class="qres">' + s.results.map(searchResultHtml).join('') + '</ul>';
+}
+
+/* Only the two panels are repainted, never the input. Re-rendering the whole
+   view on each keystroke would take the caret away from whoever is typing,
+   which on a phone means they cannot finish a word. */
+function paintSearch(){
+  var note = $('#q-note'), out = $('#q-out'), board = $('#q-board');
+  if (!note || !out) return;
+  note.innerHTML = searchNoteHtml();
+  out.innerHTML = searchResultsHtml();
+  if (board) board.hidden = !!(state.search.results || state.search.running);
+}
+
+function runSearch(){
+  var s = state.search;
+  var q = s.q.trim();
+  if (q.length < SEARCH_MIN) {
+    s.running = false; s.results = null; s.via = null; s.err = null;
+    return paintSearch();
+  }
+  var seq = ++s.seq;
+  s.running = true; s.err = null;
+  paintSearch();
+  /* searchServer() returns null rather than throwing when there is no
+     connection, which is the signal to fall back — and to say so. */
+  Promise.resolve(MEND.searchServer(q, 30)).then(function(rows){
+    if (seq !== state.search.seq) return;          /* a newer query is in flight */
+    if (rows) { s.results = rows; s.via = 'server'; }
+    else      { s.results = MEND.searchAll(q); s.via = 'local'; }
+    s.running = false;
+    paintSearch();
+  }).catch(function(e){
+    if (seq !== state.search.seq) return;
+    /* The server answered badly. Fall back rather than showing nothing, and
+       print BOTH facts: what came back, and that only the cache was read. */
+    s.results = MEND.searchAll(q); s.via = 'local';
+    s.running = false; s.err = null;
+    paintSearch();
+    var note = $('#q-note');
+    if (note) note.insertAdjacentHTML('beforeend',
+      '<div class="qnote">' + esc(T('pitso.q.err', { why: e.message })) + '</div>');
+  });
+}
+
+function onSearchInput(v){
+  state.search.q = v;
+  if (searchTimer) clearTimeout(searchTimer);
+  if (!v.trim().length) {
+    state.search.seq++;
+    state.search.running = false; state.search.results = null;
+    state.search.via = null; state.search.err = null;
+    return paintSearch();
+  }
+  searchTimer = setTimeout(runSearch, SEARCH_WAIT);
+}
+
+function viewFind(){
+  var f = state.filters;
+  var list = MEND.all('pitso_providers').filter(function(pp){
+    if (f.trade && pp.trade_code !== f.trade) return false;
+    if (f.district && (pp.districts || []).indexOf(f.district) === -1) return false;
+    if (f.available && !pp.available) return false;
+    return true;
+  });
+  /* Sorted by standing, never by price. */
+  list.sort(function(a,b){
+    var A = MEND.standing(a.profile_id), B = MEND.standing(b.profile_id);
+    return (B.rating || 0) - (A.rating || 0) || B.jobs_completed - A.jobs_completed;
+  });
+
+  var tradeOpts = ['<option value="">' + esc(T('ui.all_trades')) + '</option>'].concat(TRADES.map(function(t){
+    return '<option value="' + esc(t[0]) + '"' + (f.trade === t[0] ? ' selected' : '') + '>' + esc(t[1]) + '</option>';
+  })).join('');
+  var distOpts = ['<option value="">' + esc(T('ui.all_districts')) + '</option>'].concat(MEND.DISTRICTS.map(function(d){
+    return '<option value="' + esc(d) + '"' + (f.district === d ? ' selected' : '') + '>' + esc(d) + '</option>';
+  })).join('');
+
+  return '<div class="viewhead"><h2>' + esc(T('pitso.find')) + '</h2>' +
+      '<p>' + esc(T('pitso.find.intro')) + '</p></div>' +
+    '<div class="filters">' +
+    searchBox() +
+    '<div class="fgrid">' +
+      '<div><label class="fl" for="f-trade">' + esc(T('pitso.trade')) + '</label><select id="f-trade">' + tradeOpts + '</select></div>' +
+      '<div><label class="fl" for="f-dist">' + esc(T('app.district')) + '</label><select id="f-dist">' + distOpts + '</select></div>' +
+    '</div>' +
+    '<div class="checkrow" style="margin-top:12px">' +
+      '<input type="checkbox" id="f-avail"' + (f.available ? ' checked' : '') + '>' +
+      '<label for="f-avail">' + esc(T('pitso.onlyavailable')) + '</label></div>' +
+    '<div class="count" id="f-count">' + esc(T('pitso.onboard',
+        { n: list.length + ' ' + (list.length === 1 ? T('app.person') : T('app.people')) })) + '</div>' +
+    /* The count above is the count of what was DOWNLOADED. Saying it without
+       saying that is the omission this line exists to close. */
+    coverageBlock('pitso_providers', { search: true }) +
+    '</div>' +
+    '<div id="q-note"></div><div id="q-out"></div>' +
+    '<div id="q-board">' +
+    (list.length
+      ? '<ul class="board">' + list.map(providerEntry).join('') + '</ul>'
+      : '<p class="muted" style="padding:28px 0">' + esc(T('pitso.empty.board')) + '</p>') +
+    '</div>';
+}
+
+/* =========================================================================
+   VIEW 2 — PROVIDER PROFILE
+   ========================================================================= */
+function docVerdict(d){
+  var s = MEND.effectiveStatus(d);            /* never read d.status directly */
+  var label = docLabel(d.kind);
+  if (s === 'verified') {
+    var tail = [];
+    if (d.issued_by) tail.push(d.issued_by + (d.issued_on ? ' ' + yearOf(d.issued_on) : ''));
+    else if (d.issued_on) tail.push(T('pitso.dv.issued', { date: MEND.fmtDate(d.issued_on) }));
+    if (d.expires_on) tail.push(T('pitso.dv.validto', { date: MEND.fmtDate(d.expires_on) }));
+    return { cls:'ok', mark:'✓',
+             text: T('pitso.dv.verified', { doc: label }) + (tail.length ? ' · ' + tail.join(' · ') : '') };
+  }
+  if (s === 'expired')
+    return { cls:'no', mark:'!', text: T('pitso.dv.expired', { doc: label, date: MEND.fmtDate(d.expires_on) }) };
+  if (s === 'rejected')
+    return { cls:'no', mark:'×', text: T('pitso.dv.rejected', { doc: label }) };
+  return { cls:'wait', mark:'·', text: T('pitso.dv.waiting', { doc: label }) };
+}
+
+function viewProfile(){
+  var pid = state.profileId;
+  var p = MEND.profile(pid);
+  if (!p) return '<p class="sec">' + esc(T('pitso.prof.nosuch')) + '</p>';
+  var pp = MEND.all('pitso_providers').filter(function(x){ return x.profile_id === pid; })[0];
+  var st = MEND.standing(pid);
+  var docs = MEND.all('documents').filter(function(d){ return d.profile_id === pid; });
+  var revs = MEND.all('reviews').filter(function(r){ return r.subject_id === pid; })
+              .sort(function(a,b){ return (b.created_at || '').localeCompare(a.created_at || ''); });
+
+  var h = '<button class="link" data-back="find" style="margin-bottom:18px">' +
+      esc(T('pitso.prof.back')) + '</button>' +
+    '<h2 style="font-size:1.75rem">' + esc(p.display_name) + '</h2>' +
+    /* Before the standing, before the trade, before the price. If MEND has
+       taken this listing down, that is the first thing about it that is true,
+       and the person it happened to is entitled to read it here rather than
+       work it out from a listing that has silently stopped appearing. */
+    (pp ? takedownBlock('pitso_providers', pid) : '') +
+    standingLine(st) + verifiedBadges(pid) +
+    '<div class="trade">' + (pp ? '<b>' + esc(tradeName(pp.trade_code)) + '</b> · ' +
+      pp.years_experience + ' ' + esc(T('pitso.years')) + ' · ' : '') +
+      esc([p.village, p.district].filter(Boolean).join(', ')) + '</div>' +
+    (p.bio ? '<div class="headline">' + esc(p.bio) + '</div>' : '') +
+    (pp ? '<div class="price"><b>' + esc(rateLine(pp)) + '</b>' +
+          (pp.available ? '' : ' · ' + esc(T('pitso.prof.notaking'))) + '</div>' : '') +
+    '<hr class="rule">';
+
+  /* Standing across all three platforms — the whole argument of the spine.
+     The other two names are LINKS. A claim that a standing is portable, printed
+     next to a number a reader cannot follow anywhere, is just a claim. */
+  /* '<n> jobs on <a>Mafisa</a>' used to be built out of two English fragments
+     either side of a link. It is now one string with the link as a named hole,
+     because the words move around the name in Sesotho. */
+  var xlink = function(host, label){
+    return '<a href="' + host + '" rel="noopener" target="_blank">' + esc(label) + '</a>';
+  };
+  h += '<h3>' + esc(T('rep.standing')) + '</h3>' +
+    '<p class="sec small" style="margin-top:6px">' + esc(T('pitso.prof.carried')) + '</p>' +
+    '<div class="tally">' +
+      '<div><div class="n">' + st.pitso_completed   + '</div><div class="l">' +
+        esc(T('pitso.prof.jobs_here')) + '</div></div>' +
+      '<div><div class="n">' + st.mafisa_completed  + '</div><div class="l">' +
+        tHtml('pitso.prof.jobs_on', { platform: xlink(CROSS.mafisa, T('mafisa.name')) }) + '</div></div>' +
+      '<div><div class="n">' + st.matsema_completed + '</div><div class="l">' +
+        tHtml('pitso.prof.jobs_on', { platform: xlink(CROSS.matsema, T('matsema.name')) }) + '</div></div>' +
+      '<div><div class="n">' + (st.rating != null ? st.rating.toFixed(2) : '—') + '</div><div class="l">' +
+        esc(T('pitso.prof.avg_of', { n: st.review_count })) + '</div></div>' +
+    '</div>' +
+    '<p class="sec small" style="margin-top:12px">' + esc(T('pitso.prof.cross')) + '</p>' +
+    '<hr class="rule">';
+
+  /* ---- what a stranger may know about disagreements ---------------------
+     COUNTS AND NOTHING ELSE. An accusation is not a finding, and putting the
+     claim on a public page would make Pitso a place people are damaged by
+     rumour. The screen says so in words rather than leaving it implied. */
+  var ds = MEND.disputeStanding(pid);
+  h += '<h3>' + esc(T('pitso.disp.standing')) + '</h3>';
+  if (!ds.open && !ds.resolved) {
+    h += '<p class="sec small" style="margin-top:6px">' + esc(T('pitso.disp.none_ever')) + '</p>';
+  } else {
+    h += '<div class="tally" style="margin-top:10px">' +
+      '<div><div class="n">' + ds.open + '</div><div class="l">' + esc(T('pitso.disp.open_n')) + '</div></div>' +
+      '<div><div class="n">' + ds.resolved + '</div><div class="l">' + esc(T('pitso.disp.settled_n')) + '</div></div>' +
+    '</div>';
+    if (ds.open_recent)
+      h += '<p class="sec small" style="margin-top:10px">' + esc(T('pitso.disp.recent', { n: ds.open_recent })) + '</p>';
+  }
+  h += '<p class="sec small" style="margin-top:10px">' + esc(T('dispute.count_only')) + '</p>' +
+    '<hr class="rule">';
+
+  h += '<h3>' + esc(T('pitso.prof.checked')) + '</h3>' +
+    '<p class="sec small" style="margin-top:6px">' + esc(T('pitso.prof.verdict_only')) + '</p>' +
+    (docs.length
+      ? '<ul class="docs">' + docs.map(function(d){
+          var v = docVerdict(d);
+          return '<li><span class="mark ' + v.cls + '">' + v.mark + '</span><span class="break">' + esc(v.text) + '</span></li>';
+        }).join('') + '</ul>'
+      : '<p class="sec small">' + esc(T('pitso.prof.nothing_sent')) + '</p>') +
+    '<hr class="rule">';
+
+  h += '<h3>' + esc(T('pitso.prof.said')) + '</h3>' +
+    (revs.length
+      ? revs.map(function(r){
+          return '<div class="review"><span class="stars">' + esc(MEND.star(r.rating)) + '</span>' +
+            '<div class="body">' + esc(r.body || '') + '</div>' +
+            '<div class="by">' + esc(name(r.author_id)) + ' · ' + MEND.fmtDate(dayOf(r.created_at)) + '</div></div>';
+        }).join('')
+      : '<p class="sec small">' + esc(T('pitso.prof.noreviews')) + '</p>');
+
+  /* This person can leave the app as text or as paper. A tradesperson with no
+     smartphone is still findable if somebody else can paste him into a group. */
+  h += '<div class="btnrow" data-noprint style="margin-top:18px">' +
+    '<button class="btn ghost small" data-share-provider="' + esc(pid) + '">' + esc(T('ui.share')) + '</button>' +
+    '<button class="btn ghost small" data-print-provider="' + esc(pid) + '">' + esc(T('ui.print')) + '</button>' +
+  '</div>';
+
+  if (pp) {
+    h += '<div class="btnrow"><button class="btn clay" data-hire="' + esc(pp.trade_code) + '">' +
+         esc(T('pitso.prof.hire', { trade: tradeName(pp.trade_code).toLowerCase() })) + '</button></div>' +
+         '<p class="tiny sec" style="margin-top:10px">' + esc(T('pitso.prof.noqueue')) + '</p>';
+    /* Last on the page and the quietest thing on it. */
+    h += reportBlock('pitso_providers', pid);
+  }
+  return h;
+}
+
+/* =========================================================================
+   VIEW 3 — POST A REQUEST
+   ========================================================================= */
+function viewPost(){
+  var f = state.postPrefill || {};
+  var tradeOpts = ['<option value="">' + esc(T('pitso.post.pick_trade')) + '</option>'].concat(TRADES.map(function(t){
+    return '<option value="' + esc(t[0]) + '"' + (f.trade === t[0] ? ' selected' : '') + '>' +
+      esc(t[1]) + (t[2] ? ' — ' + esc(t[2]) : '') + '</option>';
+  })).join('');
+  var distOpts = ['<option value="">' + esc(T('pitso.post.pick_dist')) + '</option>'].concat(MEND.DISTRICTS.map(function(d){
+    return '<option value="' + esc(d) + '">' + esc(d) + '</option>';
+  })).join('');
+
+  return '<div class="viewhead"><h2>' + esc(T('pitso.post')) + '</h2>' +
+      '<p>' + esc(T('pitso.post.intro')) + '</p></div>' +
+    '<hr class="rule">' +
+    '<form id="postform" novalidate>' +
+      '<div class="field" data-f="trade"><label class="fl" for="q-trade">' + esc(T('pitso.post.trade')) + '</label>' +
+        '<select id="q-trade">' + tradeOpts + '</select><div class="err hidden"></div></div>' +
+      '<div class="field" data-f="district"><label class="fl" for="q-dist">' + esc(T('app.district')) + '</label>' +
+        '<select id="q-dist">' + distOpts + '</select><div class="err hidden"></div></div>' +
+      '<div class="field" data-f="title"><label class="fl" for="q-title">' + esc(T('pitso.post.title')) + '</label>' +
+        '<input type="text" id="q-title" maxlength="120" placeholder="' + esc(T('pitso.post.title_ph')) + '">' +
+        '<div class="hint">' + esc(T('pitso.post.title_hint')) + '</div>' +
+        '<div class="err hidden"></div></div>' +
+      '<div class="field" data-f="description"><label class="fl" for="q-desc">' + esc(T('pitso.post.detail')) + '</label>' +
+        '<textarea id="q-desc" placeholder="' + esc(T('pitso.post.detail_ph')) + '"></textarea>' +
+        '<div class="err hidden"></div></div>' +
+      '<div class="fgrid">' +
+        '<div class="field" data-f="needed_by"><label class="fl" for="q-by">' + esc(T('pitso.neededby')) + '</label>' +
+          '<input type="date" id="q-by" value="' + esc(f.needed_by || '') + '"><div class="err hidden"></div></div>' +
+        '<div class="field" data-f="budget"><label class="fl" for="q-budget">' + esc(T('pitso.post.budget')) + '</label>' +
+          '<input type="number" id="q-budget" min="0" step="1" inputmode="decimal" placeholder="2500">' +
+          '<div class="hint">' + esc(T('pitso.post.budget_hint')) + '</div><div class="err hidden"></div></div>' +
+      '</div>' +
+      '<div class="note">' + esc(T('pitso.post.note')) + '</div>' +
+      ifWritable('<div class="btnrow"><button type="submit" class="btn">' +
+                 esc(T('pitso.post.go')) + '</button></div>') +
+    '</form>';
+}
+
+function submitRequest(e){
+  e.preventDefault();
+  if (refuseWrite()) return;
+  var meP = MEND.me();
+  if (!meP) { state.flash = T('pitso.err.signin.post'); return render(); }
+  var vals = {
+    trade: $('#q-trade').value,
+    district: $('#q-dist').value,
+    title: $('#q-title').value.trim(),
+    description: $('#q-desc').value.trim(),
+    needed_by: $('#q-by').value || null,
+    budget: $('#q-budget').value
+  };
+  var errs = {};
+  if (!vals.trade) errs.trade = T('pitso.err.pick.trade');
+  if (!vals.district) errs.district = T('pitso.err.pick.district');
+  if (vals.title.length < 4 || vals.title.length > 120) errs.title = T('pitso.err.title.len');
+  var cents = toCents(vals.budget);
+  if (isNaN(cents)) errs.budget = T('pitso.err.quote');
+  if (vals.needed_by && vals.needed_by < MEND.today()) errs.needed_by = T('pitso.err.date.past');
+
+  $$('#postform .field').forEach(function(fd){
+    var k = fd.getAttribute('data-f'), box = $('.err', fd);
+    if (errs[k]) { fd.classList.add('bad'); box.textContent = errs[k]; box.classList.remove('hidden'); }
+    else { fd.classList.remove('bad'); box.textContent = ''; box.classList.add('hidden'); }
+  });
+  if (Object.keys(errs).length) { var first = $('#postform .field.bad'); if (first) first.scrollIntoView({block:'center'}); return; }
+
+  var row = MEND.insert('pitso_requests', {
+    requester_id: meP.id, trade_code: vals.trade, district: vals.district,
+    title: vals.title, description: vals.description || null,
+    needed_by: vals.needed_by, budget_cents: cents, state: 'open'
+  });
+  rec('pitso.request.posted', {
+    platform:'pitso', subject_table:'pitso_requests', subject_id: row.id,
+    payload:{ trade_code: row.trade_code, district: row.district, budget_cents: row.budget_cents }
+  });
+  state.postPrefill = null;
+  state.flash = MEND.claimed(T('pitso.post.done',
+    { trade: tradeName(vals.trade).toLowerCase(), district: vals.district }));
+  go('requests');
+}
+
+/* =========================================================================
+   VIEW 4 — OPEN REQUESTS (the board)
+   ========================================================================= */
+function offersFor(rid){ return MEND.all('pitso_offers').filter(function(o){ return o.request_id === rid; }); }
+
+function requestEntry(q, opts){
+  opts = opts || {};
+  /* Nobody may be signed in at all in connected mode until they sign in, so
+     this must survive a null me() rather than throwing on .id. */
+  var meP = MEND.me() || {};
+  var offers = offersFor(q.id);
+  var live = offers.filter(function(o){ return o.state === 'offered'; });
+  var mine = !!meP.id && q.requester_id === meP.id;
+  var myOffer = meP.id ? offers.filter(function(o){ return o.provider_id === meP.id; })[0] : null;
+  var overdue = q.needed_by && q.needed_by < MEND.today();
+
+  var h = '<li>' +
+    '<div class="rtitle">' + esc(q.title) + syncMark(q) + '</div>' +
+    /* A takedown sets pitso_requests.state to 'withdrawn', which drops the row
+       out of the open list entirely. The person who posted it still sees it
+       here under My work, and this is where they find out what happened —
+       there is nowhere else they could. */
+    takedownBlock('pitso_requests', q.id) +
+    '<div class="meta">' +
+      '<span><b>' + esc(tradeName(q.trade_code)) + '</b></span>' +
+      '<span>' + esc(q.district) + '</span>' +
+      '<span' + (overdue ? ' class="muted"' : '') + '>' + esc(T('pitso.neededby')) + ' ' + MEND.fmtDate(q.needed_by) + '</span>' +
+      '<span>' + esc(T('pitso.budget')) + ' ' +
+        esc(moneyOrPhrase(q.budget_cents, T('pitso.openbudget'))) + '</span>' +
+    '</div>' +
+    /* 'Posted by <link>' is one string with the name as a hole — the words sit
+       on the other side of the name in Sesotho. */
+    '<div class="small sec" style="margin-top:6px">' +
+      tHtml('pitso.req.postedby', {
+        name: mine ? esc(T('pitso.disp.you'))
+                   : '<a class="link" href="#" data-profile="' + esc(q.requester_id) + '">' +
+                     esc(name(q.requester_id)) + '</a>',
+        date: esc(MEND.fmtDate(dayOf(q.created_at)))
+      }) + '</div>' +
+    (q.description ? '<div class="desc">' + esc(q.description) + '</div>' : '');
+
+  if (q.state === 'engaged') {
+    h += '<div class="offercount">' + esc(T('pitso.req.taken')) + '</div>';
+  } else {
+    h += live.length
+      ? '<div class="offercount">' + esc(countWord(live.length, 'pitso.req.oneoffer', 'pitso.req.noffers')) + '</div>'
+      : '<div class="offercount none">' + esc(T('pitso.nooffers')) + '</div>';
+  }
+
+  if (mine) {
+    /* the requester sees the offers themselves and can accept one */
+    if (live.length) {
+      h += '<div style="margin-top:12px">' + live.map(function(o){ return offerCard(o, q); }).join('') + '</div>';
+    }
+  } else if (q.state === 'open' && meP.id) {
+    if (myOffer) {
+      h += '<div class="card quiet" style="margin-top:12px"><div class="small"><b>' +
+        esc(T('pitso.req.youroffer')) + '</b> ' +
+        esc(moneyOrPhrase(offerAmount(myOffer), T('pitso.req.willquote'))) +
+        ' · ' + esc(stateWord(myOffer.state)) + syncMark(myOffer) + '</div>' +
+        (myOffer.message ? '<div class="small sec break" style="margin-top:6px">' + esc(myOffer.message) + '</div>' : '') +
+        '</div>';
+    } else if (opts.allowOffer !== false) {
+      h += (state.openForm === q.id
+        ? offerForm(q)
+        : ifWritable('<div class="btnrow"><button class="btn ghost small" data-offer="' + esc(q.id) + '">' +
+                     esc(T('pitso.offer')) + '</button></div>'));
+    }
+  }
+  /* An open request is a notice. It has to be able to reach the people who are
+     in the WhatsApp group and not on this page. */
+  h += '<div class="btnrow" data-noprint>' +
+    '<button class="btn ghost small" data-share-request="' + esc(q.id) + '">' + esc(T('ui.share')) + '</button>' +
+    '<button class="btn ghost small" data-print-request="' + esc(q.id) + '">' + esc(T('ui.print')) + '</button>' +
+  '</div>';
+  /* Not on your own request: reporting yourself to the desk is not a thing
+     anybody wants to do, and the offer to would only be noise. */
+  if (!mine) h += reportBlock('pitso_requests', q.id);
+  return h + '</li>';
+}
+
+function offerCard(o, q){
+  return '<div class="card">' +
+    '<a class="pname" href="#" data-profile="' + esc(o.provider_id) + '" style="font-size:1.125rem">' + esc(name(o.provider_id)) + '</a>' +
+    standingLine(MEND.standing(o.provider_id)) +
+    (o.message ? '<div class="small sec break" style="margin-top:8px">' + esc(o.message) + '</div>' : '') +
+    '<div class="price"><b>' + esc(moneyOrPhrase(offerAmount(o), T('pitso.req.willquote_b'))) + '</b>' + syncMark(o) + '</div>' +
+    (q.state === 'open'
+      ? ifWritable('<div class="btnrow"><button class="btn small" data-accept="' + esc(o.id) + '">' +
+                   esc(T('pitso.accept')) + '</button></div>')
+      : '') +
+  '</div>';
+}
+
+function offerForm(q){
+  return '<form class="card" data-offerform="' + esc(q.id) + '" style="margin-top:12px" novalidate>' +
+    '<div class="field" data-f="quote"><label class="fl" for="o-quote">' + esc(T('pitso.req.yourprice')) + '</label>' +
+      '<input type="number" id="o-quote" min="0" step="1" inputmode="decimal" placeholder="3650">' +
+      '<div class="hint">' + esc(T('pitso.req.price_hint')) + '</div><div class="err hidden"></div></div>' +
+    '<div class="field" data-f="message"><label class="fl" for="o-msg">' + esc(T('pitso.req.whatoffer')) + '</label>' +
+      '<textarea id="o-msg" placeholder="' + esc(T('pitso.req.whatoffer_ph')) + '"></textarea>' +
+      '<div class="err hidden"></div></div>' +
+    '<div class="btnrow"><button type="submit" class="btn">' + esc(T('pitso.sendoffer')) + '</button>' +
+      '<button type="button" class="btn ghost" data-cancel="1">' + esc(T('app.cancel')) + '</button></div>' +
+  '</form>';
+}
+
+function viewRequests(){
+  var qs = MEND.all('pitso_requests').filter(function(q){ return q.state === 'open' || q.state === 'engaged'; })
+    .sort(function(a,b){ return (b.created_at || '').localeCompare(a.created_at || ''); });
+  return '<div class="viewhead"><h2>' + esc(T('pitso.requests')) + '</h2>' +
+      '<p>' + esc(T('pitso.req.intro')) + '</p></div>' +
+    /* The open-request download is bounded at 200 too. Somebody scrolling to
+       the bottom of this page and concluding there is no work is entitled to
+       know that is not what the page is telling them. */
+    coverageBlock('pitso_requests', {}) +
+    '<hr class="rule">' +
+    (qs.length ? '<ul class="board">' + qs.map(function(q){ return requestEntry(q, {}); }).join('') + '</ul>'
+               : '<p class="muted">' + esc(T('pitso.empty.requests')) + '</p>');
+}
+
+function submitOffer(form){
+  if (refuseWrite()) return;
+  var qid = form.getAttribute('data-offerform');
+  var q = MEND.all('pitso_requests').filter(function(x){ return x.id === qid; })[0];
+  var meP = MEND.me();
+  if (!q || q.state !== 'open') { state.flash = T('pitso.err.offer.closed'); return render(); }
+  if (q.requester_id === meP.id) { state.flash = T('pitso.err.offer.own'); return render(); }
+
+  var quote = $('#o-quote', form).value;
+  var msg = $('#o-msg', form).value.trim();
+  var cents = toCents(quote);
+  var errs = {};
+  if (isNaN(cents)) errs.quote = T('pitso.err.quote');
+  if (msg.length < 4) errs.message = T('pitso.err.saysomething');
+  $$('.field', form).forEach(function(fd){
+    var k = fd.getAttribute('data-f'), box = $('.err', fd);
+    if (errs[k]) { fd.classList.add('bad'); box.textContent = errs[k]; box.classList.remove('hidden'); }
+    else { fd.classList.remove('bad'); box.textContent=''; box.classList.add('hidden'); }
+  });
+  if (Object.keys(errs).length) return;
+
+  /* one offer per provider per job — the unique constraint in 002_platforms.sql */
+  if (offersFor(qid).some(function(o){ return o.provider_id === meP.id; })) {
+    state.flash = T('pitso.err.offer.twice'); state.openForm = null; return render();
+  }
+  var o = MEND.insert('pitso_offers', {
+    request_id: qid, provider_id: meP.id, quote_cents: cents, message: msg, state: 'offered'
+  });
+  rec('pitso.offer.made', {
+    platform:'pitso', subject_table:'pitso_offers', subject_id: o.id,
+    payload:{ request_id: qid, quote_cents: o.quote_cents }
+  });
+  state.openForm = null;
+  /* Tell the person who posted it. Nothing did, so an offer arrived and the
+     only way to discover it was to go looking. */
+  MEND.notify(q.requester_id, 'offer_made', 'notif.offer_made',
+              { name: name(meP.id), title: q.title },
+              { platform: 'pitso', table: 'pitso_offers', id: o.id });
+  state.flash = MEND.claimed(T('pitso.req.offersent', { name: name(q.requester_id) }));
+  render();
+}
+
+function acceptOffer(oid){
+  if (refuseWrite()) return;
+  var o = MEND.all('pitso_offers').filter(function(x){ return x.id === oid; })[0];
+  if (!o) return;
+  var q = MEND.all('pitso_requests').filter(function(x){ return x.id === o.request_id; })[0];
+  var meP = MEND.me();
+  if (!q || q.requester_id !== meP.id) { state.flash = T('pitso.err.accept.owner'); return render(); }
+  if (q.state !== 'open') { state.flash = T('pitso.err.taken'); return render(); }
+
+  MEND.update('pitso_offers', o.id, { state:'accepted' });
+  offersFor(q.id).forEach(function(other){
+    if (other.id !== o.id && other.state === 'offered') MEND.update('pitso_offers', other.id, { state:'declined' });
+  });
+  MEND.update('pitso_requests', q.id, { state:'engaged' });
+
+  /* agreed_cents comes from offerAmount() — the same function that printed the
+     number on screen. One figure, one source. */
+  var eng = MEND.insert('engagements', {
+    platform:'pitso', provider_id:o.provider_id, counterparty_id:q.requester_id,
+    subject_table:'pitso_offers', subject_id:o.id, state:'agreed',
+    agreed_cents: offerAmount(o), currency:'LSL',
+    settled_by_provider:false, settled_by_counterparty:false,
+    started_on: MEND.today(), ended_on: null
+  });
+  rec('pitso.offer.accepted', {
+    platform:'pitso', subject_table:'engagements', subject_id: eng.id,
+    payload:{ offer_id:o.id, request_id:q.id, agreed_cents: eng.agreed_cents }
+  });
+  MEND.notify(o.provider_id, 'offer_accepted', 'notif.offer_accepted',
+              { name: name(meP.id), title: q.title },
+              { platform: 'pitso', table: 'pitso_offers', id: o.id });
+  state.flash = MEND.claimed(T('pitso.req.accepted', { name: name(o.provider_id) }));
+  go('mine');
+}
+
+
+/* =========================================================================
+   WHEN IT GOES WRONG — and the platform does not decide who is right
+
+   MEND GROUP is not a court. What Pitso does instead is worth more than a
+   verdict it has no standing to give: it holds BOTH accounts, dated, and
+   neither can be revised once given. Most disagreements between people who
+   have to keep living in the same district end the moment both accounts are
+   written down and neither can be quietly changed afterwards.
+
+   Nothing on this screen may read as a finding. No side is marked right, no
+   claim is scored, and the word "verdict" appears nowhere. The one thing that
+   closes it is BOTH of them accepting the same written outcome.
+   ========================================================================= */
+
+/* MEND.canDispute and MEND.canReview are the only places these rules live.
+   This maps core's English answer onto Sesotho and nothing else — a miss shows
+   the English, which is degraded but never wrong. */
+function disputeReason(msg){
+  if (!msg) return msg;
+  var m = String(msg);
+  if (/^sign in first/.test(m))                          return T('pitso.disp.err.signin');
+  if (/^no such job/.test(m))                            return T('pitso.disp.err.nojob');
+  if (/has not been agreed yet/.test(m))                 return T('pitso.disp.err.notagreed');
+  if (/only the two people in this job/.test(m))         return T('pitso.disp.err.notparty');
+  if (/^that is you/.test(m))                            return T('pitso.disp.err.self');
+  if (/was not part of this job/.test(m))                return T('pitso.disp.err.notinjob');
+  if (/say what went wrong/.test(m))                     return T('pitso.disp.err.claim');
+  if (/write a little more than that/.test(m))           return T('pitso.disp.err.stmt');
+  if (/^no such dispute/.test(m))                        return T('pitso.disp.err.nodispute');
+  if (/only the two people in this dispute/.test(m))     return T('pitso.disp.err.notyours');
+  return m;
+}
+
+/* "May I raise anything here at all?", asked before a word has been typed.
+   canDispute checks the CLAIM as well as the structure, so a stand-in clears
+   that one check and leaves only the structural answers. The real claim is put
+   through canDispute again at the moment of writing — this is the question the
+   screen asks, not the gate the write goes through. */
+var CLAIM_PROBE = '..........';
+function disputeGate(e, other){
+  return MEND.canDispute(e.id, { against: other, claim: CLAIM_PROBE });
+}
+
+/* Both accounts, in the order they were given, each with its date and the name
+   of whoever wrote it. Two columns on a screen wide enough for them, stacked in
+   the same order on one that is not. Numbered, because this is a record. */
+function accountsList(d){
+  if (!d.statements.length)
+    return '<p class="small sec" style="margin-top:10px">' + esc(T('pitso.disp.nothing_said')) + '</p>';
+  return '<div class="accounts">' +
+    '<div class="acchead">' +
+      '<div class="acclabel">' + esc(name(d.raised_by)) + ' · ' + esc(T('pitso.disp.side.raiser')) + '</div>' +
+      '<div class="acclabel">' + esc(name(d.against))   + ' · ' + esc(T('pitso.disp.side.other')) + '</div>' +
+    '</div>' +
+    '<ol class="entries">' + d.statements.map(function(st, i){
+      var side = st.author_id === d.raised_by ? 'a' : 'b';
+      return '<li data-side="' + side + '">' +
+        '<div class="top">' +
+          '<span class="n">' + (i + 1) + '</span>' +
+          '<span class="nm">' + esc(name(st.author_id)) + '</span>' +
+          '<span class="role">' + esc(side === 'a' ? T('pitso.disp.side.raiser') : T('pitso.disp.side.other')) + '</span>' +
+          '<span class="dt">' + esc(MEND.fmtDate(dayOf(st.created_at))) + '</span>' +
+        '</div>' +
+        '<div class="say break">' + esc(st.body) + '</div>' +
+      '</li>';
+    }).join('') + '</ol></div>';
+}
+
+/* The form that raises it. The refusal, when there is one, is printed in words
+   above — never a greyed-out button a person is left to guess at. */
+function raiseForm(e, other){
+  return '<form class="card quiet" data-raiseform="' + esc(e.id) + '" style="margin-top:12px" novalidate>' +
+    '<h4 style="font-size:1.0625rem">' + esc(T('pitso.disp.raise_head')) + '</h4>' +
+    '<p class="tiny sec" style="margin-top:4px">' + esc(T('pitso.disp.about_person', { name: name(other) })) + '</p>' +
+    '<div class="noverdict">' + esc(T('dispute.no_verdict')) + '</div>' +
+    (state.disputeErr ? '<div class="note" style="margin:10px 0 0"><b>' + esc(T('app.no')) + '</b> — ' +
+                        esc(state.disputeErr) + '</div>' : '') +
+    '<div class="field" style="margin-top:14px"><label class="fl" for="d-kind">' +
+      esc(T('dispute.what_kind')) + '</label>' +
+      '<select id="d-kind">' + MEND.DISPUTE_KINDS.map(function(k){
+        return '<option value="' + esc(k) + '">' + esc(T('dispute.k.' + k)) + '</option>';
+      }).join('') + '</select></div>' +
+    '<div class="field"><label class="fl" for="d-claim">' + esc(T('dispute.claim')) + '</label>' +
+      '<textarea id="d-claim" maxlength="2000"></textarea></div>' +
+    '<div class="field"><label class="fl" for="d-amount">' + esc(T('dispute.amount')) + '</label>' +
+      '<input type="number" id="d-amount" min="0" step="1" inputmode="decimal">' +
+      '<div class="hint">' + esc(T('pitso.disp.amount_hint')) + '</div></div>' +
+    /* Said before they type and again before they send. It is true, and a
+       person is entitled to know it while they still have the choice. */
+    '<div class="note"><b>' + esc(T('dispute.final')) + '</b></div>' +
+    '<div class="btnrow"><button type="submit" class="btn clay">' + esc(T('pitso.disp.send_claim')) + '</button>' +
+      '<button type="button" class="btn ghost" data-cancel="1">' + esc(T('app.cancel')) + '</button></div>' +
+  '</form>';
+}
+
+function statementForm(d){
+  return '<form class="card quiet" data-stmtform="' + esc(d.id) + '" style="margin-top:12px" novalidate>' +
+    '<div class="field"><label class="fl" for="d-body">' + esc(T('dispute.add_reply')) + '</label>' +
+      '<textarea id="d-body" maxlength="4000"></textarea></div>' +
+    (state.disputeErr ? '<div class="note"><b>' + esc(T('app.no')) + '</b> — ' + esc(state.disputeErr) + '</div>' : '') +
+    '<div class="note"><b>' + esc(T('dispute.final')) + '</b></div>' +
+    '<div class="btnrow"><button type="submit" class="btn">' + esc(T('pitso.disp.send_stmt')) + '</button>' +
+      '<button type="button" class="btn ghost" data-cancel="1">' + esc(T('app.cancel')) + '</button></div>' +
+  '</form>';
+}
+
+/* The outcome. EITHER of them writes what was agreed; each accepts only their
+   own side; it closes when both have.
+
+   Deliberately, once the outcome is written there is no path here that sends
+   different text: MEND.acceptOutcome overwrites `outcome` with whatever it is
+   given while keeping the acceptance the other party already gave, so a second
+   party passing new words would close the record on a sentence the first party
+   never agreed to. The second party can only accept it as written, or write
+   another account and leave it open. */
+function outcomeBlock(d, meId){
+  var iAmRaiser = d.raised_by === meId;
+  var mine   = iAmRaiser ? d.outcome_agreed_by_raiser : d.outcome_agreed_by_other;
+  var theirs = iAmRaiser ? d.outcome_agreed_by_other  : d.outcome_agreed_by_raiser;
+  var other  = iAmRaiser ? d.against : d.raised_by;
+  var h = '<div class="outcome"><h4>' + esc(T('dispute.outcome')) + '</h4>';
+
+  if (d.state === 'resolved' && d.both_accepted) {
+    return h + '<div class="agreed break">' + esc(d.outcome) + '</div>' +
+      '<div class="where">' + esc(T('dispute.closed_on',
+        { date: MEND.fmtDate(dayOf(d.closed_at) || MEND.today()) })) + '</div></div>';
+  }
+
+  if (!String(d.outcome || '').trim()) {
+    h += '<p class="small sec" style="margin-top:6px">' + esc(T('pitso.disp.outcome_none')) + '</p>' +
+      '<p class="small sec">' + esc(T('dispute.both_accept')) + '</p>';
+    h += (state.openForm === 'out-' + d.id
+      ? outcomeForm(d)
+      : ifWritable('<div class="btnrow"><button class="btn ghost small" data-outcome="' + esc(d.id) + '">' +
+                   esc(T('pitso.disp.write_outcome')) + '</button></div>'));
+    return h + '</div>';
+  }
+
+  h += '<div class="agreed break">' + esc(d.outcome) + '</div>';
+  if (mine) {
+    h += '<div class="where">' + esc(T('dispute.you_accepted')) + '</div>' +
+         '<div class="where">' + esc(T('dispute.waiting_them')) + '</div>';
+  } else {
+    if (theirs) h += '<div class="where">' + esc(T('dispute.both_accept')) + '</div>';
+    h += '<p class="small sec" style="margin-top:8px">' + esc(T('pitso.disp.outcome_fixed')) + '</p>' +
+      ifWritable('<div class="btnrow"><button class="btn small" data-acceptout="' + esc(d.id) + '">' +
+                 esc(T('pitso.disp.accept_asis')) + '</button></div>');
+  }
+  return h + '</div>';
+}
+
+function outcomeForm(d){
+  return '<form class="card" data-outcomeform="' + esc(d.id) + '" style="margin-top:12px" novalidate>' +
+    '<div class="field"><label class="fl" for="d-out">' + esc(T('dispute.outcome')) + '</label>' +
+      '<textarea id="d-out" maxlength="2000"></textarea></div>' +
+    (state.disputeErr ? '<div class="note"><b>' + esc(T('app.no')) + '</b> — ' + esc(state.disputeErr) + '</div>' : '') +
+    '<div class="note">' + esc(T('dispute.both_accept')) + '</div>' +
+    '<div class="btnrow"><button type="submit" class="btn">' + esc(T('pitso.disp.write_accept')) + '</button>' +
+      '<button type="button" class="btn ghost" data-cancel="1">' + esc(T('app.cancel')) + '</button></div>' +
+  '</form>';
+}
+
+function disputeCard(d, meId){
+  var iAmParty = d.raised_by === meId || d.against === meId;
+  var last = d.statements[d.statements.length - 1];
+  var closed = d.state === 'resolved';
+  var h = '<div class="dispute">' +
+    '<span class="dstamp' + (closed ? ' done' : '') + '">' +
+      esc(T(closed ? 'dispute.resolved' : (d.state === 'answered' ? 'dispute.answered' : 'dispute.open'))) +
+    '</span>' +
+    '<div class="kind">' + esc(T('dispute.k.' + d.kind)) + '</div>' +
+    '<div class="raisedby">' + esc(T('pitso.disp.raised_on',
+      { date: MEND.fmtDate(dayOf(d.created_at)), name: name(d.raised_by) })) + '</div>' +
+    (d.amount_cents != null
+      ? '<div class="amt">' + esc(T('pitso.disp.amount_line', { amount: MEND.M(d.amount_cents) })) + '</div>'
+      : '') +
+    /* The principle, on the screen, every time. */
+    '<div class="noverdict">' + esc(T('dispute.no_verdict')) + '</div>' +
+    '<div class="acclabel" style="margin-top:16px">' + esc(T('pitso.disp.accounts')) + '</div>' +
+    accountsList(d);
+
+  if (iAmParty && !closed) {
+    if (last && last.author_id !== meId)
+      h += '<p class="small" style="margin-top:12px"><b>' + esc(T('dispute.your_turn')) + '</b></p>';
+    h += (state.openForm === 'stmt-' + d.id
+      ? statementForm(d)
+      : ifWritable('<div class="btnrow"><button class="btn ghost small" data-statement="' + esc(d.id) + '">' +
+                   esc(T('dispute.add_reply')) + '</button></div>'));
+  }
+  if (iAmParty) h += outcomeBlock(d, meId);
+  return h + '</div>';
+}
+
+function disputeBlock(e, meId){
+  var other = e.provider_id === meId ? e.counterparty_id : e.provider_id;
+  var list = MEND.disputeFor(e.id);
+  var open = list.filter(function(d){ return d.state !== 'resolved' && d.state !== 'withdrawn'; });
+  var h = list.map(function(d){ return disputeCard(d, meId); }).join('');
+
+  if (open.length) {
+    h += '<p class="tiny sec" style="margin-top:10px">' + esc(T('pitso.disp.already_open')) + '</p>';
+    return h;
+  }
+  var why = disputeGate(e, other);
+  if (why) {
+    /* The refusal, in words. Never a dead button. */
+    return h + '<div class="small sec" style="margin-top:14px">' +
+      esc(T('pitso.disp.cannot', { why: disputeReason(why) })) + '</div>';
+  }
+  return h + (state.openForm === 'disp-' + e.id
+    ? raiseForm(e, other)
+    : ifWritable('<div class="btnrow"><button class="btn ghost small" data-dispute="' + esc(e.id) + '">' +
+                 esc(T('dispute.raise_about')) + '</button></div>'));
+}
+
+function submitRaise(form){
+  if (refuseWrite()) return;
+  var eid = form.getAttribute('data-raiseform');
+  var e = MEND.all('engagements').filter(function(x){ return x.id === eid; })[0];
+  var meP = MEND.me();
+  if (!e || !meP) return;
+  var other = e.provider_id === meP.id ? e.counterparty_id : e.provider_id;
+  var cents = toCents($('#d-amount', form).value);
+  var spec = {
+    against: other,
+    kind: $('#d-kind', form).value,
+    claim: $('#d-claim', form).value.trim(),
+    amount_cents: isNaN(cents) ? null : cents
+  };
+  /* Ask the gate with the REAL claim before writing, and show what it said. */
+  var why = MEND.canDispute(eid, spec);
+  if (why) { state.disputeErr = disputeReason(why); return render(); }
+  try {
+    MEND.raiseDispute(eid, spec);
+  } catch (err) { state.disputeErr = disputeReason(err.message); return render(); }
+  state.disputeErr = null; state.openForm = null;
+  state.flash = T('pitso.disp.flash.raised', { name: name(other) });
+  render();
+}
+
+function submitStatement(form){
+  if (refuseWrite()) return;
+  var did = form.getAttribute('data-stmtform');
+  try {
+    MEND.addStatement(did, $('#d-body', form).value.trim());
+    rec('dispute.statement', { platform:'pitso', subject_table:'disputes', subject_id: did, payload:{} });
+  } catch (err) { state.disputeErr = disputeReason(err.message); return render(); }
+  state.disputeErr = null; state.openForm = null;
+  state.flash = T('pitso.disp.flash.stmt');
+  render();
+}
+
+function submitOutcome(form){
+  if (refuseWrite()) return;
+  var did = form.getAttribute('data-outcomeform');
+  var text = $('#d-out', form).value.trim();
+  if (text.length < 5) { state.disputeErr = T('pitso.disp.err.stmt'); return render(); }
+  acceptTheOutcome(did, text);
+}
+
+/* One function writes an acceptance, whether it is the first (which carries the
+   words) or the second (which must not). */
+function acceptTheOutcome(did, text){
+  var meP = MEND.me();
+  var before = MEND.all('disputes').filter(function(x){ return x.id === did; })[0];
+  var other = before ? (before.raised_by === (meP && meP.id) ? before.against : before.raised_by) : null;
+  try {
+    MEND.acceptOutcome(did, text || null);
+  } catch (err) { state.disputeErr = disputeReason(err.message); return render(); }
+  var after = MEND.all('disputes').filter(function(x){ return x.id === did; })[0];
+  state.disputeErr = null; state.openForm = null;
+  state.flash = (after && after.state === 'resolved')
+    ? T('pitso.disp.flash.closed')
+    : T('pitso.disp.flash.mine', { name: other ? name(other) : '' });
+  render();
+}
+
+/* =========================================================================
+   VIEW 5 — MY WORK
+   ========================================================================= */
+function engagementEntry(e){
+  var meP = MEND.me();
+  var iAmProvider = e.provider_id === meP.id;
+  var other = iAmProvider ? e.counterparty_id : e.provider_id;
+  /* One source. These used to read e.settled_by_*, while the settlement block
+     lower down read the settlements table, and the two contradicted each other
+     on screen for every finished job in the seed. */
+  var settled = MEND.settledState(e, meP.id);
+  var mySettled = settled.mine;
+  var bothSettled = settled.both;
+
+  var h = '<div class="card">' +
+    '<div class="small sec"><b>' + esc(e.platform.toUpperCase()) + '</b> · ' +
+      esc(stateWord(e.state)) + syncMark(e) + '</div>' +
+    '<div class="rtitle" style="font-size:1.0625rem; margin-top:6px">' +
+      tHtml(iAmProvider ? 'pitso.mine.workfor' : 'pitso.mine.workby', {
+        name: '<a class="link" href="#" data-profile="' + esc(other) + '">' + esc(name(other)) + '</a>'
+      }) + '</div>' +
+    '<div class="meta"><span>' + esc(T('pitso.agreed')) + ' ' +
+      esc(moneyOrPhrase(e.agreed_cents, T('pitso.mine.nofigure'))) + '</span>' +
+      (e.started_on ? '<span>' + esc(T('pitso.mine.started', { date: MEND.fmtDate(e.started_on) })) + '</span>' : '') +
+      (e.ended_on ? '<span>' + esc(T('pitso.mine.ended', { date: MEND.fmtDate(e.ended_on) })) + '</span>' : '') + '</div>';
+
+  /* completion */
+  if (e.state === 'agreed' || e.state === 'active') {
+    h += ifWritable('<div class="btnrow"><button class="btn small" data-complete="' + esc(e.id) + '">' +
+                    esc(T('pitso.complete')) + '</button></div>');
+  }
+
+  /* settlement — v1 RECORDS money, it never MOVES money */
+  if (e.agreed_cents != null) {
+    if (bothSettled) {
+      h += '<div class="note ok" style="margin-top:12px">' +
+        esc(T('pitso.settle.bothsaid', { amount: MEND.M(e.agreed_cents) })) + '</div>';
+    } else {
+      h += '<div class="note" style="margin-top:12px">' +
+        esc(mySettled
+          ? T('pitso.settle.waitother', { name: name(other) })
+          : T(iAmProvider ? 'pitso.settle.oncepaid.p' : 'pitso.settle.oncepaid.c', { name: name(other) })) +
+        '</div>';
+      if (!mySettled) {
+        h += ifWritable('<div class="btnrow"><button class="btn ghost small" data-settle="' + esc(e.id) + '">' +
+                        esc(T('pitso.mine.marksettled')) + '</button></div>');
+      }
+    }
+  }
+
+  /* The itemised payment record: method, amount, day, and the transaction code.
+     Separate from the coarse settled_by_* flags above, which say only "I think
+     we are square"; this says what actually moved and carries the code that
+     settles an argument a year later. */
+  h += settleBlock(e, meP.id);
+
+  /* review — ALWAYS through MEND.canReview, and the refusal is shown as written */
+  var reason = MEND.canReview(e.id, meP.id, other);
+  if (reason === null) {
+    h += (state.openForm === 'rev-' + e.id
+      ? reviewForm(e, other)
+      : ifWritable('<div class="btnrow"><button class="btn clay small" data-review="' + esc(e.id) + '">' +
+                   esc(T('pitso.mine.reviewbtn')) + '</button></div>'));
+  } else {
+    h += '<div class="small sec" style="margin-top:12px">' +
+         esc(T('pitso.mine.reviewno', { why: reason })) + '</div>';
+  }
+
+  /* When it goes wrong. The platform does not decide who is right; it holds
+     both accounts. This is the last block on the card on purpose — it is the
+     thing you reach for after everything above it has failed. */
+  h += disputeBlock(e, meP.id);
+
+  return h + '</div>';
+}
+
+function reviewForm(e, other){
+  var r = state.rating || 0;
+  var stars = '';
+  for (var i = 1; i <= 5; i++) {
+    stars += '<button type="button" data-rate="' + i + '" aria-pressed="' + (r === i) +
+      '" aria-label="' + esc(T('pitso.mine.rating_aria', { n: i })) + '">' +
+      (i <= r ? '★' : '☆') + '</button>';
+  }
+  return '<form class="card quiet" data-reviewform="' + esc(e.id) + '" style="margin-top:12px" novalidate>' +
+    '<h4 style="font-size:1.0625rem">' + esc(T('pitso.mine.reviewing', { name: name(other) })) + '</h4>' +
+    '<p class="tiny sec" style="margin-top:4px">' + esc(T('pitso.mine.rev_final')) + '</p>' +
+    '<div class="field" data-f="rating"><label class="fl">' + esc(T('pitso.mine.outof5')) + '</label>' +
+      '<div class="ratepick">' + stars + '</div><div class="err hidden"></div></div>' +
+    '<div class="field" data-f="body"><label class="fl" for="rv-body">' + esc(T('pitso.mine.whathappened')) + '</label>' +
+      '<textarea id="rv-body" maxlength="1200" placeholder="' + esc(T('pitso.mine.rev_ph')) + '"></textarea>' +
+      '<div class="err hidden"></div></div>' +
+    '<div class="btnrow"><button type="submit" class="btn">' + esc(T('pitso.mine.leaverev')) + '</button>' +
+      '<button type="button" class="btn ghost" data-cancel="1">' + esc(T('app.cancel')) + '</button></div>' +
+  '</form>';
+}
+
+function submitReview(form){
+  if (refuseWrite()) return;
+  var eid = form.getAttribute('data-reviewform');
+  var e = MEND.all('engagements').filter(function(x){ return x.id === eid; })[0];
+  var meP = MEND.me();
+  if (!e) return;
+  var other = e.provider_id === meP.id ? e.counterparty_id : e.provider_id;
+
+  /* the gate is re-asked at the moment of writing, not only at render */
+  var reason = MEND.canReview(eid, meP.id, other);
+  if (reason !== null) { state.flash = T('pitso.err.review.no', { why: reason }); state.openForm = null; return render(); }
+
+  var body = $('#rv-body', form).value.trim();
+  var errs = {};
+  if (!state.rating) errs.rating = T('pitso.err.rate');
+  if (body.length < 4) errs.body = T('pitso.err.reviewbody');
+  if (body.length > 1200) errs.body = T('pitso.err.reviewlong');
+  $$('.field', form).forEach(function(fd){
+    var k = fd.getAttribute('data-f'), box = $('.err', fd);
+    if (errs[k]) { fd.classList.add('bad'); box.textContent = errs[k]; box.classList.remove('hidden'); }
+    else { fd.classList.remove('bad'); box.textContent=''; box.classList.add('hidden'); }
+  });
+  if (Object.keys(errs).length) return;
+
+  var rev = MEND.insert('reviews', {
+    engagement_id: eid, author_id: meP.id, subject_id: other, rating: state.rating, body: body
+  });
+  rec('review.left', {
+    platform: e.platform, subject_table:'reviews', subject_id: rev.id,
+    payload:{ engagement_id: eid, subject_id: other, rating: state.rating }
+  });
+  state.openForm = null; state.rating = 0;
+  state.flash = T('pitso.mine.revdone', { name: name(other) });
+  render();
+}
+
+/* =========================================================================
+   YOUR ACCOUNT — take a copy, or go
+
+   Two things, and the second one is where the wording has to be exact.
+
+   The account is NOT erased in the sense a Delete button usually implies.
+   Finished jobs, payments both sides confirmed, settled disagreements and the
+   photographs taken when something was handed over all STAY. They are the
+   other person's record as much as this one's, and if either side could
+   destroy them by closing an account, none of them would be worth anything —
+   which is the sentence mend_deletion_preview() returns as
+   `why_those_are_kept`, and it is printed here rather than paraphrased.
+
+   So the preview is fetched and RENDERED FIRST, and only then does a button
+   that removes anything exist on the page. A Delete button that promises more
+   than it delivers is worse than no Delete button.
+   ========================================================================= */
+function acctReason(msg){
+  if (!msg) return msg;
+  var m = String(msg);
+  if (/needs a connection/.test(m))  return T('pitso.acct.needs_conn');
+  if (/^Sign in first/.test(m))      return T('pitso.disp.err.signin');
+  return m;
+}
+
+/* A key mend_deletion_preview() returns that is not named in the string table
+   is shown as it comes, readably. Dropping it would quietly shrink a list a
+   person is reading immediately before an irreversible act. */
+function previewLabel(key){
+  var k = 'pitso.acct.k.' + key;
+  var s = T(k);
+  return s === k ? String(key).replace(/_/g, ' ') : s;
+}
+
+function previewSide(cls, heading, obj){
+  var keys = Object.keys(obj || {});
+  if (!keys.length) return '';
+  return '<section class="' + cls + '"><h5>' + esc(heading) + '</h5><dl>' +
+    keys.map(function(k){
+      return '<div class="pr"><dt>' + esc(previewLabel(k)) + '</dt>' +
+             '<dd>' + esc(String(obj[k])) + '</dd></div>';
+    }).join('') + '</dl></section>';
+}
+
+function exportPanel(){
+  var a = state.acct;
+  var h = '<div class="acct"><h4>' + esc(T('pitso.acct.copy')) + '</h4>' +
+    '<p class="lead">' + esc(T('pitso.acct.copy_why')) + '</p>' +
+    /* Said before they ask for it, not discovered after they open the file. */
+    '<p class="lead">' + esc(T('pitso.acct.copy_nofiles')) + '</p>';
+  if (a.exportErr)
+    h += '<div class="note" style="margin-top:12px">' + esc(T('pitso.acct.copy_failed', { why: a.exportErr })) + '</div>';
+  if (a.exporting)
+    h += '<p class="lead" style="margin-top:12px">' + esc(T('pitso.acct.copy_asking')) + '</p>';
+  else
+    h += '<div class="btnrow"><button class="btn ghost" id="acct-export">' +
+         esc(T('pitso.acct.copy')) + '</button></div>';
+
+  if (a.exportUrl) {
+    h += '<div class="note ok" style="margin-top:14px">' +
+      esc(T('pitso.acct.copy_ready', { date: MEND.fmtDate(dayOf(a.exportAt)) })) + '</div>' +
+      '<div class="btnrow"><a class="btn" href="' + esc(a.exportUrl) +
+        '" download="mend-my-data.json">' + esc(T('pitso.acct.download')) + '</a></div>' +
+      /* The download can be refused by the browser and say nothing. Same rule
+         as the share box: a button that appears to do nothing is worse than
+         no button, so the whole file is here to be copied by hand. */
+      '<p class="lead" style="margin-top:10px">' + esc(T('pitso.acct.copy_manual')) + '</p>' +
+      '<textarea class="raw" id="acct-raw" readonly aria-label="' + esc(T('pitso.acct.copy')) + '">' +
+        esc(a.exportText || '') + '</textarea>';
+  }
+  return h + '</div>';
+}
+
+function deletePanel(){
+  var a = state.acct, meP = MEND.me();
+  var h = '<div class="acct"><h4>' + esc(T('pitso.acct.remove')) + '</h4>' +
+    '<p class="lead">' + esc(T('pitso.acct.remove_why')) + '</p>';
+
+  if (a.previewErr)
+    h += '<div class="note" style="margin-top:12px">' + esc(a.previewErr) + '</div>';
+
+  if (!a.preview) {
+    h += a.previewing
+      ? '<p class="lead" style="margin-top:12px">' + esc(T('pitso.acct.asking')) + '</p>'
+      : '<div class="btnrow"><button class="btn ghost" id="acct-preview">' +
+        esc(T('pitso.acct.show')) + '</button></div>';
+    /* NO delete button until the preview above has been fetched and drawn. */
+    return h + '</div>';
+  }
+
+  var p = a.preview;
+  h += '<div class="prev">' +
+    previewSide('gone',  T('pitso.acct.erased'), p.erased) +
+    previewSide('stays', T('pitso.acct.kept'),   p.kept_without_your_name) +
+  '</div>';
+  if (p.why_those_are_kept)
+    h += '<div class="keepwhy break">' + esc(p.why_those_are_kept) + '</div>';
+  if (p.cannot_be_undone)
+    h += '<p class="undone">' + esc(T('pitso.acct.cannot_undo')) + '</p>';
+
+  if (a.deleting) {
+    h += '<div class="note" id="acct-progress" role="status" aria-live="polite" ' +
+         'style="margin-top:14px">' + esc(progressWords()) + '</div>';
+    return h + '</div>';
+  }
+
+  if (a.delErr)
+    h += '<div class="note" style="margin-top:14px">' + esc(T('pitso.acct.failed', { why: a.delErr })) + '</div>';
+
+  /* Typing your own name, not a checkbox. core/mend.js passes it to
+     mend_delete_me() which refuses if it does not match, so this is the real
+     gate and not decoration. */
+  h += '<form id="acct-delform" style="margin-top:16px" novalidate>' +
+    '<div class="field"><label class="fl" for="acct-confirm">' + esc(T('pitso.acct.confirm')) + '</label>' +
+      '<input type="text" id="acct-confirm" autocomplete="off">' +
+      '<div class="hint">' + esc(T('pitso.acct.confirm_hint',
+        { name: meP ? meP.display_name : '' })) + '</div></div>' +
+    '<div class="btnrow"><button type="submit" class="btn clay">' + esc(T('pitso.acct.do_it')) + '</button>' +
+      '<button type="button" class="btn ghost" id="acct-cancel">' + esc(T('app.cancel')) + '</button></div>' +
+  '</form>';
+  return h + '</div>';
+}
+
+function progressWords(){
+  var pr = state.acct.progress;
+  return pr && pr.step === 'files'
+    ? T('pitso.acct.working', { done: pr.done, total: pr.total })
+    : T('pitso.acct.record');
+}
+
+/* core/mend.js deletes the files ONE AT A TIME, so onProgress can fire once per
+   file. A full render each time would rebuild this whole long page that many
+   times, on a phone already busy with the deletes themselves. Only this one
+   line moves, and it is a live region so a screen reader hears it change. */
+function paintProgress(){
+  var box = $('#acct-progress');
+  if (box) box.textContent = progressWords(); else render();
+}
+
+function accountSection(){
+  return '<hr class="rule"><h3>' + esc(T('pitso.acct.head')) + '</h3>' +
+    '<p class="sec small" style="margin-top:6px">' + esc(T('pitso.acct.intro')) + '</p>' +
+    /* Neither of these can do anything without a server, and both say so here
+       rather than by failing when tapped. */
+    (MEND.status === 'connected'
+      ? exportPanel() + deletePanel()
+      : '<div class="note" style="margin-top:12px">' + esc(T('pitso.acct.needs_conn')) + '</div>');
+}
+
+function doExport(){
+  var a = state.acct;
+  a.exporting = true; a.exportErr = null;
+  render();
+  Promise.resolve(MEND.exportMe()).then(function(obj){
+    a.exporting = false;
+    var text = JSON.stringify(obj, null, 2);
+    a.exportText = text;
+    a.exportAt = (obj && obj.exported_at) || new Date().toISOString();
+    try {
+      if (a.exportUrl) URL.revokeObjectURL(a.exportUrl);
+      a.exportUrl = URL.createObjectURL(new Blob([text], { type: 'application/json' }));
+    } catch (e) {
+      a.exportUrl = null;                 /* the box below still holds the file */
+    }
+    render();
+  }).catch(function(e){
+    a.exporting = false;
+    a.exportErr = acctReason(e.message);
+    render();
+  });
+}
+
+function loadDeletionPreview(){
+  var a = state.acct;
+  a.previewing = true; a.previewErr = null;
+  render();
+  Promise.resolve(MEND.deletionPreview()).then(function(p){
+    a.previewing = false; a.preview = p;
+    render();
+  }).catch(function(e){
+    a.previewing = false; a.previewErr = acctReason(e.message);
+    render();
+  });
+}
+
+function submitDelete(form){
+  var a = state.acct;
+  var typed = $('#acct-confirm', form).value.trim();
+  a.deleting = true; a.delErr = null; a.progress = null;
+  render();
+  MEND.deleteMe(typed, function(pr){
+    a.progress = pr;
+    paintProgress();
+  }).then(function(){
+    a.deleting = false; a.preview = null; a.open = false;
+    state.auth = { email:'', code:'', sent:false, busy:false, err:null, msg:null, user:null };
+    state.docLinks = {};
+    state.flash = T('pitso.acct.done');
+    go('find');
+  }).catch(function(e){
+    a.deleting = false; a.progress = null;
+    a.delErr = acctReason(e.message);
+    render();
+  });
+}
+
+function viewMine(){
+  var meP = MEND.me();
+  var myReqs = MEND.all('pitso_requests').filter(function(q){ return q.requester_id === meP.id; })
+    .sort(function(a,b){ return (b.created_at||'').localeCompare(a.created_at||''); });
+  var myOffers = MEND.all('pitso_offers').filter(function(o){ return o.provider_id === meP.id; })
+    .sort(function(a,b){ return (b.created_at||'').localeCompare(a.created_at||''); });
+  var myEng = MEND.all('engagements').filter(function(e){
+      return e.provider_id === meP.id || e.counterparty_id === meP.id;
+    }).sort(function(a,b){
+      var rank = { agreed:0, active:1, completed:2, proposed:0, cancelled:3, disputed:3 };
+      return (rank[a.state] || 9) - (rank[b.state] || 9);
+    });
+
+  var h = '<div class="viewhead"><h2>' + esc(T('pitso.tab.mine')) + '</h2>' +
+    '<p>' + esc(T('pitso.mine.intro')) + '</p></div><hr class="rule">';
+
+  h += '<h3>' + esc(T('pitso.mine.posted')) + '</h3>';
+  h += myReqs.length
+    ? '<ul class="board" style="margin-top:8px">' + myReqs.map(function(q){ return requestEntry(q, {allowOffer:false}); }).join('') + '</ul>'
+    : '<p class="sec small" style="margin-top:8px">' + esc(T('pitso.mine.noposted')) + ' ' +
+      '<button class="link" data-back="post">' + esc(T('pitso.mine.putone')) + '</button></p>';
+
+  h += '<hr class="rule"><h3>' + esc(T('pitso.mine.offers')) + '</h3>';
+  h += myOffers.length
+    ? '<div style="margin-top:8px">' + myOffers.map(function(o){
+        var q = MEND.all('pitso_requests').filter(function(x){ return x.id === o.request_id; })[0] || {};
+        return '<div class="card"><div class="rtitle" style="font-size:1.0625rem">' +
+          esc(q.title || T('pitso.mine.ajob')) + '</div>' +
+          '<div class="meta"><span>' + esc(tradeName(q.trade_code)) + '</span><span>' + esc(q.district || '') + '</span>' +
+          '<span>' + esc(T('pitso.mine.forwhom', { name: name(q.requester_id) })) + '</span></div>' +
+          (o.message ? '<div class="small sec break" style="margin-top:8px">' + esc(o.message) + '</div>' : '') +
+          '<div class="price"><b>' + esc(moneyOrPhrase(offerAmount(o), T('pitso.mine.toquote'))) + '</b> · ' +
+          esc(stateWord(o.state)) + syncMark(o) + '</div></div>';
+      }).join('') + '</div>'
+    : '<p class="sec small" style="margin-top:8px">' + esc(T('pitso.mine.nooffers')) + '</p>';
+
+  h += '<hr class="rule"><h3>' + esc(T('pitso.mine.jobs')) + '</h3>';
+  h += myEng.length
+    ? '<div style="margin-top:8px">' + myEng.map(engagementEntry).join('') + '</div>'
+    : '<p class="sec small" style="margin-top:8px">' + esc(T('pitso.mine.nojobs')) + '</p>';
+
+  var led = MEND.all('ledger');
+  h += '<hr class="rule"><h3>' + esc(T('pitso.rec.head')) + '</h3>' +
+    '<p class="sec small" style="margin-top:6px">' + esc(T('pitso.rec.explain')) + '</p>' +
+    /* Say where the chain actually lives. core/mend.js appends ledger entries to
+       the device store and does not push them to Postgres, and a reconnect
+       replaces them with whatever the server holds. Describing that as an audit
+       trail would be describing a mechanism nobody checked. */
+    (MEND.CONFIGURED
+      ? '<p class="sec small">' + esc(T('pitso.rec.deviceonly')) + '</p>'
+      : '') +
+    '<p class="small" style="margin-top:8px">' +
+    esc(countWord(led.length, 'pitso.rec.oneentry', 'pitso.rec.nentries')) + ' ' +
+    '<button class="link" id="verify-ledger">' + esc(T('pitso.rec.check')) + '</button> <span id="verify-out"></span></p>';
+
+  /* Last on the person's own screen, which is the only screen it belongs on. */
+  h += accountSection();
+  return h;
+}
+
+/* =========================================================================
+   VIEW 6 — MY DOCUMENTS
+   Nothing in Pitso ever let anyone prove anything, and every badge on every
+   profile rested on a verdict no mechanism could produce. This is that
+   mechanism seen from the person's side: upload, check it, send it, wait, and
+   read the answer — including the reason when the answer is no.
+
+   The file is private. It goes to a bucket with no public URL (db/006_storage.sql)
+   and is opened through a signed link that dies in minutes, only ever by the
+   person it belongs to or the reviewer looking at it.
+   ========================================================================= */
+function daysWaiting(ts){
+  var day = dayOf(ts); if (!day) return null;
+  var n = MEND.daysUntil(day);              /* negative once the day has passed */
+  return n == null ? null : -n;
+}
+
+/* .effective, never .status — a verified document past its expiry is expired,
+   whatever the stored column says. */
+function docStateLine(d){
+  var eff = d.effective;
+  if (eff === 'rejected')
+    return { cls:'no', text: d.reviewed_at
+      ? T('pitso.docs.rejectedon', { date: MEND.fmtDate(dayOf(d.reviewed_at)) }) : T('doc.rejected') };
+  if (eff === 'expired')
+    return { cls:'no', text: T('pitso.docs.expiredon', { date: MEND.fmtDate(d.expires_on) }) };
+  if (eff === 'verified')
+    return { cls:'ok', text: d.reviewed_at
+      ? T('pitso.docs.verifiedon', { date: MEND.fmtDate(dayOf(d.reviewed_at)) }) : T('doc.verified') };
+  if (d.stage === 'draft')
+    return { cls:'draft', text: T('pitso.docs.notsent') };
+  if (d.submitted_at) {
+    var w = daysWaiting(d.submitted_at);
+    var day = MEND.fmtDate(dayOf(d.submitted_at));
+    return { cls:'wait', text: w > 1 ? T('pitso.docs.waitsince', { date: day, n: w })
+                                     : w === 1 ? T('pitso.docs.waitsince1', { date: day })
+                                               : T('pitso.docs.waittoday', { date: day }) };
+  }
+  return { cls:'wait', text: T('pitso.docs.waitnodate') };
+}
+
+function docRank(d){
+  if (d.effective === 'rejected') return 0;
+  if (d.effective === 'expired')  return 1;
+  if (d.stage === 'draft')        return 2;
+  if (d.effective === 'verified') return 4;
+  return 3;
+}
+
+function docEntry(d){
+  /* A row the database refused must not describe itself as waiting on anybody's
+     desk. It is on nobody's desk. That reading comes first, before every other
+     state, and it survives a later PATCH that matched no rows. */
+  var unsaved = !!(d._sync === 'failed' || (d.id && state.failedIds[d.id]));
+  var s = unsaved ? { cls:'no', text: T('pitso.docs.unsaved') } : docStateLine(d);
+  var h = '<li>' +
+    '<div class="dname">' + esc(docLabel(d.kind)) + syncMark(d) + '</div>' +
+    '<div class="dstate ' + s.cls + '">' + esc(s.text) + '</div>';
+
+  if (unsaved) {
+    h += '<div class="dwhy">' + esc(T('pitso.docs.unsaved_why')) + '</div>';
+  }
+
+  /* A rejection without its reason is useless to the person who has to fix it. */
+  if (!unsaved && d.effective === 'rejected') {
+    h += '<div class="dwhy"><b>' + esc(T('pitso.docs.reason_given')) + '</b> ' +
+      esc(String(d.note || '').trim() ? d.note : T('pitso.docs.noreason')) +
+      '</div>';
+  }
+  if (!unsaved && d.effective === 'expired') {
+    h += '<div class="dwhy">' + esc(T('pitso.docs.expired_why')) + '</div>';
+  }
+
+  var meta = [];
+  if (d.issued_by)  meta.push(T('pitso.docs.issuedby', { who: d.issued_by }));
+  if (d.issued_on)  meta.push(T('pitso.docs.issuedon', { date: MEND.fmtDate(d.issued_on) }));
+  if (d.expires_on) meta.push(T('pitso.docs.expireson', { date: MEND.fmtDate(d.expires_on) }));
+  if (meta.length) h += '<div class="dmeta">' + esc(meta.join(' · ')) + '</div>';
+
+  /* UPLOADING IS NOT SUBMITTING, and the screen says why. */
+  if (!unsaved && d.stage === 'draft') {
+    if (state.openForm === 'send-' + d.id) {
+      h += '<div class="note" style="margin-top:12px">' + esc(T('pitso.docs.sendwarn')) + '</div>' +
+        ifWritable('<div class="btnrow">' +
+          '<button class="btn" data-sendok="' + esc(d.id) + '">' + esc(T('pitso.docs.sendyes')) + '</button>' +
+          '<button class="btn ghost" data-cancel="1">' + esc(T('pitso.docs.notyet')) + '</button></div>');
+    } else {
+      h += '<p class="small sec" style="margin-top:10px">' + esc(T('pitso.docs.notsubmit')) + '</p>' +
+        ifWritable('<div class="btnrow"><button class="btn ghost small" data-send="' + esc(d.id) + '">' +
+                   esc(T('pitso.docs.sendbtn')) + '</button></div>');
+    }
+  }
+
+  var link = state.docLinks[d.id];
+  if (link && link.url) {
+    h += '<div class="dlink"><a href="' + esc(link.url) + '" target="_blank" rel="noopener">' +
+      esc(T('pitso.docs.openwhat')) + '</a> ' +
+      '<span class="sec">' + esc(T('pitso.docs.linklife')) + '</span></div>';
+  } else if (link && link.err) {
+    h += '<div class="dlink sec">' + esc(link.err) + '</div>';
+  }
+  h += '<div class="btnrow"><button class="btn ghost small" data-doclink="' + esc(d.id) + '">' +
+       esc(T('pitso.docs.checkwhat')) + '</button></div>';
+  return h + '</li>';
+}
+
+function uploadForm(){
+  var kinds = ['<option value="">' + esc(T('pitso.docs.pickkind')) + '</option>'].concat(PITSO_DOC_KINDS.map(function(k){
+    return '<option value="' + esc(k) + '">' + esc(docLabel(k)) + '</option>';
+  })).join('');
+  return '<form id="upform" novalidate>' +
+    '<div class="field" data-f="kind"><label class="fl" for="u-kind">' + esc(T('pitso.docs.whatitis')) + '</label>' +
+      '<select id="u-kind">' + kinds + '</select>' +
+      '<ul class="kinds">' + PITSO_DOC_KINDS.map(function(k){
+        return '<li><b>' + esc(docLabel(k)) + '</b> — ' + esc(docWhy(k)) + '</li>';
+      }).join('') + '</ul>' +
+      '<div class="err hidden"></div></div>' +
+    '<div class="field" data-f="file"><label class="fl" for="u-file">' + esc(T('pitso.docs.thefile')) + '</label>' +
+      '<input type="file" id="u-file" accept="image/jpeg,image/png,image/heic,application/pdf,.jpg,.jpeg,.png,.heic,.pdf">' +
+      '<div class="hint">' + esc(T('pitso.docs.filehint')) + '</div>' +
+      '<div class="err hidden"></div></div>' +
+    '<div class="field" data-f="issued_by"><label class="fl" for="u-by">' + esc(T('pitso.docs.whoissued')) + '</label>' +
+      '<input type="text" id="u-by" maxlength="80" placeholder="Lerotholi Polytechnic">' +
+      '<div class="hint">' + esc(T('pitso.docs.whohint')) + '</div>' +
+      '<div class="err hidden"></div></div>' +
+    '<div class="fgrid">' +
+      '<div class="field" data-f="issued_on"><label class="fl" for="u-issued">' + esc(T('doc.issued_on')) + '</label>' +
+        '<input type="date" id="u-issued"><div class="err hidden"></div></div>' +
+      '<div class="field" data-f="expires_on"><label class="fl" for="u-expires">' + esc(T('doc.expires_on')) + '</label>' +
+        '<input type="date" id="u-expires">' +
+        '<div class="hint">' + esc(T('doc.no_expiry')) + '</div><div class="err hidden"></div></div>' +
+    '</div>' +
+    '<div class="err hidden" id="up-error"></div>' +
+    ifWritable('<div class="btnrow"><button type="submit" class="btn" id="u-go">' +
+               esc(T('pitso.docs.uploadbtn')) + '</button></div>') +
+  '</form>';
+}
+
+function viewDocs(){
+  var head = '<div class="viewhead"><h2>' + esc(T('pitso.tab.docs')) + '</h2>' +
+    '<p>' + esc(T('pitso.docs.intro')) + '</p></div>';
+
+  if (MEND.CONFIGURED && !MEND.me()) {
+    return head + '<hr class="rule">' +
+      '<p class="sec">' + esc(T('pitso.docs.signin')) + '</p>';
+  }
+
+  var docs = MEND.myDocuments().sort(function(a, b){
+    return docRank(a) - docRank(b) || (b.created_at || '').localeCompare(a.created_at || '');
+  });
+
+  var h = head +
+    (MEND.status === 'connected' ? '' :
+      '<div class="note" style="margin-top:16px">' + esc(T('pitso.docs.noserver')) + '</div>') +
+    '<hr class="rule">' +
+    (docs.length
+      ? '<ul class="dlist">' + docs.map(docEntry).join('') + '</ul>'
+      : '<p class="sec">' + esc(T('pitso.docs.empty')) + '</p>');
+
+  h += '<hr class="rule"><h3>' + esc(T('pitso.docs.sendhead')) + '</h3>' +
+    '<p class="sec small" style="margin-top:6px">' + esc(T('pitso.docs.twosteps')) + '</p>' +
+    uploadForm();
+  return h;
+}
+
+/* =========================================================================
+   SIGNING IN, AND THE PROFILE THAT MUST EXIST BEFORE ANYTHING ELSE
+   ========================================================================= */
+function needsProfile(){ return !!(MEND.CONFIGURED && state.auth.user && !MEND.me()); }
+function signedOut(){ return !!(MEND.CONFIGURED && !MEND.me()); }
+var SIGNIN_REQUIRED = { post:1, mine:1, docs:1 };
+
+function viewSignInFirst(){
+  return '<div class="viewhead"><h2>' + esc(T('pitso.auth.first')) + '</h2>' +
+    '<p>' + esc(T('pitso.auth.why')) + '</p></div>' +
+    '<hr class="rule">' +
+    '<p>' + esc(T('pitso.auth.how')) + '</p>';
+}
+
+/* A signed-in person with no profile row is a stranger to everyone else on the
+   board: profiles.id references auth.users(id), and nothing creates that row for
+   them. So it is asked for once, here, before anything else can be written. */
+function viewProfileSetup(){
+  var distOpts = ['<option value="">' + esc(T('pitso.post.pick_dist')) + '</option>'].concat(MEND.DISTRICTS.map(function(d){
+    return '<option value="' + esc(d) + '">' + esc(d) + '</option>';
+  })).join('');
+  return '<div class="viewhead"><h2>' + esc(T('pitso.prof.finish')) + '</h2>' +
+    '<p>' + esc(T('pitso.prof.finish_why', { email: state.auth.email || T('pitso.disp.you') })) + '</p></div>' +
+    '<hr class="rule">' +
+    '<form id="profileform" novalidate>' +
+      '<div class="field" data-f="display_name"><label class="fl" for="p-name">' + esc(T('pitso.prof.yourname')) + '</label>' +
+        '<input type="text" id="p-name" maxlength="80" placeholder="Thabang Mokoena">' +
+        '<div class="hint">' + esc(T('pitso.prof.name_hint')) + '</div>' +
+        '<div class="err hidden"></div></div>' +
+      '<div class="fgrid">' +
+        '<div class="field" data-f="district"><label class="fl" for="p-dist">' + esc(T('app.district')) + '</label>' +
+          '<select id="p-dist">' + distOpts + '</select><div class="err hidden"></div></div>' +
+        '<div class="field" data-f="village"><label class="fl" for="p-village">' + esc(T('pitso.prof.village')) + '</label>' +
+          '<input type="text" id="p-village" maxlength="60" placeholder="Ha Thetsane"><div class="err hidden"></div></div>' +
+      '</div>' +
+      '<div class="field" data-f="phone"><label class="fl" for="p-phone">' + esc(T('app.phone')) + '</label>' +
+        '<input type="text" id="p-phone" maxlength="24" placeholder="+266 5800 0000">' +
+        '<div class="hint">' + esc(T('pitso.prof.phone_hint')) + '</div>' +
+        '<div class="err hidden"></div></div>' +
+      '<div class="field" data-f="bio"><label class="fl" for="p-bio">' + esc(T('pitso.prof.whatyoudo')) + '</label>' +
+        '<textarea id="p-bio" maxlength="600" placeholder="Electrician, 12 years. Domestic and small commercial. Own transport."></textarea>' +
+        '<div class="err hidden"></div></div>' +
+      ifWritable('<div class="btnrow"><button type="submit" class="btn">' + esc(T('pitso.prof.saveit')) + '</button></div>') +
+    '</form>';
+}
+
+function createProfile(form){
+  if (refuseWrite()) return;
+  var vals = {
+    display_name: $('#p-name', form).value.trim(),
+    district: $('#p-dist', form).value,
+    village: $('#p-village', form).value.trim(),
+    phone: $('#p-phone', form).value.trim(),
+    bio: $('#p-bio', form).value.trim()
+  };
+  var errs = {};
+  if (vals.display_name.length < 2 || vals.display_name.length > 80) errs.display_name = T('pitso.err.name.len');
+  if (!vals.district) errs.district = T('pitso.err.pick.district');
+  if (vals.bio.length > 600) errs.bio = T('pitso.err.bio.len');
+  $$('.field', form).forEach(function(fd){
+    var k = fd.getAttribute('data-f'), box = $('.err', fd);
+    if (errs[k]) { fd.classList.add('bad'); box.textContent = errs[k]; box.classList.remove('hidden'); }
+    else { fd.classList.remove('bad'); box.textContent = ''; box.classList.add('hidden'); }
+  });
+  if (Object.keys(errs).length) return;
+
+  MEND.insert('profiles', {
+    id: state.auth.user.id, kind:'person', display_name: vals.display_name,
+    district: vals.district, village: vals.village || null,
+    phone: vals.phone || null, bio: vals.bio || null
+  });
+  state.flash = T('pitso.prof.saved');
+  go('docs');
+}
+
+/* ---- documents: the three actions --------------------------------------- */
+function doUpload(form){
+  if (refuseWrite()) return;
+  var kind = $('#u-kind', form).value;
+  var input = $('#u-file', form);
+  var file = input && input.files && input.files[0];
+  var issued_by  = $('#u-by', form).value.trim();
+  var issued_on  = $('#u-issued', form).value || null;
+  var expires_on = $('#u-expires', form).value || null;
+
+  var errs = {};
+  if (!kind) errs.kind = T('pitso.err.doc.kind');
+  if (!file) errs.file = T('pitso.err.doc.file');
+  else {
+    var ext = (file.name.match(/\.[a-z0-9]+$/i) || [''])[0].toLowerCase();
+    if (file.size > MAX_UPLOAD)
+      errs.file = T('pitso.err.doc.big', { size: Math.round(file.size / 1048576 * 10) / 10 });
+    else if (ALLOWED_MIME.indexOf(file.type) === -1 && ALLOWED_EXT.indexOf(ext) === -1)
+      errs.file = T('pitso.err.doc.type');
+  }
+  if (issued_on && issued_on > MEND.today()) errs.issued_on = T('pitso.err.doc.future');
+  if (expires_on && issued_on && expires_on <= issued_on) errs.expires_on = T('pitso.err.doc.order');
+  if (expires_on && expires_on < MEND.today()) errs.expires_on = T('pitso.err.doc.gone');
+
+  $$('.field', form).forEach(function(fd){
+    var k = fd.getAttribute('data-f'), box = $('.err', fd);
+    if (errs[k]) { fd.classList.add('bad'); box.textContent = errs[k]; box.classList.remove('hidden'); }
+    else { fd.classList.remove('bad'); box.textContent = ''; box.classList.add('hidden'); }
+  });
+  if (Object.keys(errs).length) return;
+
+  /* No re-render while this is in flight: a repaint would throw away the file
+     the person chose. The button says what is happening instead. */
+  var btn = $('#u-go', form), box = $('#up-error', form);
+  if (btn) { btn.disabled = true; btn.textContent = T('pitso.docs.uploading'); }
+  if (box) { box.textContent = ''; box.classList.add('hidden'); }
+
+  MEND.uploadDocument(file, kind, { issued_by: issued_by || null, issued_on: issued_on, expires_on: expires_on })
+    .then(function(){
+      state.flash = T('pitso.docs.uploaded');
+      render();
+      window.scrollTo(0, 0);
+    })
+    .catch(function(e){
+      if (btn) { btn.disabled = false; btn.textContent = T('pitso.docs.uploadbtn'); }
+      if (box) { box.textContent = T('pitso.err.upload', { why: e.message }); box.classList.remove('hidden'); }
+    });
+}
+
+function sendForChecking(id){
+  if (refuseWrite()) return;
+  var r = MEND.submitDocument(id);
+  state.openForm = null;
+  state.flash = r ? MEND.claimed(T('pitso.docs.sent')) : T('pitso.docs.gone');
+  render();
+}
+
+function askLink(id){
+  var d = MEND.myDocuments().filter(function(x){ return x.id === id; })[0];
+  if (!d) return;
+  if (MEND.status !== 'connected') {
+    state.docLinks[id] = { err: T('pitso.docs.nolink') };
+    return render();
+  }
+  state.docLinks[id] = { err: T('pitso.docs.asking') };
+  render();
+  MEND.documentLink(d).then(function(url){
+    state.docLinks[id] = url ? { url: url } : { err: T('pitso.docs.nolinkback') };
+    render();
+  }).catch(function(e){
+    state.docLinks[id] = { err: T('pitso.docs.linkfail', { why: e.message }) };
+    render();
+  });
+}
+
+/* =========================================================================
+   SHELL
+   ========================================================================= */
+/* FOUR states, not two. device and connecting are notes; connected is a quiet
+   confirmation; unreachable is a warning with its own band, because the page is
+   then showing stale device rows and a reader who misses that acts on figures
+   that are not current. */
+function renderMode(){
+  var n = MEND.modeNotice();
+  var box = $('#mode');
+  box.className = 'mode ' + n.mode;
+  var h = '<span class="flag">' + esc(n.label) + '</span>';
+  if (n.mode === 'unreachable') {
+    h += '<span class="stale">' + esc(T('pitso.stale')) + '</span>';
+  }
+  h += '<span class="detail">' + esc(n.detail) + '</span>';
+  $('.wrap', box).innerHTML = h;
+}
+
+/* The connection resolves after load, so the banner is subscribed rather than
+   painted once. Reaching 'connected' also REPLACES the whole store with server
+   rows, which makes whatever is on screen stale — so the view is repainted too,
+   unless somebody is in the middle of typing into a form. */
+var paintedStatus = null;
+function onStatusChanged(s){
+  renderMode();
+  if (paintedStatus === null) { paintedStatus = s; return; }
+  if (s === paintedStatus) return;
+  paintedStatus = s;
+  if (state.openForm || $('#upform')) {
+    state.flash = T('pitso.reloaded');
+    renderWho();
+  } else {
+    render();
+  }
+}
+
+/* ---- who you are -------------------------------------------------------- */
+/* Device preview keeps the picker: there is no auth server to talk to and a
+   sign-in form with nothing behind it would be theatre. When Supabase IS
+   configured it is a real sign-in — an email and a one-time code. Pitso does not
+   ask for a password and has no field to type one into. */
+function renderWho(){
+  var box = $('#who');
+  if (!box) return;
+  box.innerHTML = MEND.CONFIGURED ? authBlock() : devicePicker();
+  if (MEND.CONFIGURED) {
+    var e = $('#si-email'); if (e) e.value = state.auth.email || '';
+    var c = $('#si-code');  if (c) c.value = state.auth.code || '';
+  }
+}
+
+function devicePicker(){
+  var meP = MEND.me();
+  var opts = MEND.all('profiles').map(function(p){
+    return '<option value="' + esc(p.id) + '"' + (meP && meP.id === p.id ? ' selected' : '') + '>' +
+      esc(p.display_name) + ' — ' + esc(p.district) + '</option>';
+  }).join('');
+  return '<label for="whoami">' + esc(T('pitso.auth.aswho')) + '</label>' +
+         '<select id="whoami" aria-label="' + esc(T('auth.signed_in_as')) + '">' + opts + '</select>';
+}
+
+function authBlock(){
+  var a = state.auth, meP = MEND.me();
+  if (a.user) {
+    return '<div class="signedin">' +
+      '<span class="wholine">' + esc(T('auth.signed_in_as')) + ' <b>' + esc(meP ? meP.display_name : (a.email || T('pitso.disp.you'))) + '</b>' +
+        (meP && a.email ? ' · ' + esc(a.email) : '') + '</span>' +
+      '<button type="button" class="btnw ghost" id="signout">' + esc(T('app.signout')) + '</button>' +
+    '</div>';
+  }
+  if (!a.sent) {
+    return '<form class="si" id="si-emailform" novalidate>' +
+      '<label class="wholine" for="si-email">' + esc(T('pitso.auth.signin_email')) + '</label>' +
+      '<input type="email" id="si-email" autocomplete="email" placeholder="you@example.com">' +
+      '<button type="submit" class="btnw"' + (a.busy ? ' disabled' : '') + '>' +
+        esc(a.busy ? T('pitso.auth.sending') : T('pitso.auth.emailme')) + '</button>' +
+      '<span class="authnote">' + esc(T('pitso.auth.nopass')) + '</span>' +
+      (a.err ? '<span class="autherr">' + esc(a.err) + '</span>' : '') +
+    '</form>';
+  }
+  return '<form class="si" id="si-codeform" novalidate>' +
+    '<label class="wholine" for="si-code">' +
+      tHtml('pitso.auth.codesent', { email: '<b>' + esc(a.email) + '</b>' }) + '</label>' +
+    '<input type="text" class="code" id="si-code" inputmode="numeric" autocomplete="one-time-code" maxlength="8" placeholder="123456">' +
+    '<button type="submit" class="btnw"' + (a.busy ? ' disabled' : '') + '>' +
+      esc(a.busy ? T('pitso.auth.checking') : T('app.signin')) + '</button>' +
+    '<button type="button" class="btnw ghost" id="si-restart">' + esc(T('pitso.auth.otheraddr')) + '</button>' +
+    (a.msg ? '<span class="authnote">' + esc(a.msg) + '</span>' : '') +
+    (a.err ? '<span class="autherr">' + esc(a.err) + '</span>' : '') +
+  '</form>';
+}
+
+function startSignIn(form){
+  var email = $('#si-email', form).value.trim();
+  state.auth.email = email;
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+    state.auth.err = T('pitso.auth.bademail');
+    return renderWho();
+  }
+  state.auth.err = null; state.auth.busy = true; renderWho();
+  MEND.sendSignInCode(email).then(function(){
+    state.auth.busy = false; state.auth.sent = true; state.auth.code = '';
+    state.auth.msg = T('pitso.auth.sent');
+    renderWho();
+    var c = $('#si-code'); if (c) c.focus();
+  }).catch(function(e){
+    state.auth.busy = false;
+    state.auth.err = T('pitso.auth.sendfail', { why: e.message });
+    renderWho();
+  });
+}
+
+function finishSignIn(form){
+  var code = $('#si-code', form).value.trim();
+  state.auth.code = code;
+  if (!/^[0-9]{4,8}$/.test(code)) {
+    state.auth.err = T('pitso.auth.badcode');
+    return renderWho();
+  }
+  state.auth.err = null; state.auth.busy = true; renderWho();
+  MEND.verifySignInCode(state.auth.email, code).then(function(user){
+    state.auth.busy = false; state.auth.user = user;
+    state.auth.sent = false; state.auth.code = ''; state.auth.msg = null;
+    state.flash = T('pitso.auth.signedin', { email: state.auth.email });
+    render();
+  }).catch(function(e){
+    state.auth.busy = false;
+    state.auth.err = e.message;
+    renderWho();
+  });
+}
+
+/* The nav, the masthead line and the footer are static markup so they render
+   before any script runs. Their words are painted from the string table at boot
+   and again whenever the language changes — otherwise the toggle would leave
+   five English tabs and three English paragraphs on the page. */
+function paintChrome(){
+  $$('nav.tabs button').forEach(function(b){
+    var k = TAB_KEY[b.getAttribute('data-view')];
+    if (k) b.textContent = T(k);
+  });
+  var said = $('#said'); if (said) said.textContent = T('pitso.tagline');
+  var link = function(href, label){
+    return '<a href="' + href + '" rel="noopener">' + esc(label) + '</a>';
+  };
+  var f3 = $('#foot-three');
+  if (f3) f3.innerHTML = tHtml('pitso.foot.three', {
+    pitso:   '<strong>' + esc(T('pitso.name')) + '</strong>',
+    mafisa:  link(CROSS.mafisa,  T('mafisa.name')),
+    matsema: link(CROSS.matsema, T('matsema.name'))
+  });
+  var fm = $('#foot-money'); if (fm) fm.textContent = T('pitso.foot.nomoney');
+  var fb = $('#foot-by');
+  if (fb) fb.innerHTML = tHtml('pitso.foot.by', { mend: link('https://mendgroup.co.za', 'MEND GROUP') });
+}
+
+function go(view){
+  state.view = view; state.openForm = null; state.rating = 0;
+  $$('nav.tabs button').forEach(function(b){
+    b.setAttribute('aria-selected', String(b.getAttribute('data-view') === view));
+  });
+  render();
+  window.scrollTo(0, 0);
+}
+
+function render(){
+  var body;
+  /* A signed-in person with no profile row cannot write anything anywhere, so
+     that comes before every other screen. */
+  if (needsProfile())                                  body = viewProfileSetup();
+  else if (signedOut() && SIGNIN_REQUIRED[state.view]) body = viewSignInFirst();
+  else if (state.view === 'find')          body = viewFind();
+  else if (state.view === 'profile')       body = viewProfile();
+  else if (state.view === 'post')          body = viewPost();
+  else if (state.view === 'requests')      body = viewRequests();
+  else if (state.view === 'docs')          body = viewDocs();
+  else                                     body = viewMine();
+
+  var flash = state.flash ? '<div class="flash">' + esc(state.flash) + '</div>' : '';
+  state.flash = null;
+  $('#view').innerHTML = flash + shareBoxHtml() + body;
+  /* Select it for them. On a phone the next thing they do is a long-press to
+     copy, and half of that work is already done. */
+  var sb = $('#sharetext');
+  if (sb) { try { sb.focus(); sb.setSelectionRange(0, sb.value.length); } catch (e) {} }
+  /* A full repaint (a language change, a connection resolving) rebuilds the
+     find box empty. Put back what was typed and what it found, so the search
+     survives the repaint the way the share box does. */
+  paintSearch();
+  renderWho();
+  renderAlerts();
+}
+
+/* ---- one delegated listener for everything ----------------------------- */
+document.addEventListener('click', function(ev){
+  var t = ev.target.closest ? ev.target.closest('[data-view],[data-profile],[data-back],[data-hire],[data-offer],[data-accept],[data-review],[data-settle],[data-complete],[data-rate],[data-cancel],[data-send],[data-sendok],[data-doclink],[data-share-provider],[data-print-provider],[data-share-request],[data-print-request],[data-pay],[data-confirmpay],[data-dispute],[data-statement],[data-outcome],[data-acceptout],[data-report],#verify-ledger,#signout,#si-restart,#clear-errors,#share-close,#acct-export,#acct-preview,#acct-cancel') : null;
+  if (!t) return;
+
+  /* ---- saying something is wrong: private, and quiet ---- */
+  if (t.hasAttribute('data-report')) {
+    state.openForm = 'rep-' + t.getAttribute('data-report');
+    state.reportErr = null; render(); return;
+  }
+
+  /* ---- your account: a copy, or going ---- */
+  if (t.id === 'acct-export')  { doExport(); return; }
+  if (t.id === 'acct-preview') { loadDeletionPreview(); return; }
+  if (t.id === 'acct-cancel')  {
+    state.acct.preview = null; state.acct.previewErr = null; state.acct.delErr = null;
+    render(); return;
+  }
+
+  /* ---- share and print: these write nothing, so no gate ---- */
+  if (t.id === 'share-close') { state.shareBox = null; render(); return; }
+  if (t.hasAttribute('data-share-provider')) { shareProvider(t.getAttribute('data-share-provider')); return; }
+  if (t.hasAttribute('data-print-provider')) { printProvider(t.getAttribute('data-print-provider')); return; }
+  if (t.hasAttribute('data-share-request'))  { shareRequest(t.getAttribute('data-share-request')); return; }
+  if (t.hasAttribute('data-print-request'))  { printRequest(t.getAttribute('data-print-request')); return; }
+
+  /* ---- a disagreement: both accounts held, never a verdict ---- */
+  if (t.hasAttribute('data-dispute')) {
+    state.openForm = 'disp-' + t.getAttribute('data-dispute'); state.disputeErr = null; render(); return;
+  }
+  if (t.hasAttribute('data-statement')) {
+    state.openForm = 'stmt-' + t.getAttribute('data-statement'); state.disputeErr = null; render(); return;
+  }
+  if (t.hasAttribute('data-outcome')) {
+    state.openForm = 'out-' + t.getAttribute('data-outcome'); state.disputeErr = null; render(); return;
+  }
+  if (t.hasAttribute('data-acceptout')) {
+    if (refuseWrite()) return;
+    /* No text on the second acceptance: the words stand as the first party
+       wrote them, and this only adds a name to them. */
+    acceptTheOutcome(t.getAttribute('data-acceptout'), null); return;
+  }
+
+  /* ---- payment: RECORDED here, never made here ---- */
+  if (t.hasAttribute('data-pay')) {
+    state.openForm = 'pay-' + t.getAttribute('data-pay'); state.settleErr = null; render(); return;
+  }
+  if (t.hasAttribute('data-confirmpay')) {
+    if (refuseWrite()) return;
+    try {
+      MEND.confirmSettlement(t.getAttribute('data-confirmpay'));
+      state.flash = T('pitso.settle.confirmed');
+    } catch (err) { state.flash = settleReason(err.message); }
+    render(); return;
+  }
+
+  if (t.id === 'signout') {
+    MEND.signOut();
+    state.auth = { email:'', code:'', sent:false, busy:false, err:null, msg:null, user:null };
+    state.docLinks = {};
+    state.flash = T('pitso.auth.signedout');
+    go('find'); return;
+  }
+  if (t.id === 'si-restart') {
+    state.auth.sent = false; state.auth.code = ''; state.auth.err = null; state.auth.msg = null;
+    renderWho(); return;
+  }
+  if (t.id === 'clear-errors') { state.writeErrors = []; renderAlerts(); return; }
+
+  if (t.hasAttribute('data-send'))    { state.openForm = 'send-' + t.getAttribute('data-send'); render(); return; }
+  if (t.hasAttribute('data-sendok'))  { sendForChecking(t.getAttribute('data-sendok')); return; }
+  if (t.hasAttribute('data-doclink')) { askLink(t.getAttribute('data-doclink')); return; }
+
+  if (t.hasAttribute('data-view')) { go(t.getAttribute('data-view')); return; }
+
+  if (t.hasAttribute('data-profile')) {
+    ev.preventDefault();
+    state.profileId = t.getAttribute('data-profile');
+    go('profile'); return;
+  }
+  if (t.hasAttribute('data-back')) { go(t.getAttribute('data-back')); return; }
+
+  if (t.hasAttribute('data-hire')) {
+    state.postPrefill = { trade: t.getAttribute('data-hire') };
+    go('post'); return;
+  }
+  if (t.hasAttribute('data-offer')) { state.openForm = t.getAttribute('data-offer'); render(); return; }
+  if (t.hasAttribute('data-cancel')) {
+    state.openForm = null; state.rating = 0; state.settleErr = null; state.disputeErr = null;
+    state.reportErr = null;
+    render(); return;
+  }
+  if (t.hasAttribute('data-accept')) { acceptOffer(t.getAttribute('data-accept')); return; }
+  if (t.hasAttribute('data-review')) { state.openForm = 'rev-' + t.getAttribute('data-review'); state.rating = 0; render(); return; }
+
+  if (t.hasAttribute('data-rate')) {
+    state.rating = Number(t.getAttribute('data-rate'));
+    var form = t.closest('form');
+    $$('.ratepick button', form).forEach(function(b){
+      var v = Number(b.getAttribute('data-rate'));
+      b.setAttribute('aria-pressed', String(v === state.rating));
+      b.textContent = v <= state.rating ? '★' : '☆';
+    });
+    return;
+  }
+
+  if (t.hasAttribute('data-settle')) {
+    if (refuseWrite()) return;
+    var eid = t.getAttribute('data-settle');
+    var e = MEND.all('engagements').filter(function(x){ return x.id === eid; })[0];
+    var meP = MEND.me();
+    if (!e) return;
+    var patch = e.provider_id === meP.id ? { settled_by_provider:true } : { settled_by_counterparty:true };
+    MEND.update('engagements', eid, patch);
+    rec('engagement.settlement.marked', {
+      platform:e.platform, subject_table:'engagements', subject_id:eid,
+      payload:{ side: e.provider_id === meP.id ? 'provider' : 'counterparty' }
+    });
+    state.flash = T('pitso.settle.marked');
+    render(); return;
+  }
+
+  if (t.hasAttribute('data-complete')) {
+    if (refuseWrite()) return;
+    var cid = t.getAttribute('data-complete');
+    MEND.update('engagements', cid, { state:'completed', ended_on: MEND.today() });
+    rec('engagement.completed', { platform:'pitso', subject_table:'engagements', subject_id:cid, payload:{} });
+    state.flash = T('pitso.mine.completed');
+    render(); return;
+  }
+
+  if (t.id === 'verify-ledger') {
+    MEND.verifyLedger().then(function(r){
+      var out = $('#verify-out');
+      if (out) out.innerHTML =
+        r.ok === true
+          ? '<b style="color:var(--green2)">' + esc(T('pitso.rec.intact', { n: r.entries })) + '</b>'
+        : r.ok === false
+          ? '<b style="color:#9A4708">' + esc(T('pitso.rec.broken', { n: r.broken_at })) + '</b>'
+          // Neither intact nor broken. An empty chain has nothing to check, and a
+          // server that did not answer has not been checked. Saying "broken" for
+          // either is an accusation the software cannot support — and it used to
+          // print "Broken at entry undefined" to every first-time visitor.
+          : '<span class="small muted">' + esc(r.note || r.error || T('pitso.rec.unknown')) + '</span>';
+    });
+    return;
+  }
+});
+
+document.addEventListener('submit', function(ev){
+  var f = ev.target;
+  if (f.id === 'postform') { submitRequest(ev); return; }
+  if (f.id === 'si-emailform') { ev.preventDefault(); startSignIn(f); return; }
+  if (f.id === 'si-codeform')  { ev.preventDefault(); finishSignIn(f); return; }
+  if (f.id === 'profileform')  { ev.preventDefault(); createProfile(f); return; }
+  if (f.id === 'upform')       { ev.preventDefault(); doUpload(f); return; }
+  if (f.hasAttribute('data-offerform')) { ev.preventDefault(); submitOffer(f); return; }
+  if (f.hasAttribute('data-reviewform')) { ev.preventDefault(); submitReview(f); return; }
+  if (f.hasAttribute('data-payform')) { ev.preventDefault(); submitSettlement(f); return; }
+  if (f.hasAttribute('data-raiseform')) { ev.preventDefault(); submitRaise(f); return; }
+  if (f.hasAttribute('data-stmtform')) { ev.preventDefault(); submitStatement(f); return; }
+  if (f.hasAttribute('data-outcomeform')) { ev.preventDefault(); submitOutcome(f); return; }
+  if (f.hasAttribute('data-reportform')) { ev.preventDefault(); submitReport(f); return; }
+  if (f.id === 'acct-delform') { ev.preventDefault(); submitDelete(f); return; }
+});
+
+/* The sign-in fields are re-rendered whenever anything else changes, so what has
+   been typed is held in state and put back. */
+document.addEventListener('input', function(ev){
+  if (ev.target.id === 'si-email') state.auth.email = ev.target.value;
+  if (ev.target.id === 'si-code')  state.auth.code  = ev.target.value;
+  /* Debounced inside onSearchInput. Never a request per keystroke: eight round
+     trips to spell "Mokhotlong" is seven of them paid for out of somebody's
+     airtime for nothing. */
+  if (ev.target.id === 'q-find')   onSearchInput(ev.target.value);
+});
+
+/* Enter in the find box searches now rather than waiting out the debounce. */
+document.addEventListener('keydown', function(ev){
+  if (ev.target.id !== 'q-find' || ev.key !== 'Enter') return;
+  ev.preventDefault();
+  if (searchTimer) clearTimeout(searchTimer);
+  runSearch();
+});
+
+document.addEventListener('change', function(ev){
+  var id = ev.target.id;
+  if (id === 's-method') {
+    var hint = $('#s-refhint');
+    if (hint) hint.textContent = ELECTRONIC.indexOf(ev.target.value) >= 0
+      ? T('pitso.settle.ref.need') : T('money.cash_no_code');
+    return;
+  }
+  if (id === 'whoami') { MEND.signInAs(ev.target.value); state.openForm = null; go(state.view); return; }
+  if (id === 'f-trade') { state.filters.trade = ev.target.value; render(); return; }
+  if (id === 'f-dist')  { state.filters.district = ev.target.value; render(); return; }
+  if (id === 'f-avail') { state.filters.available = ev.target.checked; render(); return; }
+});
+
+/* boot */
+
+/* A row the server refused must be visible as a refusal, not as a row. */
+MEND.onWriteError(function(e){
+  state.writeErrors.push(e);
+  if (e.id) state.failedIds[e.id] = e.message;
+  /* Repaint so the row itself carries the mark too — unless somebody is typing
+     into an open form, which is not worth throwing away for a label. */
+  if (state.openForm) renderAlerts(); else render();
+});
+
+/* Subscribed, not painted once: the connection resolves after this line runs. */
+MEND.onStatus(onStatusChanged);
+
+if (MEND.CONFIGURED) {
+  /* core/mend.js keeps the signed-in profile id in localStorage but not the
+     access token, which lives in memory. After a reload a stored session would
+     therefore look signed in while every write went out with the anon key and
+     was refused by RLS. Start signed out and ask again — a name on screen that
+     no longer authorises anything is worse than an empty form. */
+  MEND.signOut();
+} else {
+  var profs = MEND.all('profiles');
+  if (!MEND.me() && profs.length) MEND.signInAs(profs[0].id);
+}
+paintChrome();
+render();
+
+/* The shared strip changes the language; this page has to follow it. onLang
+   fires once on subscribe, and that first call is the render we just did. */
+var langBooted = false;
+MEND.onLang(function(){
+  if (!langBooted) { langBooted = true; return; }
+  paintChrome();
+  renderMode();   // the disclosure banner must follow the language button too
+  render();
+});
+
+window.PITSO = { state: state, render: render, go: go, writeBlock: writeBlock,
+                 share: doShare, settleReason: settleReason,
+                 disputeReason: disputeReason, disputeGate: disputeGate };  /* for verification */
+})();
+</script>
+</body>
+</html>
