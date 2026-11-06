@@ -1,0 +1,566 @@
+<!doctype html>
+<!-- © MEND GROUP (PTY) LTD · Reg No. 96070 · Maseru, Lesotho.
+     Generated from the mend-platforms monorepo — edit there, not here. -->
+<html data-title-key="title.sla" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MEND Services: IT support, month by month</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+/* .btn sets display, which beats the hidden attribute: Sign out showed to nobody. */
+[hidden]{display:none!important}
+/* MEND's own palette, shared with the verification desk: this is MEND selling
+   its own service, not a fourth Moshoeshoe platform. --ink2 for text, never
+   --ink3, which measures 3.73:1 (A11Y.md). */
+:root{--teal:#0d9488;--teal2:#0f766e;--gold:#e8c877;--stone:#1c1917;--ink2:#57534e;--paper:#fafaf9;
+      --paper2:#f5f5f4;--line:#e7e5e4;--ok:#15803d;--bad:#b91c1c;--warn:#b45309}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--paper);color:var(--stone);line-height:1.6;
+     -webkit-font-smoothing:antialiased;padding-bottom:72px}
+h1,h2,h3{font-family:'Plus Jakarta Sans',sans-serif;letter-spacing:-.02em;line-height:1.2}
+.w{max-width:760px;margin:0 auto;padding:0 16px}
+header{background:var(--stone);color:#fff;padding:14px 0}
+header .w{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+header h1{font-size:18px;font-weight:800}
+header .sub{font-size:12.5px;color:#d6d3d1}
+#mode{padding:10px 0;font-size:13px;border-bottom:1px solid var(--line)}
+#mode.device{background:#eef2f4} #mode.connected{background:#ecfdf5}
+#mode.connecting{background:#fdf6e3} #mode.unreachable{background:#fef2f2;border-bottom:2px solid var(--bad)}
+main{padding:22px 0}
+.card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px;margin-bottom:14px}
+.card h2{font-size:18px;margin-bottom:6px} .card h3{font-size:15px;margin:12px 0 6px}
+.lede{color:var(--ink2);font-size:14px;margin-bottom:12px}
+label{display:block;font-size:13px;font-weight:600;margin:10px 0 4px}
+input,textarea,select{width:100%;padding:10px 11px;border:1px solid var(--line);border-radius:6px;font:inherit;font-size:15px;background:#fff}
+input[type=checkbox],input[type=radio]{width:auto;margin-right:8px}
+textarea{min-height:96px}
+.row{display:flex;gap:10px;flex-wrap:wrap}.row>*{flex:1 1 140px}
+.btn{display:inline-block;background:var(--teal);color:#fff;border:none;padding:11px 18px;min-height:44px;border-radius:6px;
+     font-family:'Plus Jakarta Sans';font-weight:700;font-size:14px;cursor:pointer;text-decoration:none;margin:10px 8px 0 0}
+.btn:hover{background:var(--teal2)} .btn[disabled]{opacity:.5;cursor:not-allowed}
+.btn.ghost{background:#fff;border:1px solid var(--line);color:var(--stone)} .btn.no{background:#fff;border:1px solid #e7b9b9;color:var(--bad)}
+.btn:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+.flash{padding:11px 14px;border-radius:8px;margin-bottom:14px;background:#ecfdf5;border:1px solid #a7d8c4}
+.flash.bad{background:#fef2f2;border-color:#e7b9b9;color:var(--bad)}
+.tag{display:inline-block;font-size:12px;font-weight:600;padding:2px 9px;border-radius:999px;background:var(--paper2);color:var(--ink2)}
+.tag.confirmed{background:#ecfdf5;color:var(--ok)} .tag.not_disputed{background:#fdf6e3;color:var(--warn)}
+.tag.disputed{background:#fef2f2;color:var(--bad)} .tag.submitted{background:#eef2f4;color:var(--stone)}
+table{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0}
+th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+.num{font-variant-numeric:tabular-nums}
+ul.list{list-style:none} ul.list li{padding:10px 0;border-bottom:1px solid var(--line)}
+a{color:var(--teal2)}
+.copy{font-family:ui-monospace,monospace;font-size:13px;word-break:break-all;background:var(--paper2);padding:10px;border-radius:6px}
+.lvl{padding:10px 0;border-bottom:1px solid var(--line)} .lvl .row{margin-top:4px}
+/* The one-page monthly report: the same markup on screen, in MEND's preview and on paper. */
+.report{font-size:14px;overflow-wrap:anywhere} .report h3{font-size:14px;margin:14px 0 4px}
+.rp{table-layout:fixed} .rp th:nth-child(1){width:25%} .rp th:nth-child(2){width:22%} .rp th:nth-child(3){width:8%}
+.rp th:nth-child(4){width:9%} .rp th:nth-child(5){width:36%}
+@media (max-width:560px){.rp th:nth-child(1){width:23%} .rp th:nth-child(2){width:21%} .rp th:nth-child(3),.rp th:nth-child(4){width:12%}
+  .rp th:nth-child(5){width:32%} .rp th,.rp td{padding:8px 3px}}
+.rp-top{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:12.5px;color:var(--ink2);border-bottom:2px solid var(--teal);padding-bottom:6px;margin-bottom:10px}
+.rp-client{font-size:19px;margin:0} .rp-dates{color:var(--ink2);font-size:13px;margin-bottom:6px}
+.rp th{font-size:12.5px;color:var(--ink2)} .rp td.num{white-space:nowrap} .rp-text{white-space:pre-line}
+.rp-status{margin-top:12px;padding:8px 10px;border-radius:6px;background:var(--paper2);font-weight:600}
+.rp-status.confirmed{background:#ecfdf5;color:var(--ok)} .rp-status.not_disputed{background:#fdf6e3;color:var(--warn)}
+.rp-status.disputed{background:#fef2f2;color:var(--bad)}
+.rp-money{font-size:13px;color:var(--ink2);margin-top:6px}
+@media print{
+  @page{size:A4;margin:12mm}
+  body{background:#fff;padding:0;font-size:9.5pt;line-height:1.4}
+  header,#mode,footer,#flash,.noprint,.btn,form{display:none!important}
+  main{padding:0} .w{max-width:none;padding:0}
+  .card{border:0;padding:0;margin:0}
+  .report{font-size:9.5pt} .rp-status{border:1px solid #ccc} .rp th,.rp td{padding:4px 5px}
+  .rp-client{font-size:14pt} .report h3{font-size:10pt;margin:8px 0 2px}
+  .report{line-height:1.35} .rp-top{margin-bottom:6px} .rp-status{margin-top:6px;padding:5px 8px} .rp-money{margin-top:3px}
+  .report tr{page-break-inside:avoid}
+}
+</style>
+<style>/* Injected into every app at build time. A printed page must be the RECORD,
+   not a photograph of an app: no navigation, no buttons, no banners, no
+   coloured blocks that come out as grey smears on a mono printer. */
+@media print {
+  #mend-strip, nav, .noprint, [data-noprint] { display: none !important; }
+  html, body { background: #fff !important; color: #000 !important;
+               padding-bottom: 0 !important; margin: 0 !important; }
+  body { font-size: 11.5pt; }
+  a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 9pt; word-break: break-all; }
+  a { text-decoration: none; color: #000 !important; }
+  /* Progress bars and status pills are colour on screen and meaningless in
+     grey, so print gives them an outline and lets the number carry the meaning. */
+  [class*="bar"], [class*="pill"], [class*="badge"], [class*="stamp"] {
+    box-shadow: none !important; border: 1px solid #000 !important;
+    background: #fff !important; color: #000 !important;
+  }
+  button, input[type="button"], input[type="submit"], select { display: none !important; }
+  input, textarea { border: none !important; padding: 0 !important; font: inherit !important; }
+  table { page-break-inside: auto; } tr { page-break-inside: avoid; }
+  h1, h2, h3 { page-break-after: avoid; }
+  /* When one element is being printed on purpose, print only that.
+     CSS cannot select an ancestor, so printRecord() marks the chain from the
+     target up to <body> with data-print-path. Without that, a target nested
+     anywhere below body had its own parent hidden and printed a blank page. */
+  body[data-printing] *:not([data-print-path]):not([data-print-target]):not([data-print-target] *) {
+    display: none !important;
+  }
+  body[data-printing] [data-print-path] {
+    display: block !important;
+    margin: 0 !important; padding: 0 !important; border: none !important;
+    background: none !important; box-shadow: none !important; max-width: none !important;
+  }
+  body[data-printing] [data-print-target],
+  body[data-printing] [data-print-target] * { display: revert !important; }
+  body[data-printing] [data-print-target] { display: block !important; }
+  @page { margin: 16mm; }
+}
+</style>
+<style>:root{--mend-bar-bg:#1c1917;--mend-bar-fg:#faf8f5;--mend-bar-accent:#0f766e;--mend-bar-line:rgba(255,255,255,.18);}</style>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#1c1917">
+<link rel="apple-touch-icon" href="icons/sla-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Services">
+<script>/* Injected into every app at build time so all five behave identically and no
+   app has to remember to do this. Registration failing is never fatal: the app
+   works online exactly as before. */
+(function () {
+  if (!('serviceWorker' in navigator)) return;
+  addEventListener('load', function () {
+    navigator.serviceWorker.register('./sw.js').catch(function () {});
+  });
+  // Tell the page when it is offline, so it can stop pretending otherwise.
+  function paintOnline() { document.documentElement.setAttribute('data-online', navigator.onLine ? 'yes' : 'no'); }
+  addEventListener('online', paintOnline); addEventListener('offline', paintOnline); paintOnline();
+})();
+</script>
+</head>
+<body>
+<header><div class="w"><div><h1 id="h-title"></h1><div class="sub" id="h-sub"></div></div>
+<button class="btn ghost" id="signout" hidden></button></div></header>
+<div id="mode" role="status"><div class="w" id="mode-text"></div></div>
+<main class="w"><div id="flash" class="flash" role="alert" hidden></div><div id="app"></div></main>
+<footer class="w" style="padding:8px 16px 24px;font-size:13px"><a id="l-terms" href="#"></a> · <a id="l-privacy" href="#"></a></footer>
+
+<script src="config.js"></script>
+<script src="core/i18n.js"></script>
+<script src="core/seed.js"></script>
+<script src="core/mend.js"></script>
+<script src="core/ui.js"></script>
+<script src="strings.js"></script>
+<script src="sla.js"></script>
+<script>
+/* MEND Services. Every rule is enforced by db/036_sla.sql; this page asks, and
+   shows the database's own sentence when it refuses. Spec section 6. */
+(function () {
+  'use strict';
+  var M = window.MEND, S = window.MEND_SLA, A = S.api(M), T = M.t;
+  var app = document.getElementById('app');
+  var me = null;
+
+  function h(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function say(msg, bad) {
+    var el = document.getElementById('flash');
+    el.textContent = msg || ''; el.className = bad ? 'flash bad' : 'flash'; el.hidden = !msg;
+    // The message sits at the top and Submit at the bottom: on a phone a refusal
+    // would land off-screen and the press would seem to do nothing.
+    if (msg && el.scrollIntoView) el.scrollIntoView({ block: 'nearest' });
+  }
+  async function guard(fn) {
+    try { say(''); return await fn(); }
+    catch (e) { say(S.reason(e), true); return undefined; }
+  }
+  // One press, one request: the button stays off until the answer is back, so a
+  // second tap on a slow phone cannot send a second payment, decision or acceptance.
+  function once(btn, fn) {
+    if (btn.disabled) return;
+    btn.disabled = true;
+    return guard(fn).then(function () { if (btn.isConnected) btn.disabled = false; });
+  }
+  function route() { return (location.hash || '#/').replace(/^#\/?/, '').split('/'); }
+  function tag(state) { return '<span class="tag ' + h(state) + '">' + h(T(S.stateKey(state))) + '</span>'; }
+  function fmt(d) { return M.fmtDate(String(d).slice(0, 10)); }
+  function draftKey(id) { return 'mend.sla.draft.' + id; }
+  function loadDraft(id) { try { return JSON.parse(localStorage.getItem(draftKey(id))) || null; } catch (e) { return null; } }
+  function keepDraft(id, d) { try { localStorage.setItem(draftKey(id), JSON.stringify(d)); } catch (e) {} }
+  function dropDraft(id) { try { localStorage.removeItem(draftKey(id)); } catch (e) {} }
+
+  function banner() {
+    var n = M.modeNotice(), el = document.getElementById('mode');
+    el.className = n.mode;
+    document.getElementById('mode-text').textContent = S.modeText(n, M.CONFIGURED, T);
+  }
+
+  // ---- device preview: an invented agreement, labelled, and nothing else ------
+  // One month in each state the database can produce, so a visitor sees the
+  // whole cycle without a server. Every name and number here is invented. Each
+  // month is drawn by the same one-page report the live app uses.
+  var SAMPLE = {
+    provider: 'MEND GROUP', client: 'Sample Dental Practice (invented)', fn: 'IT support',
+    fee: 200000, currency: 'ZAR', term: 12, start: '2026-07-01', notice: 30,
+    levels: [['First response', 'Same working day by 19:00'], ['Backup check', 'Once a month'], ['Saturday site visit', 'Once a month']],
+    months: [
+      { n: 1, from: '2026-07-01', to: '2026-07-31', state: 'confirmed', decided: '2026-08-03', paid: 200000,
+        met: [[14, 14], [1, 1], [1, 1]], notes: ['', 'Restore test on the 28th: good.', ''],
+        report: 'Two new laptops set up for the new hygienist. All 14 requests answered the same day. Backup checked on the 28th: good.' },
+      { n: 2, from: '2026-08-01', to: '2026-08-31', state: 'not_disputed', submitted: '2026-09-01', answerBy: '2026-09-08', paid: 200000,
+        met: [[11, 12], [1, 1], [1, 1]], notes: ['One request on a Sunday, answered Monday 08:10.', '', ''],
+        report: 'All requests answered the same day except one, on a Sunday. Backup checked on the 28th: good.' },
+      { n: 3, from: '2026-09-01', to: '2026-09-30', state: 'disputed', decided: '2026-10-04', paid: 0,
+        met: [[9, 9], [0, 1], [1, 1]], notes: ['', 'Missed: the drive was taken home for the weekend.', ''],
+        report: 'All 9 requests answered the same day. Backup check missed: the drive was taken home for the weekend.',
+        kind: 'late', claim: 'The backup was only checked on 3 October, after a scare. It should have been done in September.' },
+      { n: 4, from: '2026-10-01', to: '2026-10-31', state: 'submitted', submitted: '2026-10-31', answerBy: '2026-11-07', paid: 0,
+        met: [[10, 10], [1, 1], [0, 0]], notes: ['', '', 'No visit needed: nothing on site this month.'],
+        report: 'Email moved to multi-factor sign-in for all staff. Backup checked on the 24th: good.' }
+    ]
+  };
+
+  function renderSample() {
+    var x = SAMPLE, money = function (c) { return S.money(c, x.currency); };
+    var levels = x.levels.map(function (l, i) { return { id: 'L' + i, position: i + 1, name: l[0], target: l[1] }; });
+    var c = { term_months: x.term, final_period_no: x.term, monthly_fee_cents: x.fee, sla_levels: levels,
+              engagements: { currency: x.currency, provider: { display_name: x.provider }, client: { display_name: x.client } } };
+    var decided = x.months.filter(function (m) { return S.isDecided(m.state); });
+    var count = function (s) { return decided.filter(function (m) { return m.state === s; }).length; };
+    app.innerHTML =
+      '<div class="card"><h2>' + h(T('sla.sample.title', { provider: x.provider, client: x.client })) + '</h2>' +
+      '<p class="lede">' + h(T('sla.accept.terms', { 'function': x.fn, term: x.term, fee: money(x.fee), start: fmt(x.start), notice: x.notice })) + '</p>' +
+      '<h3 style="font-size:14px;margin-top:10px">' + h(T('sla.accept.levels')) + '</h3><ul class="list">' +
+      levels.map(function (l) { return '<li>' + h(l.name) + ' · ' + h(l.target) + '</li>'; }).join('') + '</ul>' +
+      '<p class="lede" style="margin-top:10px">' + h(T('sla.sample.how')) + '</p></div>' +
+      x.months.map(function (m) {
+        var per = { period_no: m.n, starts_on: m.from, ends_on: m.to, state: m.state === 'not_disputed' ? 'submitted' : m.state,
+                    effective_state: m.state, submitted_at: m.submitted || null, answer_by: m.answerBy || null,
+                    decided_at: m.decided || null, paid_cents: m.paid, report: m.report };
+        var res = levels.map(function (l, i) { return { level_id: l.id, met: m.met[i][0], total: m.met[i][1], note: m.notes[i] || null }; });
+        return '<div class="card">' + S.reportHtml(S.report(c, per, res, fmt), T) +
+          (m.claim ? '<p><b>' + h(T('sla.kind.' + m.kind)) + '.</b> ' + h(T('sla.sample.claim', { claim: m.claim })) + '</p>' : '') + '</div>';
+      }).join('') +
+      '<div class="card"><h2>' + h(T('sla.record.title')) + '</h2><p>' +
+      h(T('sla.record.line', { 'function': x.fn, client: x.client, decided: decided.length,
+        confirmed: count('confirmed'), lapsed: count('not_disputed'), disputed: count('disputed') })) + '</p></div>';
+  }
+
+  // ---- sign-in and first-time profile ----------------------------------------
+  function renderSignIn(into) {
+    var box = into || app;
+    box.innerHTML = '<div class="card"><h2>' + h(T('sla.signin')) + '</h2><p class="lede">' + h(T('sla.signin.lede')) + '</p>' +
+      '<form id="f-email"><label for="email">' + h(T('sla.email')) + '</label><input id="email" type="email" required autocomplete="email">' +
+      '<button class="btn">' + h(T('sla.send_code')) + '</button></form>' +
+      '<form id="f-code" hidden><label for="code">' + h(T('sla.code')) + '</label><input id="code" inputmode="numeric" autocomplete="one-time-code" required>' +
+      '<button class="btn">' + h(T('sla.verify')) + '</button></form></div>';
+    var email = '';
+    box.querySelector('#f-email').onsubmit = function (ev) {
+      ev.preventDefault(); email = box.querySelector('#email').value.trim();
+      guard(async function () { await M.sendSignInCode(email); box.querySelector('#f-code').hidden = false; });
+    };
+    box.querySelector('#f-code').onsubmit = function (ev) {
+      ev.preventDefault();
+      guard(async function () { await M.verifySignInCode(email, box.querySelector('#code').value.trim()); await render(); });
+    };
+  }
+
+  function renderProfile() {
+    app.innerHTML = '<div class="card"><h2>' + h(T('sla.profile.title')) + '</h2><p class="lede">' + h(T('sla.profile.private')) + '</p>' +
+      '<form id="f-prof"><label for="pname">' + h(T('sla.profile.name')) + '</label><input id="pname" required minlength="2" maxlength="80">' +
+      '<fieldset style="border:0;margin-top:10px"><legend style="font-weight:600;font-size:13px">' + h(T('sla.profile.kind')) + '</legend>' +
+      '<label><input type="radio" name="kind" value="entity" checked>' + h(T('sla.profile.entity')) + '</label>' +
+      '<label><input type="radio" name="kind" value="person">' + h(T('sla.profile.person')) + '</label></fieldset>' +
+      '<button class="btn">' + h(T('sla.profile.save')) + '</button></form></div>';
+    app.querySelector('#f-prof').onsubmit = function (ev) {
+      ev.preventDefault();
+      var kind = app.querySelector('input[name=kind]:checked').value;
+      guard(async function () { await A.createProfile(M.sessionUserId(), app.querySelector('#pname').value.trim(), kind); await render(); });
+    };
+  }
+
+  // ---- home --------------------------------------------------------------------
+  async function renderHome() {
+    var contracts = await A.contracts(), offers = await A.offers();
+    // A month left unanswered for 7 days stands as not disputed, so the client
+    // is shown every month waiting on them first, with its deadline.
+    var asClient = contracts.filter(function (c) { return c.engagements.counterparty_id === me.id; });
+    var waiting = await A.waiting(asClient.map(function (c) { return c.id; }));
+    var html = '';
+    if (waiting.length) {
+      html += '<div class="card"><h2>' + h(T('sla.waiting')) + '</h2><ul class="list">' + waiting.map(function (w) {
+        var c = asClient.filter(function (x) { return x.id === w.contract_id; })[0], p = c && c.engagements.provider;
+        return '<li><a href="#/month/' + h(w.id) + '">' + h(T('sla.month', { n: w.period_no })) + ' · ' + h(p ? p.display_name : '') +
+          '</a> · ' + h(T('sla.waiting.by', { date: fmt(S.maseruDay(w.answer_by)) })) + '</li>';
+      }).join('') + '</ul></div>';
+    }
+    html += '<div class="card"><h2>' + h(T('sla.agreements')) + '</h2>';
+    html += contracts.length ? '<ul class="list">' + contracts.map(function (c) {
+      var e = c.engagements, other = e.provider_id === me.id ? e.client : e.provider;
+      return '<li><a href="#/contract/' + h(c.id) + '">' + h(other ? other.display_name : '') + '</a> · ' +
+        h(c.term_months) + ' × ' + h(S.money(c.monthly_fee_cents, e.currency)) + ' · <span class="tag">' + h(e.state) + '</span></li>';
+    }).join('') + '</ul>' : '<p class="lede">' + h(T('sla.none')) + '</p>';
+    html += '<a class="btn" href="#/offer">' + h(T('sla.new_offer')) + '</a></div>';
+    if (offers.length) {
+      html += '<div class="card"><h2>' + h(T('sla.open_offers')) + '</h2><ul class="list">' + offers.map(function (o) {
+        return '<li>' + h(o.client_label) + ' · ' + h(fmt(o.starts_on)) + ' <button class="btn ghost" data-withdraw="' + h(o.id) + '">' +
+          h(T('sla.withdraw')) + '</button></li>';
+      }).join('') + '</ul></div>';
+    }
+    html += '<div class="card"><h2>' + h(T('sla.data')) + '</h2><button class="btn ghost" id="export">' + h(T('sla.export')) + '</button>' +
+      ' <a class="btn ghost" href="#/record/' + h(me.id) + '">' + h(T('sla.record.title')) + '</a>' +
+      ' <button class="btn no" id="erase">' + h(T('sla.delete')) + '</button></div>';
+    app.innerHTML = html;
+    app.querySelectorAll('[data-withdraw]').forEach(function (b) {
+      b.onclick = function () { guard(async function () { await A.withdrawOffer(b.dataset.withdraw); await render(); }); };
+    });
+    // Erasure is core's: it removes documents and photos first, then anonymises the
+    // profile. Accepted agreements stay, with no name attached (spec rule 14).
+    app.querySelector('#erase').onclick = function () {
+      var typed = window.prompt(T('sla.delete.confirm', { name: me.display_name }));
+      if (typed == null) return;
+      guard(async function () { await M.deleteMe(typed); M.signOut(); location.hash = '#/'; location.reload(); });
+    };
+    app.querySelector('#export').onclick = function () {
+      guard(async function () {
+        var data = { platform: await M.exportMe(), sla: await A.exportMine() };
+        var a = document.createElement('a');
+        a.href = URL.createObjectURL(new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' }));
+        a.download = 'mend-services-my-data.json'; a.click();
+      });
+    };
+  }
+
+  // ---- a new offer ------------------------------------------------------------------
+  function renderOfferForm() {
+    app.innerHTML = '<div class="card"><h2>' + h(T('sla.new_offer')) + '</h2><form id="f-offer">' +
+      '<label for="o-for">' + h(T('sla.offer.for')) + '</label><input id="o-for" required minlength="2" maxlength="80">' +
+      '<div class="row"><div><label for="o-term">' + h(T('sla.offer.term')) + '</label><input id="o-term" type="number" min="1" max="12" value="3" required></div>' +
+      '<div><label for="o-fee">' + h(T('sla.offer.fee')) + '</label><input id="o-fee" type="number" min="1" step="0.01" value="2000" required></div>' +
+      '<div><label for="o-cur">' + h(T('sla.offer.currency')) + '</label><select id="o-cur"><option>ZAR</option><option>LSL</option></select></div></div>' +
+      '<div class="row"><div><label for="o-start">' + h(T('sla.offer.start')) + '</label><input id="o-start" type="date" required value="' + h(M.today()) + '"></div>' +
+      '<div><label for="o-notice">' + h(T('sla.offer.notice')) + '</label><input id="o-notice" type="number" min="0" max="90" value="30" required></div></div>' +
+      '<label for="o-scope">' + h(T('sla.offer.scope')) + '</label><textarea id="o-scope" required minlength="20" maxlength="2000"></textarea>' +
+      '<label for="o-levels">' + h(T('sla.offer.levels')) + '</label><textarea id="o-levels" required>' +
+      'First response | same working day by 19:00\nBackup check | once a month, result reported</textarea>' +
+      '<button class="btn">' + h(T('sla.offer.make')) + '</button></form><div id="o-out"></div></div>';
+    app.querySelector('#f-offer').onsubmit = function (ev) {
+      ev.preventDefault();
+      var v = function (id) { return app.querySelector(id).value; };
+      var levels = v('#o-levels').split('\n').map(function (l) { return l.split('|'); })
+        .filter(function (p) { return p[0] && p[0].trim(); })
+        .map(function (p) { return { name: p[0].trim(), target: (p[1] || '').trim() }; });
+      guard(async function () {
+        var r = await A.createOffer({ client_label: v('#o-for'), function_code: 'it_support', term_months: +v('#o-term'),
+          monthly_fee_cents: Math.round(parseFloat(v('#o-fee')) * 100), currency: v('#o-cur'), starts_on: v('#o-start'),
+          scope: v('#o-scope'), notice_days: +v('#o-notice'), levels: levels });
+        var link = location.origin + location.pathname + '#/accept/' + r.code;
+        app.querySelector('#f-offer').hidden = true;
+        app.querySelector('#o-out').innerHTML = '<p class="lede">' + h(T('sla.offer.link')) + '</p><p class="copy">' + h(link) + '</p>';
+      });
+    };
+  }
+
+  // ---- accepting an offer ------------------------------------------------------------
+  async function renderAccept(code, signedIn) {
+    var o = await A.preview(code);
+    if (!o) { app.innerHTML = ''; say('that link is not a MEND offer; check it was copied whole', true); return; }
+    var html = '<div class="card"><h2>' + h(T('sla.accept.title', { provider: o.provider })) + '</h2><p>' +
+      h(T('sla.accept.terms', { 'function': o['function'], term: o.term_months, fee: S.money(o.monthly_fee_cents, o.currency),
+                                start: fmt(o.starts_on), notice: o.notice_days })) + '</p><p>' + h(o.scope) + '</p>' +
+      '<h3>' + h(T('sla.accept.levels')) + '</h3><table>' + o.levels.map(function (l) {
+        return '<tr><td>' + h(l.name) + '</td><td>' + h(l.target) + '</td></tr>'; }).join('') + '</table>';
+    if (o.state !== 'open') html += '<p class="lede">' + h(T('sla.accept.state', { state: o.state })) + '</p></div>';
+    else if (!signedIn) html += '<p class="lede">' + h(T('sla.accept.signin_first')) + '</p></div><div id="signin"></div>';
+    else html += '<form id="f-acc"><label><input type="checkbox" id="auth">' + h(T('sla.accept.authority')) + '</label>' +
+      '<button class="btn">' + h(T('sla.accept.do')) + '</button></form></div>';
+    app.innerHTML = html;
+    if (o.state === 'open' && !signedIn) renderSignIn(app.querySelector('#signin'));
+    var f = app.querySelector('#f-acc');
+    if (f) f.onsubmit = function (ev) {
+      ev.preventDefault();
+      once(f.querySelector('button'), async function () { var id = await A.accept(code, app.querySelector('#auth').checked); location.hash = '#/contract/' + id; });
+    };
+  }
+
+  // ---- an agreement ---------------------------------------------------------------------
+  async function findContract(id) {
+    var all = await A.contracts();
+    return all.filter(function (c) { return c.id === id; })[0] || null;
+  }
+
+  async function renderContract(id) {
+    try { await A.advance(id); } catch (e) { /* a refusal here only means nothing to advance */ }
+    var c = await findContract(id);
+    if (!c) { app.innerHTML = ''; say('no such agreement', true); return; }
+    var e = c.engagements, months = await A.months(id), mine = e.provider_id === me.id;
+    var html = '<div class="card"><h2>' + h((mine ? e.client : e.provider).display_name) + ' <span class="tag">' + h(e.state) + '</span></h2>' +
+      '<p class="lede">' + h(c.term_months) + ' × ' + h(S.money(c.monthly_fee_cents, e.currency)) + ' · ' + h(fmt(c.starts_on)) + '</p>' +
+      '<p>' + h(c.scope) + '</p><ul class="list">' + months.map(function (m) {
+        return '<li><a href="#/month/' + h(m.id) + '">' + h(T('sla.month', { n: m.period_no })) + '</a> ' + tag(m.effective_state) +
+          ' · ' + h(T('sla.month.paid', { paid: S.money(m.paid_cents, e.currency), fee: S.money(c.monthly_fee_cents, e.currency) })) + '</li>';
+      }).join('') + '</ul>';
+    if (mine && months.length < c.final_period_no && ['agreed', 'active', 'disputed'].indexOf(e.state) >= 0) {
+      html += '<button class="btn" id="open">' + h(T('sla.month.open', { n: months.length + 1 })) + '</button>';
+    }
+    if (!mine) html += '<label><input type="checkbox" id="pub"' + (c.client_named_publicly ? ' checked' : '') + '>' + h(T('sla.public_name')) + '</label>';
+    if (!c.notice_given_on && ['agreed', 'active', 'disputed'].indexOf(e.state) >= 0) {
+      html += '<form id="f-notice" class="row"><div><label for="last">' + h(T('sla.notice.last_day')) + '</label><input id="last" type="date" required></div>' +
+        '<div><button class="btn ghost">' + h(T('sla.notice')) + '</button></div></form>';
+    }
+    app.innerHTML = html + '</div>';
+    var open = app.querySelector('#open');
+    if (open) open.onclick = function () { guard(async function () { var mid = await A.openMonth(id); location.hash = '#/month/' + mid; }); };
+    var pub = app.querySelector('#pub');
+    if (pub) pub.onchange = function () { guard(async function () { await A.setPublicName(id, pub.checked); }); };
+    var fn = app.querySelector('#f-notice');
+    if (fn) fn.onsubmit = function (ev) {
+      ev.preventDefault(); guard(async function () { await A.giveNotice(id, app.querySelector('#last').value); await render(); });
+    };
+  }
+
+  // ---- a month ------------------------------------------------------------------------------
+  // MEND logs the month (met / out of / note per promise, and the report), sees
+  // the one-page report exactly as the client will, and submits. Everyone else
+  // sees that same page, with Confirm / Dispute or Record payment under it.
+  async function renderMonth(id) {
+    var m = (await M.serverGet('/sla_periods_effective?id=eq.' + encodeURIComponent(id)))[0];
+    if (!m) { app.innerHTML = ''; say('no such month', true); return; }
+    var c = await findContract(m.contract_id), e = c.engagements, mine = e.provider_id === me.id;
+    var levels = c.sla_levels.slice().sort(function (a, b) { return a.position - b.position; });
+    var saved = await A.results(id), got = {};
+    saved.forEach(function (r) { got[r.level_id] = r; });
+    var back = '<p class="lede noprint"><a href="#/contract/' + h(c.id) + '">' + h((mine ? e.client : e.provider).display_name) + '</a></p>';
+
+    if (mine && m.state === 'draft') {
+      var d = loadDraft(id) || { report: m.report || '', results: got };
+      app.innerHTML = '<div class="card noprint"><h2>' + h(T('sla.month', { n: m.period_no })) + ' ' + tag(m.effective_state) + '</h2>' + back +
+        '<form id="f-month">' + levels.map(function (l) {
+          var r = d.results[l.id] || {};
+          return '<div class="lvl"><b>' + h(l.name) + '</b> <span class="lede">' + h(l.target) + '</span><div class="row">' +
+            '<div><label for="met-' + h(l.id) + '">' + h(T('sla.month.met')) + '</label><input id="met-' + h(l.id) + '" type="number" min="0" data-met="' + h(l.id) + '" value="' + h(r.met == null ? '' : r.met) + '"></div>' +
+            '<div><label for="tot-' + h(l.id) + '">' + h(T('sla.month.total')) + '</label><input id="tot-' + h(l.id) + '" type="number" min="0" data-total="' + h(l.id) + '" value="' + h(r.total == null ? '' : r.total) + '"></div></div>' +
+            '<label for="note-' + h(l.id) + '">' + h(T('sla.month.note')) + '</label><input id="note-' + h(l.id) + '" maxlength="160" data-note="' + h(l.id) + '" value="' + h(r.note || '') + '"></div>';
+        }).join('') + '<label for="report">' + h(T('sla.month.report')) + '</label><textarea id="report" maxlength="800">' + h(d.report) + '</textarea>' +
+        '<p class="lede" id="offline" hidden>' + h(T('sla.offline')) + '</p>' +
+        '<button class="btn ghost" id="save">' + h(T('sla.month.save')) + '</button><button class="btn" id="submit">' + h(T('sla.month.submit')) + '</button>' +
+        '</form></div><div class="card"><p class="lede noprint">' + h(T('sla.month.preview')) + '</p><div id="pv"></div></div>';
+      var read = function () {
+        var raw = {};
+        levels.forEach(function (l) {
+          raw[l.id] = { met: app.querySelector('[data-met="' + l.id + '"]').value, total: app.querySelector('[data-total="' + l.id + '"]').value,
+                        note: app.querySelector('[data-note="' + l.id + '"]').value };
+        });
+        var list = S.draftResults(levels, raw), res = {};
+        list.forEach(function (r) { res[r.level_id] = r; });
+        return { report: app.querySelector('#report').value, results: res, list: list };
+      };
+      var preview = function () {
+        var x = read(); keepDraft(id, { report: x.report, results: x.results });
+        app.querySelector('#pv').innerHTML = S.reportHtml(S.report(c, Object.assign({}, m, { report: x.report }), x.list, fmt), T);
+        var off = !navigator.onLine;
+        app.querySelector('#offline').hidden = !off; app.querySelector('#submit').disabled = off;
+      };
+      app.querySelector('#f-month').oninput = preview; window.addEventListener('online', preview); window.addEventListener('offline', preview);
+      preview();
+      app.querySelector('#save').onclick = function (ev) {
+        ev.preventDefault(); var x = read();
+        guard(async function () { await A.saveDraft(id, x.report, x.list); say(T('sla.month.saved')); });
+      };
+      app.querySelector('#submit').onclick = function (ev) {
+        ev.preventDefault(); var x = read(), btn = ev.currentTarget; btn.disabled = true;
+        guard(async function () { await A.submitMonth(id, x.report, x.list); dropDraft(id); await render(); })
+          .then(function () { if (btn.isConnected) btn.disabled = false; });
+      };
+      return;
+    }
+
+    var html = '<div class="card">' + back + S.reportHtml(S.report(c, m, saved, fmt), T) +
+      '<button class="btn ghost noprint" id="print">' + h(T('sla.report.print')) + '</button></div>';
+    var act = '';
+    if (!mine && m.effective_state === 'submitted') {
+      act += '<p class="lede">' + h(T('sla.month.answer_by', { date: fmt(S.maseruDay(m.answer_by)) })) + '</p>' +
+        '<button class="btn" id="yes">' + h(T('sla.month.confirm')) + '</button>' +
+        '<form id="f-dis"><label for="kind">' + h(T('sla.month.kind')) + '</label><select id="kind">' + S.DISPUTE_KINDS.map(function (k) {
+          return '<option value="' + k + '">' + h(T('sla.kind.' + k)) + '</option>'; }).join('') + '</select>' +
+        '<label for="claim">' + h(T('sla.month.claim')) + '</label><textarea id="claim" minlength="10" maxlength="2000" required></textarea>' +
+        '<button class="btn no">' + h(T('sla.month.dispute')) + '</button></form>';
+    }
+    if (mine && m.paid_cents < c.monthly_fee_cents) {
+      act += '<form id="f-pay"><h3>' + h(T('sla.pay.title')) + '</h3><div class="row">' +
+        '<div><label for="amt">' + h(T('sla.pay.amount')) + '</label><input id="amt" type="number" min="0.01" step="0.01" required value="' +
+        h(((c.monthly_fee_cents - m.paid_cents) / 100).toFixed(2)) + '"></div>' +
+        '<div><label for="meth">' + h(T('sla.pay.method')) + '</label><select id="meth">' + M.SETTLE_METHODS.map(function (k) {
+          return '<option>' + h(k) + '</option>'; }).join('') + '</select></div></div><div class="row">' +
+        '<div><label for="ref">' + h(T('sla.pay.reference')) + '</label><input id="ref" maxlength="40"></div>' +
+        '<div><label for="paid">' + h(T('sla.pay.date')) + '</label><input id="paid" type="date" required value="' + h(M.today()) + '"></div></div>' +
+        '<button class="btn">' + h(T('sla.pay.save')) + '</button></form>';
+    }
+    app.innerHTML = html + (act ? '<div class="card noprint">' + act + '</div>' : '');
+    app.querySelector('#print').onclick = function () { window.print(); };
+    var yes = app.querySelector('#yes');
+    if (yes) yes.onclick = function () { once(yes, async function () { await A.confirm(id); await render(); }); };
+    var fd = app.querySelector('#f-dis');
+    if (fd) fd.onsubmit = function (ev) {
+      ev.preventDefault(); once(fd.querySelector('button'), async function () { await A.dispute(id, app.querySelector('#kind').value, app.querySelector('#claim').value); await render(); });
+    };
+    var fp = app.querySelector('#f-pay');
+    if (fp) fp.onsubmit = function (ev) {
+      ev.preventDefault();
+      once(fp.querySelector('button'), async function () {
+        await A.recordPayment({ engagement_id: e.id, client_id: e.counterparty_id, provider_id: e.provider_id,
+          amount_cents: Math.round(parseFloat(app.querySelector('#amt').value) * 100), currency: e.currency,
+          method: app.querySelector('#meth').value, reference: app.querySelector('#ref').value,
+          paid_on: app.querySelector('#paid').value, period_id: id });
+        await render();
+      });
+    };
+  }
+
+  // ---- the public work record --------------------------------------------------------------------
+  async function renderRecord(providerId) {
+    var rows = await A.workRecord(providerId);
+    app.innerHTML = '<div class="card"><h2>' + h(T('sla.record.title')) + '</h2>' + (rows.length ? '<ul class="list">' + rows.map(function (r) {
+      return '<li>' + h(T('sla.record.line', { 'function': r.function_name, client: r.client, decided: r.months_decided,
+        confirmed: r.confirmed, lapsed: r.not_disputed, disputed: r.disputed })) + '</li>';
+    }).join('') + '</ul>' : '<p class="lede">' + h(T('sla.record.none')) + '</p>') + '</div>';
+  }
+
+  async function render() {
+    banner();
+    var r = route(), view = r[0], arg = r[1], uid = M.sessionUserId();
+    document.getElementById('signout').hidden = !uid;
+    if (!M.CONFIGURED) return renderSample();
+    if (view === 'record') return guard(function () { return renderRecord(arg); });
+    if (view === 'accept' && !uid) return guard(function () { return renderAccept(arg, false); });
+    if (!uid) return renderSignIn();
+    me = await guard(async function () { return (await A.myProfile(uid))[0] || null; });
+    if (!me) return renderProfile();
+    if (view === 'accept')   return guard(function () { return renderAccept(arg, true); });
+    if (view === 'offer')    return renderOfferForm();
+    if (view === 'contract') return guard(function () { return renderContract(arg); });
+    if (view === 'month')    return guard(function () { return renderMonth(arg); });
+    return guard(renderHome);
+  }
+
+  var lt = document.getElementById('l-terms'), lp = document.getElementById('l-privacy');
+  lt.href = M.LEGAL.terms; lt.textContent = T('legal.terms');
+  lp.href = M.LEGAL.privacy; lp.textContent = T('legal.privacy');
+  document.title = T('title.sla');
+  document.getElementById('h-title').textContent = T('sla.title');
+  document.getElementById('h-sub').textContent = T('sla.sub');
+  var so = document.getElementById('signout');
+  so.textContent = T('sla.signout');
+  so.onclick = function () { M.signOut(); location.hash = '#/'; location.reload(); };
+  M.onStatus(banner);
+  window.addEventListener('hashchange', render);
+  if (M.CONFIGURED) M.connect().then(render, render); else render();
+})();
+</script>
+</body>
+</html>

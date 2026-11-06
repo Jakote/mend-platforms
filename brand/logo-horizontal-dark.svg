@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" width="1200" height="300">
+  <defs>
+    <linearGradient id="mg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#14b8a6"/>
+      <stop offset="1" stop-color="#0d9488"/>
+    </linearGradient>
+  </defs>
+  <!-- Icon -->
+  <g transform="translate(30,30)">
+    <rect width="240" height="240" rx="54" fill="url(#mg)"/>
+    <path fill="#ffffff" transform="scale(0.46875)" d="
+      M 132 372 L 132 140 L 190 140 L 256 260 L 322 140 L 380 140 L 380 372
+      L 328 372 L 328 238 L 274 334 L 238 334 L 184 238 L 184 372 Z"/>
+  </g>
+  <!-- Wordmark -->
+  <text x="320" y="158" font-family="Outfit, 'Helvetica Neue', Helvetica, Arial, sans-serif"
+        font-size="96" font-weight="800" letter-spacing="2" fill="#fafaf9">MEND GROUP</text>
+  <text x="324" y="216" font-family="Outfit, 'Helvetica Neue', Helvetica, Arial, sans-serif"
+        font-size="30" font-weight="500" letter-spacing="10" fill="#a8a29e">TECHNOLOGY &amp; BUSINESS SOLUTIONS</text>
+</svg>

@@ -1,0 +1,39 @@
+{
+  "name": "Verification desk",
+  "short_name": "Desk",
+  "description": "Verification desk \u2014 MEND GROUP",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#1c1917",
+  "background_color": "#fafaf9",
+  "lang": "en",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "icons/verify-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/verify-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/verify-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icons/verify-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

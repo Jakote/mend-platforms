@@ -1,0 +1,39 @@
+{
+  "name": "MEND Services",
+  "short_name": "Services",
+  "description": "MEND Services \u2014 IT support, month by month",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#1c1917",
+  "background_color": "#faf8f5",
+  "lang": "en",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "icons/sla-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/sla-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/sla-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icons/sla-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
